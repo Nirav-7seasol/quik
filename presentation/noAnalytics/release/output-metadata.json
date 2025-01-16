@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "dev.octoshrimpy.quik",
+  "variantName": "noAnalyticsRelease",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 2225,
+      "versionName": "4.0.8-alpha",
+      "outputFile": "QUIK-v4.0.8-noAnalytics-release.apk"
+    }
+  ],
+  "elementType": "File"
+}
