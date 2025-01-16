@@ -60,6 +60,11 @@ abstract class QkActivity : LocalizationActivity() {
         title = title // The title may have been set before layout inflation
     }
 
+    fun setToolbar() {
+        setSupportActionBar(toolbar)
+        title = title // The title may have been set before layout inflation
+    }
+
     override fun setTitle(titleId: Int) {
         title = getString(titleId)
     }
