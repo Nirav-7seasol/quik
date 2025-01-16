@@ -29,7 +29,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.view.children
 import androidx.core.view.isVisible
 import com.jakewharton.rxbinding2.view.clicks
-import com.moez.QKSMS.common.base.QkController1
+import com.moez.QKSMS.common.base.QkControllerWithBinding
 import com.moez.QKSMS.feature.backup.BackupAdapter
 import dev.octoshrimpy.quik.R
 import dev.octoshrimpy.quik.common.util.DateFormatter
@@ -48,7 +48,7 @@ import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import javax.inject.Inject
 
-class BackupController : QkController1<BackupView, BackupState, BackupPresenter, BackupControllerBinding>(
+class BackupController : QkControllerWithBinding<BackupView, BackupState, BackupPresenter, BackupControllerBinding>(
     BackupControllerBinding::inflate
 ), BackupView {
 

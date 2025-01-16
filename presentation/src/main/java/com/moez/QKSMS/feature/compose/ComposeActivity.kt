@@ -212,7 +212,6 @@ class ComposeActivity : QkThemedActivity(), ComposeView {
         } else {
             binding.adRl.visibility = View.GONE
             binding.adRl1.visibility = View.GONE
-            Log.e("TAG111", "loadAds: else" )
         }
     }
 

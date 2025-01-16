@@ -32,7 +32,7 @@ import dev.octoshrimpy.quik.common.base.QkThemedActivity
 import dev.octoshrimpy.quik.common.base.QkViewContract
 import dev.octoshrimpy.quik.common.widget.QkTextView
 
-abstract class QkController1<ViewContract : QkViewContract<State>, State : Any, Presenter : QkPresenter<ViewContract, State>, Binding : ViewBinding>(
+abstract class QkControllerWithBinding<ViewContract : QkViewContract<State>, State : Any, Presenter : QkPresenter<ViewContract, State>, Binding : ViewBinding>(
     private val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> Binding
 ) : LifecycleController() {
 
