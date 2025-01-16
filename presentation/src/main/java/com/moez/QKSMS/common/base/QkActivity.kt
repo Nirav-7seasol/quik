@@ -22,15 +22,20 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import androidx.appcompat.widget.Toolbar
 import com.akexorcist.localizationactivity.ui.LocalizationActivity
+import dev.octoshrimpy.quik.R
+import dev.octoshrimpy.quik.common.widget.QkTextView
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.toolbar.*
 
 abstract class QkActivity : LocalizationActivity() {
 
+    val toolbar: Toolbar? by lazy { findViewById(R.id.toolbar) }
+
     protected val menu: Subject<Menu> = BehaviorSubject.create()
+    protected val toolbarTitle by lazy { findViewById<QkTextView>(R.id.toolbarTitle) }
 
     @SuppressLint("InlinedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,12 +49,13 @@ abstract class QkActivity : LocalizationActivity() {
                 onBackPressed()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    override fun setContentView(layoutResID: Int) {
-        super.setContentView(layoutResID)
+    override fun setContentView(view: View?) {
+        super.setContentView(view)
         setSupportActionBar(toolbar)
         title = title // The title may have been set before layout inflation
     }

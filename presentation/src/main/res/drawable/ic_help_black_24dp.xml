@@ -1,27 +1,9 @@
-<!--
-  ~ Copyright (C) 2019 Moez Bhatti <moez.bhatti@gmail.com>
-  ~
-  ~ This file is part of QKSMS.
-  ~
-  ~ QKSMS is free software: you can redistribute it and/or modify
-  ~ it under the terms of the GNU General Public License as published by
-  ~ the Free Software Foundation, either version 3 of the License, or
-  ~ (at your option) any later version.
-  ~
-  ~ QKSMS is distributed in the hope that it will be useful,
-  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~ GNU General Public License for more details.
-  ~
-  ~ You should have received a copy of the GNU General Public License
-  ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
-  -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
-    android:viewportWidth="24.0"
-    android:viewportHeight="24.0">
-    <path
-        android:fillColor="#FF000000"
-        android:pathData="M12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM13,19h-2v-2h2v2zM15.07,11.25l-0.9,0.92C13.45,12.9 13,13.5 13,15h-2v-0.5c0,-1.1 0.45,-2.1 1.17,-2.83l1.24,-1.26c0.37,-0.36 0.59,-0.86 0.59,-1.41 0,-1.1 -0.9,-2 -2,-2s-2,0.9 -2,2L8,9c0,-2.21 1.79,-4 4,-4s4,1.79 4,4c0,0.88 -0.36,1.68 -0.93,2.25z" />
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="20"
+    android:viewportHeight="20">
+  <path
+      android:pathData="M17.233,10.328V1.986H2.767V10.328L10,14.438L17.233,10.328ZM5.528,3.991H14.472V4.616H5.528L5.528,3.991ZM5.528,6.702H14.472V7.327H5.528L5.528,6.702ZM5.528,9.413H14.472V10.038H5.528L5.528,9.413ZM10,0.134L8.628,1.361H11.372L10,0.134ZM17.858,7.164V9.973L19.779,8.882L17.858,7.164ZM0,9.475V19.642L8.951,14.561L0,9.475ZM11.047,14.56L20,19.642V9.475L11.047,14.56ZM2.142,7.164L0.221,8.883L2.142,9.973V7.164ZM10.002,15.155L9.586,14.921L0.873,19.866H19.131L10.417,14.921L10.002,15.155Z"
+      android:fillColor="#000000"/>
 </vector>

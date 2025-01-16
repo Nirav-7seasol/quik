@@ -90,7 +90,7 @@ class GalleryActivity : QkActivity(), GalleryView {
     }
 
     override fun render(state: GalleryState) {
-        toolbar.setVisible(state.navigationVisible)
+        toolbar?.setVisible(state.navigationVisible)
 
         title = state.title
         pagerAdapter.updateData(state.parts)

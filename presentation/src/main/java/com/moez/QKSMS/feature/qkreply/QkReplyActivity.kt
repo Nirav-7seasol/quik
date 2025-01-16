@@ -18,7 +18,6 @@
  */
 package dev.octoshrimpy.quik.feature.qkreply
 
-import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -30,17 +29,20 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.jakewharton.rxbinding2.view.clicks
 import com.jakewharton.rxbinding2.widget.textChanges
+import dagger.android.AndroidInjection
 import dev.octoshrimpy.quik.R
 import dev.octoshrimpy.quik.common.base.QkThemedActivity
 import dev.octoshrimpy.quik.common.util.extensions.autoScrollToStart
-import dev.octoshrimpy.quik.common.util.extensions.resolveThemeColor
-import dev.octoshrimpy.quik.common.util.extensions.setBackgroundTint
 import dev.octoshrimpy.quik.common.util.extensions.setVisible
 import dev.octoshrimpy.quik.feature.compose.MessagesAdapter
-import dagger.android.AndroidInjection
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.qkreply_activity.*
+import kotlinx.android.synthetic.main.qkreply_activity.counter
+import kotlinx.android.synthetic.main.qkreply_activity.message
+import kotlinx.android.synthetic.main.qkreply_activity.messages
+import kotlinx.android.synthetic.main.qkreply_activity.send
+import kotlinx.android.synthetic.main.qkreply_activity.sim
+import kotlinx.android.synthetic.main.qkreply_activity.simIndex
 import javax.inject.Inject
 
 class QkReplyActivity : QkThemedActivity(), QkReplyView {
@@ -67,7 +69,7 @@ class QkReplyActivity : QkThemedActivity(), QkReplyView {
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         viewModel.bindView(this)
 
-        toolbar.clipToOutline = true
+        toolbar?.clipToOutline = true
 
         messages.adapter = adapter
         messages.adapter?.autoScrollToStart(messages)
@@ -85,8 +87,8 @@ class QkReplyActivity : QkThemedActivity(), QkReplyView {
 
         title = state.title
 
-        toolbar.menu.findItem(R.id.expand)?.isVisible = !state.expanded
-        toolbar.menu.findItem(R.id.collapse)?.isVisible = state.expanded
+        toolbar?.menu?.findItem(R.id.expand)?.isVisible = !state.expanded
+        toolbar?.menu?.findItem(R.id.collapse)?.isVisible = state.expanded
 
         adapter.data = state.data
 

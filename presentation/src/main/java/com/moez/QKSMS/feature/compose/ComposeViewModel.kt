@@ -190,6 +190,14 @@ class ComposeViewModel @Inject constructor(
                 .distinctUntilChanged()
                 .subscribe { title -> newState { copy(conversationtitle = title) } }
 
+        disposables += conversation
+            .map { conversation -> conversation.recipients.joinToString { recipient -> recipient.address } }
+            .distinctUntilChanged()
+            .subscribe(
+                { number -> newState { copy(conversationEnable = !number.matches(Regex(".*[a-zA-Z].*"))) } },
+                { error -> Timber.e(error, "Error processing conversation recipients") }
+            )
+
         disposables += prefs.sendAsGroup.asObservable()
                 .distinctUntilChanged()
                 .subscribe { enabled -> newState { copy(sendAsGroup = enabled) } }

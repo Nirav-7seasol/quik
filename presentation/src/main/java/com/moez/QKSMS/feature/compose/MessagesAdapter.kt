@@ -188,7 +188,7 @@ class MessagesAdapter @Inject constructor(
 
         val theme = when (message.isOutgoingMessage()) {
             true -> colors.theme()
-            false -> colors.theme(contactCache[message.address])
+            false -> colors.theme()
         }
 
         // Update the selected state
@@ -241,8 +241,8 @@ class MessagesAdapter @Inject constructor(
             holder.avatar.setRecipient(contactCache[message.address])
             holder.avatar.setVisible(!canGroup(message, next), View.INVISIBLE)
 
-            holder.body.setTextColor(theme.textPrimary)
-            holder.body.setBackgroundTint(theme.theme)
+//            holder.body.setTextColor(theme.textPrimary)
+//            holder.body.setBackgroundTint(theme.theme)
         }
 
         // Bind the body text

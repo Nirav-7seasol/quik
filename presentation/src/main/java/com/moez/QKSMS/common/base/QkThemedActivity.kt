@@ -44,7 +44,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.toolbar.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -73,29 +72,29 @@ abstract class QkThemedActivity : QkActivity() {
      * Set it based on the latest message in the conversation
      */
     val theme: Observable<Colors.Theme> = threadId
-            .distinctUntilChanged()
-            .switchMap { threadId ->
-                val conversation = conversationRepo.getConversation(threadId)
-                when {
-                    conversation == null -> Observable.just(Optional(null))
+        .distinctUntilChanged()
+        .switchMap { threadId ->
+            val conversation = conversationRepo.getConversation(threadId)
+            when {
+                conversation == null -> Observable.just(Optional(null))
 
-                    conversation.recipients.size == 1 -> Observable.just(Optional(conversation.recipients.first()))
+                conversation.recipients.size == 1 -> Observable.just(Optional(conversation.recipients.first()))
 
-                    else -> messageRepo.getLastIncomingMessage(conversation.id)
-                            .asObservable()
-                            .mapNotNull { messages -> messages.firstOrNull() }
-                            .distinctUntilChanged { message -> message.address }
-                            .mapNotNull { message ->
-                                conversation.recipients.find { recipient ->
-                                    phoneNumberUtils.compare(recipient.address, message.address)
-                                }
-                            }
-                            .map { recipient -> Optional(recipient) }
-                            .startWith(Optional(conversation.recipients.firstOrNull()))
-                            .distinctUntilChanged()
-                }
+                else -> messageRepo.getLastIncomingMessage(conversation.id)
+                    .asObservable()
+                    .mapNotNull { messages -> messages.firstOrNull() }
+                    .distinctUntilChanged { message -> message.address }
+                    .mapNotNull { message ->
+                        conversation.recipients.find { recipient ->
+                            phoneNumberUtils.compare(recipient.address, message.address)
+                        }
+                    }
+                    .map { recipient -> Optional(recipient) }
+                    .startWith(Optional(conversation.recipients.firstOrNull()))
+                    .distinctUntilChanged()
             }
-            .switchMap { colors.themeObservable(it.value) }
+        }
+        .switchMap { colors.themeObservable(it.value) }
 
     @SuppressLint("InlinedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,14 +104,14 @@ abstract class QkThemedActivity : QkActivity() {
         // When certain preferences change, we need to recreate the activity
         val triggers = listOf(prefs.nightMode, prefs.night, prefs.black, prefs.textSize, prefs.systemFont)
         Observable.merge(triggers.map { it.asObservable().skip(1) })
-                .debounce(400, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(scope())
-                .subscribe { recreate() }
+            .debounce(400, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .autoDisposable(scope())
+            .subscribe { recreate() }
 
         // We can only set light nav bar on API 27 in attrs, but we can do it in API 26 here
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.O) {
-            val night = !resolveThemeBoolean(R.attr.isLightTheme)
+            val night = !resolveThemeBoolean(android.R.attr.isLightTheme)
             window.decorView.systemUiVisibility = if (night) 0 else
                 View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
         }
@@ -123,7 +122,7 @@ abstract class QkThemedActivity : QkActivity() {
         }
 
         // Set the color for the recent apps title
-        val toolbarColor = resolveThemeColor(R.attr.colorPrimary)
+        val toolbarColor = resolveThemeColor(android.R.attr.colorPrimary)
         val icon = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
         val taskDesc = ActivityManager.TaskDescription(getString(R.string.app_name), icon, toolbarColor)
         setTaskDescription(taskDesc)
@@ -133,15 +132,15 @@ abstract class QkThemedActivity : QkActivity() {
         super.onPostCreate(savedInstanceState)
 
         // Set the color for the overflow and navigation icon
-        val textSecondary = resolveThemeColor(android.R.attr.textColorSecondary)
-        toolbar?.overflowIcon = toolbar?.overflowIcon?.apply { setTint(textSecondary) }
+        val textPrimary = resolveThemeColor(android.R.attr.textColorPrimary)
+        toolbar?.overflowIcon = toolbar?.overflowIcon?.apply { setTint(textPrimary) }
 
         // Update the colours of the menu items
         Observables.combineLatest(menu, theme) { menu, theme ->
             menu.iterator().forEach { menuItem ->
                 val tint = when (menuItem.itemId) {
                     in getColoredMenuItems() -> theme.theme
-                    else -> textSecondary
+                    else -> textPrimary
                 }
 
                 menuItem.icon = menuItem.icon?.apply { setTint(tint) }

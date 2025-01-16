@@ -113,6 +113,13 @@ class Navigator @Inject constructor(
         startActivity(intent)
     }
 
+    fun showConversationWithAd(threadId: Long, isAdShow: Boolean = false) {
+        val intent = Intent(context, ComposeActivity::class.java).putExtra("threadId", threadId)
+            .putExtra("isAdShow", isAdShow)
+        intent.putExtra("ComAdShow", true)
+        startActivity(intent)
+    }
+
     fun showConversationInfo(threadId: Long) {
         val intent = Intent(context, ConversationInfoActivity::class.java)
         intent.putExtra("threadId", threadId)
@@ -229,9 +236,6 @@ class Navigator @Inject constructor(
                 .append("Version: ${BuildConfig.VERSION_NAME}\n")
                 .append("Device: ${Build.BRAND} ${Build.MODEL}\n")
                 .append("SDK: ${Build.VERSION.SDK_INT}\n")
-                .append("Upgraded"
-                        .takeIf { BuildConfig.FLAVOR != "noAnalytics" }
-                        .takeIf { billingManager.upgradeStatus.blockingFirst() } ?: "")
                 .toString())
         startActivityExternal(intent)
     }

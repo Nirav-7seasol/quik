@@ -1,22 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2019 Moez Bhatti <moez.bhatti@gmail.com>
-  ~
-  ~ This file is part of QKSMS.
-  ~
-  ~ QKSMS is free software: you can redistribute it and/or modify
-  ~ it under the terms of the GNU General Public License as published by
-  ~ the Free Software Foundation, either version 3 of the License, or
-  ~ (at your option) any later version.
-  ~
-  ~ QKSMS is distributed in the hope that it will be useful,
-  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~ GNU General Public License for more details.
-  ~
-  ~ You should have received a copy of the GNU General Public License
-  ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
-  -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -30,6 +11,38 @@
         android:orientation="vertical"
         android:paddingTop="8dp"
         android:paddingBottom="8dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/app_logo" />
+
+            <dev.octoshrimpy.quik.common.widget.QkTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="?attr/iconTintSolid"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+            <dev.octoshrimpy.quik.common.widget.QkTextView
+                android:id="@+id/versionName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                android:layout_marginTop="6dp"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <LinearLayout
             android:id="@+id/inbox"
@@ -55,7 +68,7 @@
                 android:id="@+id/archivedIcon"
                 style="@style/DrawerIcon"
                 android:src="@drawable/ic_archive_white_24dp"
-                tools:tint="?android:attr/textColorSecondary" />
+                app:tint="?attr/iconTintSolid" />
 
             <dev.octoshrimpy.quik.common.widget.QkTextView
                 style="@style/DrawerText"
@@ -77,23 +90,11 @@
             <ImageView
                 style="@style/DrawerIcon"
                 android:src="@drawable/ic_import_export_black_24dp"
-                android:tint="?android:attr/textColorSecondary" />
+                app:tint="?attr/iconTintSolid" />
 
             <dev.octoshrimpy.quik.common.widget.QkTextView
                 style="@style/DrawerText"
                 android:text="@string/backup_title" />
-
-            <dev.octoshrimpy.quik.common.widget.QkTextView
-                android:id="@+id/plusBadge1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_rectangle_2dp"
-                android:padding="4dp"
-                android:text="@string/title_qksms_plus"
-                android:textStyle="bold"
-                app:textSize="tertiary"
-                tools:backgroundTint="@color/tools_theme"
-                tools:textColor="@color/textPrimaryDark" />
 
         </LinearLayout>
 
@@ -104,23 +105,11 @@
             <ImageView
                 style="@style/DrawerIcon"
                 android:src="@drawable/ic_event_black_24dp"
-                android:tint="?android:attr/textColorSecondary" />
+                app:tint="?attr/iconTintSolid" />
 
             <dev.octoshrimpy.quik.common.widget.QkTextView
                 style="@style/DrawerText"
                 android:text="@string/drawer_scheduled" />
-
-            <dev.octoshrimpy.quik.common.widget.QkTextView
-                android:id="@+id/plusBadge2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_rectangle_2dp"
-                android:padding="4dp"
-                android:text="@string/title_qksms_plus"
-                android:textStyle="bold"
-                app:textSize="tertiary"
-                tools:backgroundTint="@color/tools_theme"
-                tools:textColor="@color/textPrimaryDark" />
 
         </LinearLayout>
 
@@ -131,11 +120,26 @@
             <ImageView
                 style="@style/DrawerIcon"
                 android:src="@drawable/ic_block_white_24dp"
-                android:tint="?android:attr/textColorSecondary" />
+                app:tint="?attr/iconTintSolid" />
 
             <dev.octoshrimpy.quik.common.widget.QkTextView
                 style="@style/DrawerText"
                 android:text="@string/drawer_blocking" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/language"
+            style="@style/DrawerRow">
+
+            <ImageView
+                style="@style/DrawerIcon"
+                android:src="@drawable/ic_translate_black_24dp"
+                app:tint="?attr/iconTintSolid" />
+
+            <dev.octoshrimpy.quik.common.widget.QkTextView
+                style="@style/DrawerText"
+                android:text="@string/change_language" />
 
         </LinearLayout>
 
@@ -153,7 +157,7 @@
             <ImageView
                 style="@style/DrawerIcon"
                 android:src="@drawable/ic_settings_black_24dp"
-                android:tint="?android:attr/textColorSecondary" />
+                app:tint="?attr/iconTintSolid" />
 
             <dev.octoshrimpy.quik.common.widget.QkTextView
                 style="@style/DrawerText"
@@ -161,35 +165,21 @@
 
         </LinearLayout>
 
-<!--        <LinearLayout-->
-<!--            android:id="@+id/plus"-->
-<!--            style="@style/DrawerRow">-->
+        <LinearLayout
+            android:id="@+id/help"
+            style="@style/DrawerRow"
+            android:visibility="gone">
 
-<!--            <ImageView-->
-<!--                style="@style/DrawerIcon"-->
-<!--                android:src="@drawable/ic_star_black_24dp"-->
-<!--                android:tint="?android:attr/textColorSecondary" />-->
+            <ImageView
+                style="@style/DrawerIcon"
+                android:src="@drawable/ic_help_black_24dp"
+                app:tint="?attr/iconTintSolid" />
 
-<!--            <dev.octoshrimpy.quik.common.widget.QkTextView-->
-<!--                style="@style/DrawerText"-->
-<!--                android:text="@string/drawer_plus" />-->
+            <dev.octoshrimpy.quik.common.widget.QkTextView
+                style="@style/DrawerText"
+                android:text="@string/drawer_help" />
 
-<!--        </LinearLayout>-->
-
-<!--        <LinearLayout-->
-<!--            android:id="@+id/help"-->
-<!--            style="@style/DrawerRow">-->
-
-<!--            <ImageView-->
-<!--                style="@style/DrawerIcon"-->
-<!--                android:src="@drawable/ic_help_black_24dp"-->
-<!--                android:tint="?android:attr/textColorSecondary" />-->
-
-<!--            <dev.octoshrimpy.quik.common.widget.QkTextView-->
-<!--                style="@style/DrawerText"-->
-<!--                android:text="@string/drawer_help" />-->
-
-<!--        </LinearLayout>-->
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/invite"
@@ -198,7 +188,7 @@
             <ImageView
                 style="@style/DrawerIcon"
                 android:src="@drawable/ic_people_black_24dp"
-                android:tint="?android:attr/textColorSecondary" />
+                app:tint="?attr/iconTintSolid"/>
 
             <dev.octoshrimpy.quik.common.widget.QkTextView
                 style="@style/DrawerText"
@@ -206,147 +196,20 @@
 
         </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/plusBanner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/rounded_rectangle_outline_2dp"
-            android:backgroundTint="?android:attr/divider"
-            android:foreground="?attr/selectableItemBackground"
-            android:padding="16dp">
+        <LinearLayout
+            android:id="@+id/rateOkay"
+            style="@style/DrawerRow">
 
             <ImageView
-                android:id="@+id/plusIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                style="@style/DrawerIcon"
                 android:src="@drawable/ic_star_black_24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:tint="@color/tools_theme" />
+                app:tint="?attr/iconTintSolid" />
 
             <dev.octoshrimpy.quik.common.widget.QkTextView
-                android:id="@+id/plusTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/drawer_plus_banner_title"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/plusNext"
-                app:layout_constraintStart_toEndOf="@id/plusIcon"
-                app:layout_constraintTop_toTopOf="parent"
-                app:textSize="primary" />
+                style="@style/DrawerText"
+                android:text="@string/rate_us" />
 
-            <dev.octoshrimpy.quik.common.widget.QkTextView
-                android:id="@+id/plusSummary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="@string/drawer_plus_banner_summary"
-                android:textColor="?android:attr/textColorSecondary"
-                app:layout_constraintEnd_toEndOf="@id/plusTitle"
-                app:layout_constraintStart_toStartOf="@id/plusTitle"
-                app:layout_constraintTop_toBottomOf="@id/plusTitle"
-                app:textSize="secondary" />
-
-            <ImageView
-                android:id="@+id/plusNext"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_chevron_right_black_24dp"
-                android:tint="?android:attr/textColorTertiary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/rateLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/rounded_rectangle_outline_2dp"
-            android:backgroundTint="?android:attr/divider">
-
-            <ImageView
-                android:id="@+id/rateIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="16dp"
-                android:src="@drawable/ic_favorite_black_24dp"
-                app:layout_constraintBottom_toBottomOf="@id/rateSummary"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/rateTitle"
-                tools:tint="@color/tools_theme" />
-
-            <dev.octoshrimpy.quik.common.widget.QkTextView
-                android:id="@+id/rateTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/rate_title"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/rateIcon"
-                app:layout_constraintTop_toTopOf="parent"
-                app:textSize="primary" />
-
-            <dev.octoshrimpy.quik.common.widget.QkTextView
-                android:id="@+id/rateSummary"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/rate_summary"
-                android:textColor="?android:attr/textColorSecondary"
-                app:layout_constraintEnd_toEndOf="@id/rateTitle"
-                app:layout_constraintStart_toStartOf="@id/rateTitle"
-                app:layout_constraintTop_toBottomOf="@id/rateTitle"
-                app:textSize="secondary" />
-
-            <dev.octoshrimpy.quik.common.widget.QkTextView
-                android:id="@+id/rateDismiss"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:paddingStart="16dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:text="@string/rate_dismiss"
-                android:textColor="?android:attr/textColorTertiary"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/rateOkay"
-                app:layout_constraintTop_toBottomOf="@id/rateSummary"
-                app:textSize="secondary" />
-
-            <dev.octoshrimpy.quik.common.widget.QkTextView
-                android:id="@+id/rateOkay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="?attr/selectableItemBackground"
-                android:padding="16dp"
-                android:text="@string/rate_okay"
-                android:textColor="?android:attr/textColorSecondary"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rateSummary"
-                app:textSize="secondary" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

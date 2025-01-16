@@ -78,7 +78,11 @@ class ConversationsAdapter @Inject constructor(
                 val conversation = getItem(adapterPosition) ?: return@setOnClickListener
                 when (toggleSelection(conversation.id, false)) {
                     true -> view.isActivated = isSelected(conversation.id)
-                    false -> navigator.showConversation(conversation.id)
+                    false -> {
+                        val aa = conversation.lastMessage?.address?.matches(Regex(".*[a-zA-Z].*"))
+                            ?: false
+                        navigator.showConversationWithAd(conversation.id, aa)
+                    }
                 }
             }
             view.setOnLongClickListener {
