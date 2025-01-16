@@ -34,8 +34,6 @@ import dev.octoshrimpy.quik.common.widget.QkTextView
 import dev.octoshrimpy.quik.util.Preferences
 import javax.inject.Inject
 
-
-
 class TextViewStyler @Inject constructor(
     private val prefs: Preferences,
     private val colors: Colors,
@@ -61,15 +59,15 @@ class TextViewStyler @Inject constructor(
                 var textSizeAttr = 0
 
                 when (this) {
-                    is QkTextView -> context.obtainStyledAttributes(attrs, R.styleable.QkTextView)?.run {
-                        colorAttr = getInt(R.styleable.QkTextView_textColor, -1)
-                        textSizeAttr = getInt(R.styleable.QkTextView_textSize, -1)
+                    is QkTextView -> context.obtainStyledAttributes(attrs, R.styleable.CustomTextView)?.run {
+                        colorAttr = getInt(R.styleable.CustomTextView_textColor, -1)
+                        textSizeAttr = getInt(R.styleable.CustomTextView_textSize, -1)
                         recycle()
                     }
 
-                    is QkEditText -> context.obtainStyledAttributes(attrs, R.styleable.QkEditText)?.run {
-                        colorAttr = getInt(R.styleable.QkEditText_textColor, -1)
-                        textSizeAttr = getInt(R.styleable.QkEditText_textSize, -1)
+                    is QkEditText -> context.obtainStyledAttributes(attrs, R.styleable.CustomEditText)?.run {
+                        colorAttr = getInt(R.styleable.CustomEditText_textColor, -1)
+                        textSizeAttr = getInt(R.styleable.CustomEditText_textSize, -1)
                         recycle()
                     }
 
@@ -107,15 +105,15 @@ class TextViewStyler @Inject constructor(
         }
 
         when (textView) {
-            is QkTextView -> textView.context.obtainStyledAttributes(attrs, R.styleable.QkTextView).run {
-                colorAttr = getInt(R.styleable.QkTextView_textColor, -1)
-                textSizeAttr = getInt(R.styleable.QkTextView_textSize, -1)
+            is QkTextView -> textView.context.obtainStyledAttributes(attrs, R.styleable.CustomTextView).run {
+                colorAttr = getInt(R.styleable.CustomTextView_textColor, -1)
+                textSizeAttr = getInt(R.styleable.CustomTextView_textSize, -1)
                 recycle()
             }
 
-            is QkEditText -> textView.context.obtainStyledAttributes(attrs, R.styleable.QkEditText).run {
-                colorAttr = getInt(R.styleable.QkEditText_textColor, -1)
-                textSizeAttr = getInt(R.styleable.QkEditText_textSize, -1)
+            is QkEditText -> textView.context.obtainStyledAttributes(attrs, R.styleable.CustomEditText).run {
+                colorAttr = getInt(R.styleable.CustomEditText_textColor, -1)
+                textSizeAttr = getInt(R.styleable.CustomEditText_textSize, -1)
                 recycle()
             }
 

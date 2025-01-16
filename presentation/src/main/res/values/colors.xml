@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2019 Moez Bhatti <moez.bhatti@gmail.com>
-  ~
-  ~ This file is part of QKSMS.
-  ~
-  ~ QKSMS is free software: you can redistribute it and/or modify
-  ~ it under the terms of the GNU General Public License as published by
-  ~ the Free Software Foundation, either version 3 of the License, or
-  ~ (at your option) any later version.
-  ~
-  ~ QKSMS is distributed in the hope that it will be useful,
-  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~ GNU General Public License for more details.
-  ~
-  ~ You should have received a copy of the GNU General Public License
-  ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
-  -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
@@ -31,11 +14,17 @@
     <color name="backgroundLight">#FFFFFF</color>
     <color name="backgroundDark">#192025</color>
 
-    <color name="textPrimary">#49555F</color>
-    <color name="textPrimaryDisabled">#4C49555F</color>
-    <color name="textSecondary">#70808D</color>
-    <color name="textSecondaryDisabled">#4C70808D</color>
+    <color name="textPrimary">#000000</color>
+    <color name="textPrimaryDisabled">#4C000000</color>
+    <color name="textSecondary">#49555F</color>
+    <color name="textSecondaryDisabled">#4C49555F</color>
     <color name="textTertiary">#B7B9C0</color>
+
+    <!--    <color name="textPrimary">#49555F</color>-->
+    <!--    <color name="textPrimaryDisabled">#4C49555F</color>-->
+    <!--    <color name="textSecondary">#70808D</color>-->
+    <!--    <color name="textSecondaryDisabled">#4C70808D</color>-->
+    <!--    <color name="textTertiary">#B7B9C0</color>-->
 
     <color name="textPrimaryDark">#FFFFFFFF</color>
     <color name="textPrimaryDisabledDark">#7FFFFFFF</color>
@@ -62,8 +51,12 @@
     <color name="switchTrackDisabledLight">#D6D6D6</color>
     <color name="switchTrackDisabledDark">#383838</color>
 
+    <color name="cardBgColorLight">#f1f1f1</color>
+    <color name="cardBgColorDark">#2A353D</color>
+    <color name="cardBgColorBlack">#181818</color>
+
     <!-- This colour should only ever be used for attrs with the tools tag -->
-    <color name="tools_theme">#00838F</color>
+    <color name="tools_theme">#1565c0</color>
 
     <array name="random_colors">
         <item>#06C9AF</item>
@@ -321,5 +314,49 @@
         <item>#37474F</item>
         <item>#263238</item>
     </array>
+    <color name="lightBlueGrey">#1e2c37</color>
+    <color name="deepBlueGrey">#17242d</color>
+    <color name="blue">#2373fc</color>
+    <color name="purple">#6812cb</color>
+    <color name="red">#F44336</color>
+    <color name="whiteTransparent97">#F7FFFFFF</color>
+    <color name="whiteTransparent90">#E6FFFFFF</color>
+    <color name="dullGrey">#E0E0E0</color>
+    <color name="greyWhite">#BDBDBD</color>
+    <color name="lightGrey">#1AFFFFFF</color>
+    <color name="deepGrey">#1A000000</color>
+    <color name="grey">#424242</color>
+    <color name="deepDarkGrey">#212121</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#BDBDBD</color>
+    <color name="gblack">#000</color>
+    <color name="gred">#DB4437</color>
+    <color name="ggreen">#0F9D58</color>
+    <color name="gblue">#4285f4</color>
+    <color name="gyellow">#F4B400</color>
+    <color name="gpink">#d81b60</color>
+    <color name="ggray">#767676</color>
+    <color name="gdblue">#1565c0</color>
+    <color name="gpurple">#4527a0</color>
+    <color name="glyellow">#ffeb3b</color>
+    <color name="glpurple">#9575cd</color>
+    <color name="gorange">#e64a19</color>
+    <color name="glpink">#f48fb1</color>
 
+    <!--    ads colors-->
+    <color name="commonwhite">#ffffff</color>
+    <color name="commonBlack">#000000</color>
+
+    <color name="lavender_bg">#e6e6e6</color>
+    <color name="color_grey_dark1">#aaaaaa</color>
+    <color name="c_DCDCDC">#dcdcdc</color>
+    <color name="gray_text">#a4a4a4</color>
+    <color name="blackFinal">#000000</color>
+    <color name="c_E4E4E4">#e3e3e3</color>
+    <color name="gray_back1">#e9e9e9</color>
+    <color name="lavender_bg1">#e6e6e6</color>
+    <color name="cardBg">#F0F6FD</color>
+
+    <color name="main_back1">#ffffff</color>
+    <color name="black_and_white_10">#1a000000</color>
+    <color name="color_screen_bg">#fcfdff</color>
 </resources>

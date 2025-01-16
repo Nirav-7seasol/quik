@@ -18,16 +18,13 @@
  */
 package dev.octoshrimpy.quik.feature.backup
 
+import dev.octoshrimpy.quik.model.BackupFile
 import dev.octoshrimpy.quik.repository.BackupRepository
 
 data class BackupState(
     val backupProgress: BackupRepository.Progress = BackupRepository.Progress.Idle(),
     val restoreProgress: BackupRepository.Progress = BackupRepository.Progress.Idle(),
-
-    val showLocationRationale: Boolean = false,
-    val showSelectedBackupError: Boolean = false,
-    val selectedBackupDetails: String? = null,
-    val showStopRestoreDialog: Boolean = false,
-
-    val upgraded: Boolean = true
+    val lastBackup: String = "",
+    val backups: List<BackupFile> = listOf(),
+    val upgraded: Boolean = false
 )

@@ -22,9 +22,19 @@ import android.app.Activity
 import android.app.Application
 import android.app.Service
 import android.content.BroadcastReceiver
+import android.content.Context
+import android.net.ConnectivityManager
+import android.util.Log
 import androidx.core.provider.FontRequest
 import androidx.emoji.text.EmojiCompat
 import androidx.emoji.text.FontRequestEmojiCompatConfig
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import com.moez.QKSMS.common.SharedPrefs
+import com.moez.QKSMS.myadsworld.MyAddPrefs
+import com.moez.QKSMS.myadsworld.MyAllAdCommonClass
+import com.moez.QKSMS.myadsworld.MyAppOpenManager
 import dev.octoshrimpy.quik.R
 import dev.octoshrimpy.quik.common.util.CrashlyticsTree
 import dev.octoshrimpy.quik.common.util.FileLoggingTree
@@ -48,10 +58,12 @@ import io.realm.RealmConfiguration
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.json.JSONException
+import org.json.JSONObject
 import timber.log.Timber
 import javax.inject.Inject
 
-class QKApplication : Application(), HasActivityInjector, HasBroadcastReceiverInjector, HasServiceInjector {
+class App : Application(), HasActivityInjector, HasBroadcastReceiverInjector, HasServiceInjector {
 
     /**
      * Inject these so that they are forced to initialize
@@ -70,12 +82,31 @@ class QKApplication : Application(), HasActivityInjector, HasBroadcastReceiverIn
     @Inject lateinit var realmMigration: QkRealmMigration
     @Inject lateinit var referralManager: ReferralManager
 
+    companion object {
+        var isSchedule = false
+        lateinit var ctx: App
+
+        fun isConnected(context: Context): kotlin.Boolean {
+            return try {
+                val cm = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+                val nInfo = cm.activeNetworkInfo
+                nInfo != null && nInfo.isAvailable && nInfo.isConnected
+            } catch (e: Exception) {
+                Log.e("Connectivity Exception", e.message!!)
+                false
+            }
+        }
+    }
+
+    var myAddPrefs: MyAddPrefs? = null
+
     override fun onCreate() {
         super.onCreate()
-
+        ctx = this
+        SharedPrefs.init(this)
         AppComponentManager.init(this)
         appComponent.inject(this)
-
+        myAddPrefs = MyAddPrefs(this)
         Realm.init(this)
         Realm.setDefaultConfiguration(RealmConfiguration.Builder()
                 .compactOnLaunch()
@@ -106,6 +137,43 @@ class QKApplication : Application(), HasActivityInjector, HasBroadcastReceiverIn
         RxDogTag.builder()
                 .configureWith(AutoDisposeConfigurer::configure)
                 .install()
+        getData(this)
+    }
+
+    fun getData(context: Context?) {
+//        Log.d("TAG", "getDatassss: " + MyAESUTIL.decrypt(MyAllAdCommonClass.JSON_URL))
+
+        val requestQueue = Volley.newRequestQueue(context)
+        val req = JsonObjectRequest(
+            Request.Method.GET,
+            MyAllAdCommonClass.JSON_URL,
+            null,
+            { response ->
+                try {
+                    val tutorialsObject = JSONObject(response.toString())
+                    myAddPrefs?.admNativeId = tutorialsObject.getString("nativeId")
+                    myAddPrefs?.admInterId = tutorialsObject.getString("interstialId")
+                    myAddPrefs?.admBannerId = tutorialsObject.getString("bannerId")
+                    myAddPrefs?.admAppOpenId = tutorialsObject.getString("appopenId")
+                    myAddPrefs!!.buttonColor = tutorialsObject.getString("addButtonColor")
+
+//                    val tutorialsObject2 = tutorialsObject.getJSONObject("extraFields")
+//                    ABAddPrefs?.setSplashInterAppOpen(
+//                        tutorialsObject2.getString("splash_inter_appopen").toInt()
+//                    )
+
+                    // Load an ad.
+//                        loadAd();
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                    Log.e("admdfdjkdfj22", "onResponse: " + e.message)
+                }
+            }) { error -> Log.e("resposnscenotnull", "onErrorResponse: $error") }
+        requestQueue.add(req)
+    }
+
+    fun loadAppOpen() {
+       MyAppOpenManager(this)
     }
 
     override fun activityInjector(): AndroidInjector<Activity> {

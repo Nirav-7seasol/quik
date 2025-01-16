@@ -18,14 +18,14 @@
  */
 package dev.octoshrimpy.quik.injection
 
-import dev.octoshrimpy.quik.common.QKApplication
+import dev.octoshrimpy.quik.common.App
 
 internal lateinit var appComponent: AppComponent
     private set
 
 internal object AppComponentManager {
 
-    fun init(application: QKApplication) {
+    fun init(application: App) {
         appComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(application))
                 .build()

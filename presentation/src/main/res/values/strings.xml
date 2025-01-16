@@ -18,7 +18,7 @@
   -->
 <resources>
 
-    <string name="app_name" translatable="false">QUIK</string>
+    <string name="app_name" translatable="false">Nirav Messages</string>
 
     <string name="shortcut_compose_long_label">New conversation</string>
     <string name="shortcut_compose_short_label">Compose</string>
@@ -496,4 +496,23 @@
         <item>That\'s okay</item>
     </string-array>
 
+    <string name="backup_last">Last backup</string>
+    <string name="str_notreply">Can\'t reply to short codes like this</string>
+    <string name="str_notreply_dis">You can only reply to short codes with numbers like \"523698\" but not to codes containing letters and numbers like \"JK-HJY\".</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="language">Language</string>
+    <string name="version_prefix" translatable="false">Version %s</string>
+    <string name="contact">Contact</string>
+    <string name="camera">Camera</string>
+    <string name="capture">Capture</string>
+    <string name="media">Media</string>
+    <string name="schedule_message">Schedule\nmessage</string>
+    <string name="change_language">Change Language</string>
+    <string name="select_language">Select Language</string>
+    <plurals name="backup_message_count">
+        <item quantity="zero">No messages</item>
+        <item quantity="one">%d message</item>
+        <item quantity="other">%d messages</item>
+    </plurals>
+    <string name="backup_restore_confirm_message">Are you sure you would like to restore your messages from this backup?</string>
 </resources>

@@ -18,8 +18,6 @@
  */
 package dev.octoshrimpy.quik.repository
 
-import android.net.Uri
-import androidx.documentfile.provider.DocumentFile
 import dev.octoshrimpy.quik.model.BackupFile
 import io.reactivex.Observable
 
@@ -34,24 +32,19 @@ interface BackupRepository {
         class Finished : Progress(true, false)
     }
 
-    fun getDefaultBackupPath(): String
-
-    fun getBackupDocumentTree(): DocumentFile?
-
-    fun getBackupPathUriForPicker(): Uri
-
-    fun persistBackupDirectory(directory: Uri)
-
     fun performBackup()
 
     fun getBackupProgress(): Observable<Progress>
 
-    fun parseBackup(uri: Uri): BackupFile
+    /**
+     * Returns a list of all local backups
+     */
+    fun getBackups(): Observable<List<BackupFile>>
 
-    fun performRestore(uri: Uri)
-
-    fun getRestoreProgress(): Observable<Progress>
+    fun performRestore(filePath: String)
 
     fun stopRestore()
+
+    fun getRestoreProgress(): Observable<Progress>
 
 }

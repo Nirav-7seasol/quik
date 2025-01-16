@@ -1,28 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2019 Moez Bhatti <moez.bhatti@gmail.com>
-  ~
-  ~ This file is part of QKSMS.
-  ~
-  ~ QKSMS is free software: you can redistribute it and/or modify
-  ~ it under the terms of the GNU General Public License as published by
-  ~ the Free Software Foundation, either version 3 of the License, or
-  ~ (at your option) any later version.
-  ~
-  ~ QKSMS is distributed in the hope that it will be useful,
-  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~ GNU General Public License for more details.
-  ~
-  ~ You should have received a copy of the GNU General Public License
-  ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
-  -->
+
 <resources>
+
+    <declare-styleable name="WheelPicker">
+        <attr name="wheel_data" format="reference" />
+        <attr name="wheel_selected_item_position" format="integer" />
+        <attr name="wheel_item_text_size" format="dimension" />
+        <attr name="wheel_item_text_color" format="color" />
+        <attr name="wheel_selected_item_text_color" format="color" />
+        <attr name="wheel_same_width" format="boolean" />
+        <attr name="wheel_maximum_width_text" format="string" />
+        <attr name="wheel_maximum_width_text_position" format="integer" />
+        <attr name="wheel_visible_item_count" format="integer" />
+        <attr name="wheel_item_space" format="dimension" />
+        <attr name="wheel_cyclic" format="boolean" />
+        <attr name="wheel_indicator" format="boolean" />
+        <attr name="wheel_indicator_color" format="color" />
+        <attr name="wheel_indicator_size" format="dimension" />
+        <attr name="wheel_curtain" format="boolean" />
+        <attr name="wheel_curtain_color" format="color" />
+        <attr name="wheel_atmospheric" format="boolean" />
+        <attr name="wheel_curved" format="boolean" />
+        <attr name="wheel_item_align" format="enum">
+            <enum name="center" value="0" />
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <attr name="wheel_font_path" format="string" />
+    </declare-styleable>
 
     <attr name="title" format="string" />
     <attr name="summary" format="string" />
     <attr name="widget" format="reference" />
-    <attr name="icon" format="reference" />
 
     <attr name="textColor" format="enum">
         <enum name="theme" value="0" />
@@ -30,6 +39,13 @@
         <enum name="secondaryOnTheme" value="2" />
         <enum name="tertiaryOnTheme" value="3" />
     </attr>
+
+    <attr name="colorToolbar" format="reference" />
+    <attr name="colorDrawable" format="reference" />
+    <attr name="colorSearchView" format="reference" />
+    <attr name="colorBackground" format="reference" />
+    <attr name="colorBottomAppBar" format="reference" />
+    <attr name="colorDialogBackground" format="reference" />
 
     <attr name="textSize" format="enum">
         <enum name="primary" value="0" />
@@ -40,12 +56,12 @@
         <enum name="emoji" value="5" />
     </attr>
 
-    <declare-styleable name="QkTextView">
+    <declare-styleable name="CustomTextView">
         <attr name="textColor" />
         <attr name="textSize" />
     </declare-styleable>
 
-    <declare-styleable name="QkEditText">
+    <declare-styleable name="CustomEditText">
         <attr name="textColor" />
         <attr name="textSize" />
     </declare-styleable>
@@ -54,7 +70,7 @@
         <attr name="title" />
         <attr name="summary" />
         <attr name="widget" />
-        <attr name="icon" />
+        <attr name="icon" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="RadioPreferenceView">

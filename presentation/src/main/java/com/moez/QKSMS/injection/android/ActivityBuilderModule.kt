@@ -18,6 +18,9 @@
  */
 package dev.octoshrimpy.quik.injection.android
 
+import com.moez.QKSMS.feature.language.LanguageSelectionActivity
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
 import dev.octoshrimpy.quik.feature.backup.BackupActivity
 import dev.octoshrimpy.quik.feature.blocking.BlockingActivity
 import dev.octoshrimpy.quik.feature.compose.ComposeActivity
@@ -39,11 +42,13 @@ import dev.octoshrimpy.quik.feature.scheduled.ScheduledActivity
 import dev.octoshrimpy.quik.feature.scheduled.ScheduledActivityModule
 import dev.octoshrimpy.quik.feature.settings.SettingsActivity
 import dev.octoshrimpy.quik.injection.scope.ActivityScope
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class ActivityBuilderModule {
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [])
+    abstract fun bindLanguageSelectionActivity(): LanguageSelectionActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [MainActivityModule::class])

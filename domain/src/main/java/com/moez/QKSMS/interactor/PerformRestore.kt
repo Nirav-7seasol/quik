@@ -18,18 +18,17 @@
  */
 package dev.octoshrimpy.quik.interactor
 
-import android.net.Uri
 import dev.octoshrimpy.quik.repository.BackupRepository
 import io.reactivex.Flowable
 import javax.inject.Inject
 
 class PerformRestore @Inject constructor(
     private val backupRepo: BackupRepository
-) : Interactor<Uri>() {
+) : Interactor<String>() {
 
-    override fun buildObservable(params: Uri): Flowable<*> {
+    override fun buildObservable(params: String): Flowable<*> {
         return Flowable.just(params)
-                .doOnNext(backupRepo::performRestore)
+            .doOnNext(backupRepo::performRestore)
     }
 
 }

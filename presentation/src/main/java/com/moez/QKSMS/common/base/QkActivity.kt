@@ -23,11 +23,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
 import kotlinx.android.synthetic.main.toolbar.*
 
-abstract class QkActivity : AppCompatActivity() {
+abstract class QkActivity : LocalizationActivity() {
 
     protected val menu: Subject<Menu> = BehaviorSubject.create()
 

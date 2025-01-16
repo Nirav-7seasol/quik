@@ -18,31 +18,23 @@
  */
 package dev.octoshrimpy.quik.feature.backup
 
-import android.net.Uri
 import dev.octoshrimpy.quik.common.base.QkViewContract
+import dev.octoshrimpy.quik.model.BackupFile
 import io.reactivex.Observable
 
 interface BackupView : QkViewContract<BackupState> {
-    fun setBackupLocationClicks(): Observable<*>
+
+    fun activityVisible(): Observable<*>
     fun restoreClicks(): Observable<*>
-
-    fun backupClicks(): Observable<*>
-
-    fun locationRationaleConfirmClicks(): Observable<*>
-    fun locationRationaleCancelClicks(): Observable<*>
-
-    fun selectedBackupErrorClicks(): Observable<*>
-
-    fun confirmRestoreBackupConfirmClicks(): Observable<*>
-    fun confirmRestoreBackupCancelClicks(): Observable<*>
-
+    fun restoreFileSelected(): Observable<BackupFile>
+    fun restoreConfirmed(): Observable<*>
     fun stopRestoreClicks(): Observable<*>
     fun stopRestoreConfirmed(): Observable<*>
-    fun stopRestoreCancel(): Observable<*>
+    fun fabClicks(): Observable<*>
 
-    fun documentTreeSelected(): Observable<Uri>
-    fun documentSelected(): Observable<Uri>
+    fun requestStoragePermission()
+    fun selectFile()
+    fun confirmRestore()
+    fun stopRestore()
 
-    fun selectFolder(initialUri: Uri)
-    fun selectFile(initialUri: Uri)
 }

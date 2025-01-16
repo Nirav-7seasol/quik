@@ -22,7 +22,9 @@ import android.annotation.SuppressLint
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ServiceInfo
 import android.net.Uri
+import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -42,21 +44,23 @@ class RestoreBackupService : Service() {
     companion object {
         private const val NOTIFICATION_ID = -1
 
-        private const val ACTION_START = "dev.octoshrimpy.quik.ACTION_START"
-        private const val ACTION_STOP = "dev.octoshrimpy.quik.ACTION_STOP"
-        private const val EXTRA_FILE_URI = "dev.octoshrimpy.quik.EXTRA_FILE_URI"
+        private const val ACTION_START = "com.innovate.replify.ACTION_START"
+        private const val ACTION_STOP = "com.innovate.replify.ACTION_STOP"
+        private const val EXTRA_FILE_PATH = "com.innovate.replify.EXTRA_FILE_PATH"
 
-        fun start(context: Context, backupFile: Uri) {
+        fun start(context: Context, filePath: String) {
             val intent = Intent(context, RestoreBackupService::class.java)
-                    .setAction(ACTION_START)
-                    .putExtra(EXTRA_FILE_URI, backupFile.toString())
+                .setAction(ACTION_START)
+                .putExtra(EXTRA_FILE_PATH, filePath)
 
             ContextCompat.startForegroundService(context, intent)
         }
     }
 
-    @Inject lateinit var backupRepo: BackupRepository
-    @Inject lateinit var notificationManager: NotificationManager
+    @Inject
+    lateinit var backupRepo: BackupRepository
+    @Inject
+    lateinit var notificationManager: NotificationManager
 
     private val notification by lazy { notificationManager.getNotificationForBackup() }
 
@@ -78,33 +82,41 @@ class RestoreBackupService : Service() {
     private fun start(intent: Intent) {
         val notificationManager = NotificationManagerCompat.from(this)
 
-        startForeground(NOTIFICATION_ID, notification.build())
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.TIRAMISU) { // Android 14
+            startForeground(
+                NOTIFICATION_ID,
+                notification.build(),
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+            );
+        } else {
+            startForeground(NOTIFICATION_ID, notification.build())
+        }
 
         backupRepo.getRestoreProgress()
-                .sample(200, TimeUnit.MILLISECONDS, true)
-                .subscribeOn(Schedulers.io())
-                .subscribe { progress ->
-                    when (progress) {
-                        is BackupRepository.Progress.Idle -> stop()
+            .sample(200, TimeUnit.MILLISECONDS, true)
+            .subscribeOn(Schedulers.io())
+            .subscribe { progress ->
+                when (progress) {
+                    is BackupRepository.Progress.Idle -> stop()
 
-                        is BackupRepository.Progress.Running -> notification
-                                .setProgress(progress.max, progress.count, progress.indeterminate)
-                                .setContentText(progress.getLabel(this))
-                                .let { notificationManager.notify(NOTIFICATION_ID, it.build()) }
+                    is BackupRepository.Progress.Running -> notification
+                        .setProgress(progress.max, progress.count, progress.indeterminate)
+                        .setContentText(progress.getLabel(this))
+                        .let { notificationManager.notify(NOTIFICATION_ID, it.build()) }
 
-                        else -> notification
-                                .setProgress(0, 0, progress.indeterminate)
-                                .setContentText(progress.getLabel(this))
-                                .let { notificationManager.notify(NOTIFICATION_ID, it.build()) }
-                    }
+                    else -> notification
+                        .setProgress(0, 0, progress.indeterminate)
+                        .setContentText(progress.getLabel(this))
+                        .let { notificationManager.notify(NOTIFICATION_ID, it.build()) }
                 }
+            }
 
         // Start the restore
         Observable.just(intent)
-                .map { Uri.parse(it.getStringExtra(EXTRA_FILE_URI)) }
-                .map(backupRepo::performRestore)
-                .subscribeOn(Schedulers.io())
-                .subscribe({}, Timber::w)
+            .map { it.getStringExtra(EXTRA_FILE_PATH) }
+            .map(backupRepo::performRestore)
+            .subscribeOn(Schedulers.io())
+            .subscribe({}, Timber::w)
     }
 
     private fun stop() {

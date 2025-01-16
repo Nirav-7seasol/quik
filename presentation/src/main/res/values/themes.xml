@@ -1,51 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2019 Moez Bhatti <moez.bhatti@gmail.com>
-  ~
-  ~ This file is part of QKSMS.
-  ~
-  ~ QKSMS is free software: you can redistribute it and/or modify
-  ~ it under the terms of the GNU General Public License as published by
-  ~ the Free Software Foundation, either version 3 of the License, or
-  ~ (at your option) any later version.
-  ~
-  ~ QKSMS is distributed in the hope that it will be useful,
-  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~ GNU General Public License for more details.
-  ~
-  ~ You should have received a copy of the GNU General Public License
-  ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
-  -->
+
 <resources>
 
+    <attr name="chatBgColor" format="color" />
     <attr name="bubbleColor" format="reference" />
     <attr name="switchThumbEnabled" format="color" />
     <attr name="switchThumbDisabled" format="color" />
     <attr name="switchTrackEnabled" format="color" />
     <attr name="switchTrackDisabled" format="color" />
+    <attr name="languageCardBgColor" format="color" />
+    <attr name="radioTint" format="color" />
+    <attr name="iconTintSolid" format="color" />
 
-    <style name="AppLaunchTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppLaunchTheme" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:navigationBarColor">@color/backgroundDark</item>
         <item name="android:statusBarColor">@color/backgroundDark</item>
         <item name="android:windowBackground">@color/backgroundDark</item>
     </style>
 
-    <style name="AppTheme" parent="AppBaseTheme">
-        <item name="android:statusBarColor">@color/backgroundLight</item>
-        <item name="android:windowLightStatusBar">true</item>
-    </style>
+    <style name="AppTheme" parent="AppBaseTheme" />
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppBaseTheme" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:divider">@color/separatorLight</item>
         <item name="android:queryBackground">@color/bubbleLight</item>
         <item name="android:statusBarColor">@color/black</item>
         <item name="android:textColorPrimary">@color/text_primary</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
         <item name="android:textColorTertiary">@color/text_tertiary</item>
+        <item name="android:fontFamily">@font/googlefont</item>
         <item name="android:windowBackground">@color/backgroundLight</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="actionBarPopupTheme">@style/PopupTheme</item>
+        <item name="colorBottomAppBar">@color/deepBlueGrey</item>
         <item name="bubbleColor">@color/bubbleLight</item>
         <item name="colorPrimary">@color/backgroundLight</item>
         <item name="colorPrimaryDark">@color/backgroundLight</item>
@@ -55,9 +41,63 @@
         <item name="switchTrackEnabled">@color/switchTrackEnabledLight</item>
         <item name="switchTrackDisabled">@color/switchTrackDisabledLight</item>
         <item name="windowActionBar">false</item>
+        <item name="cardBackgroundColor">@color/cardBgColorLight</item>
+        <item name="radioTint">@color/black</item>
+        <item name="chatBgColor">@color/bubbleLight</item>
+        <item name="iconTintSolid">@color/black</item>
+        <item name="materialAlertDialogTheme">@style/AlertDialogTheme</item>
     </style>
 
-    <style name="AppThemeDialog" parent="Theme.AppCompat.Light.Dialog">
+    <style name="MaterialDateTimePickerDialog" parent="Theme.Material3.Light.Dialog">
+        <!-- Primary Text Colors -->
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorTertiary">@color/text_tertiary</item>
+
+        <!-- Window Background -->
+        <item name="android:windowBackground">@color/backgroundLight</item>
+
+        <!-- Button Styling -->
+        <item name="colorPrimary">@color/backgroundLight</item>
+        <item name="colorOnPrimary">@color/text_primary</item>
+
+        <!-- Additional Customizations -->
+        <item name="selectableItemBackground">@drawable/ripple</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorSurface">?attr/chatBgColor</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/TitleTextStyle</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/BodyTextStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+    </style>
+
+    <style name="TitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="BodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="rippleColor">#a4a4a4</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="rippleColor">#a4a4a4</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+
+    <style name="AppThemeDialog" parent="Theme.Material3.Light.Dialog">
         <item name="android:textColorPrimary">@color/text_primary</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
         <item name="android:textColorTertiary">@color/text_tertiary</item>
@@ -65,19 +105,73 @@
         <item name="actionBarPopupTheme">@style/PopupTheme</item>
         <item name="bubbleColor">@color/bubbleLight</item>
         <item name="colorPrimary">@color/backgroundLight</item>
+        <item name="android:fontFamily">@font/googlefont</item>
         <item name="colorPrimaryDark">@color/backgroundLight</item>
         <item name="selectableItemBackground">@drawable/ripple</item>
         <item name="windowActionBar">false</item>
+        <item name="android:drawableTint">@color/deepDarkGrey</item>
     </style>
 
     <style name="PopupTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:colorBackground">@color/backgroundLight</item>
         <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:fontFamily">@font/googlefont</item>
     </style>
+
 
     <!-- Black mode. No changes needed when not in night theme -->
     <style name="AppTheme.Black" />
     <style name="AppThemeDialog.Black" />
     <style name="PopupTheme.Black" />
 
+    <style name="Widget.CalendarView.Custom" parent="@android:style/Widget.DeviceDefault.Light.CalendarView">
+        <item name="android:textColorPrimary">#5e99a0</item>
+        <item name="android:titleTextStyle">@style/textTest</item>
+        <item name="android:weekDayTextAppearance">@style/textTest2</item>
+        <item name="android:dateTextAppearance">@style/textTest</item>
+        <item name="android:colorPrimary">#ffffff</item>
+        <item name="colorAccent">#5e99a0</item>
+    </style>
+
+    <style name="textTest" parent="@style/TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="textTest2" parent="@style/TextAppearance.AppCompat">
+        <item name="android:textColor">#aaaaaa</item>
+    </style>
+
+    <style name="CdoAppTheme1" parent="@style/Theme.VoiceRecorder1">
+        <item name="android:statusBarColor">@color/backgroundDark</item>
+        <item name="android:navigationBarColor">@color/backgroundDark</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <style name="Theme.VoiceRecorder1" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:forceDarkAllowed">false</item>
+        <!--        <item name="colorAccent">@color/tools_theme</item>-->
+        <!--        <item name="colorOnPrimary">@color/bgcolor</item>-->
+        <!--        <item name="colorOnSecondary">@color/tint_icon_color</item>-->
+        <!--        <item name="colorPrimary">@color/app_color</item>-->
+        <!--        <item name="colorPrimaryVariant">@color/app_color</item>-->
+        <!--        <item name="colorSecondary">@color/app_color</item>-->
+        <!--        <item name="colorSecondaryVariant">@color/app_color</item>-->
+    </style>
+
+    <style name="AppTheme.TransparentWindow" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:statusBarColor">#aa000000</item>
+        <item name="backgroundColor">@android:color/transparent</item>
+    </style>
 </resources>

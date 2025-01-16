@@ -30,10 +30,13 @@ import dev.octoshrimpy.quik.manager.BillingManager
 import dev.octoshrimpy.quik.repository.BackupRepository
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDisposable
+import dev.octoshrimpy.quik.manager.PermissionManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.withLatestFrom
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.Subject
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -44,116 +47,91 @@ class BackupPresenter @Inject constructor(
     private val context: Context,
     private val dateFormatter: DateFormatter,
     private val navigator: Navigator,
-    private val performBackup: PerformBackup
+    private val performBackup: PerformBackup,
+    private val permissionManager: PermissionManager
 ) : QkPresenter<BackupView, BackupState>(BackupState()) {
+
+    private val storagePermissionSubject: Subject<Boolean> = BehaviorSubject.createDefault(permissionManager.hasStorage())
 
     init {
         disposables += backupRepo.getBackupProgress()
-                .sample(16, TimeUnit.MILLISECONDS)
-                .distinctUntilChanged()
-                .subscribe { progress -> newState { copy(backupProgress = progress) } }
+            .sample(16, TimeUnit.MILLISECONDS)
+            .distinctUntilChanged()
+            .subscribe { progress -> newState { copy(backupProgress = progress) } }
 
         disposables += backupRepo.getRestoreProgress()
-                .sample(16, TimeUnit.MILLISECONDS)
-                .distinctUntilChanged()
-                .subscribe { progress -> newState { copy(restoreProgress = progress) } }
+            .sample(16, TimeUnit.MILLISECONDS)
+            .distinctUntilChanged()
+            .subscribe { progress -> newState { copy(restoreProgress = progress) } }
+
+        disposables += storagePermissionSubject
+            .distinctUntilChanged()
+            .switchMap { backupRepo.getBackups() }
+            .doOnNext { backups -> newState { copy(backups = backups) } }
+            .map { backups -> backups.map { it.date }.maxOrNull() ?: 0L } // Use maxOrNull to safely handle empty lists
+            .map { lastBackup ->
+                when (lastBackup) {
+                    0L -> context.getString(R.string.backup_never)
+                    else -> dateFormatter.getDetailedTimestamp(lastBackup)
+                }
+            }
+            .startWith(context.getString(R.string.backup_loading))
+            .subscribe { lastBackup -> newState { copy(lastBackup = lastBackup) } }
 
         disposables += billingManager.upgradeStatus
-                .subscribe { upgraded -> newState { copy(upgraded = upgraded) } }
+            .subscribe { upgraded -> newState { copy(upgraded = upgraded) } }
     }
 
     override fun bindIntents(view: BackupView) {
         super.bindIntents(view)
 
-        view.setBackupLocationClicks()
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(view.scope())
-                .subscribe { view.selectFolder(backupRepo.getBackupPathUriForPicker()) }
+        view.activityVisible()
+            .map { permissionManager.hasStorage() }
+            .autoDisposable(view.scope())
+            .subscribe(storagePermissionSubject)
 
         view.restoreClicks()
-                .withLatestFrom(
-                        backupRepo.getBackupProgress(),
-                        backupRepo.getRestoreProgress(),
-                        billingManager.upgradeStatus)
-                { _, backupProgress, restoreProgress, upgraded ->
-                    when {
-                        !upgraded -> context.makeToast(R.string.backup_restore_error_plus)
-                        backupProgress.running -> context.makeToast(R.string.backup_restore_error_backup)
-                        restoreProgress.running -> context.makeToast(R.string.backup_restore_error_restore)
-                        else -> view.selectFile(backupRepo.getBackupPathUriForPicker())
-                    }
+            .withLatestFrom(
+                backupRepo.getBackupProgress(),
+                backupRepo.getRestoreProgress(),
+                billingManager.upgradeStatus)
+            { _, backupProgress, restoreProgress, upgraded ->
+                when {
+                    !upgraded -> context.makeToast(R.string.backup_restore_error_plus)
+                    backupProgress.running -> context.makeToast(R.string.backup_restore_error_backup)
+                    restoreProgress.running -> context.makeToast(R.string.backup_restore_error_restore)
+                    !permissionManager.hasStorage() -> view.requestStoragePermission()
+                    else -> view.selectFile()
                 }
-                .autoDisposable(view.scope())
-                .subscribe()
+            }
+            .autoDisposable(view.scope())
+            .subscribe()
 
-        view.backupClicks()
-                .withLatestFrom(billingManager.upgradeStatus) { _, upgraded -> upgraded }
-                .autoDisposable(view.scope())
-                .subscribe { upgraded ->
-                    when {
-                        backupRepo.getBackupDocumentTree() == null -> {
-                            newState { copy(showLocationRationale = true) }
-                        }
-                        !upgraded -> navigator.showQksmsPlusActivity("backup_fab")
-                        upgraded -> performBackup.execute(Unit)
-                    }
-                }
+        view.restoreFileSelected()
+            .autoDisposable(view.scope())
+            .subscribe { view.confirmRestore() }
 
-        view.locationRationaleConfirmClicks()
-                .doOnNext { newState { copy(showLocationRationale = false) } }
-                .autoDisposable(view.scope())
-                .subscribe { view.selectFolder(backupRepo.getBackupPathUriForPicker()) }
-
-        view.locationRationaleCancelClicks()
-                .doOnNext { newState { copy(showLocationRationale = false) } }
-                .autoDisposable(view.scope())
-                .subscribe()
-
-        view.selectedBackupErrorClicks()
-                .autoDisposable(view.scope())
-                .subscribe { newState { copy(showSelectedBackupError = false) } }
-
-        view.confirmRestoreBackupConfirmClicks()
-                .doOnNext { newState { copy(selectedBackupDetails = null) } }
-                .withLatestFrom(view.documentSelected()) { _, backup -> backup }
-                .autoDisposable(view.scope())
-                .subscribe { backup -> RestoreBackupService.start(context, backup) }
-
-        view.confirmRestoreBackupCancelClicks()
-                .doOnNext { newState { copy(selectedBackupDetails = null) } }
-                .autoDisposable(view.scope())
-                .subscribe()
+        view.restoreConfirmed()
+            .withLatestFrom(view.restoreFileSelected()) { _, backup -> backup }
+            .autoDisposable(view.scope())
+            .subscribe { backup -> RestoreBackupService.start(context, backup.path) }
 
         view.stopRestoreClicks()
-                .autoDisposable(view.scope())
-                .subscribe { newState { copy(showStopRestoreDialog = true) } }
+            .autoDisposable(view.scope())
+            .subscribe { view.stopRestore() }
 
         view.stopRestoreConfirmed()
-                .doOnNext { newState { copy(showStopRestoreDialog = false) } }
-                .autoDisposable(view.scope())
-                .subscribe { backupRepo.stopRestore() }
+            .autoDisposable(view.scope())
+            .subscribe { backupRepo.stopRestore() }
 
-        view.stopRestoreCancel()
-                .autoDisposable(view.scope())
-                .subscribe { newState { copy(showStopRestoreDialog = false) } }
-
-        view.documentTreeSelected()
-                .autoDisposable(view.scope())
-                .subscribe { uri -> backupRepo.persistBackupDirectory(uri) }
-
-        view.documentSelected()
-                .observeOn(Schedulers.io())
-                .autoDisposable(view.scope())
-                .subscribe { uri ->
-                    try {
-                        val backupFile = backupRepo.parseBackup(uri)
-                        val date = dateFormatter.getDetailedTimestamp(backupFile.date)
-                        val details = context.getString(R.string.backup_details, date, backupFile.messages)
-                        newState { copy(selectedBackupDetails = details) }
-                    } catch (e: Exception) {
-                        newState { copy(showSelectedBackupError = true) }
-                    }
+        view.fabClicks()
+            .withLatestFrom(billingManager.upgradeStatus) { _, upgraded -> upgraded }
+            .autoDisposable(view.scope())
+            .subscribe { upgraded ->
+                when {
+                    upgraded -> performBackup.execute(Unit)
                 }
+            }
     }
 
 }

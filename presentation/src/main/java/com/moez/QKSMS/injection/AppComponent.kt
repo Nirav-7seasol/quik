@@ -18,7 +18,7 @@
  */
 package dev.octoshrimpy.quik.injection
 
-import dev.octoshrimpy.quik.common.QKApplication
+import dev.octoshrimpy.quik.common.App
 import dev.octoshrimpy.quik.common.QkDialog
 import dev.octoshrimpy.quik.common.util.QkChooserTargetService
 import dev.octoshrimpy.quik.common.widget.AvatarView
@@ -45,6 +45,7 @@ import dev.octoshrimpy.quik.injection.android.BroadcastReceiverBuilderModule
 import dev.octoshrimpy.quik.injection.android.ServiceBuilderModule
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
+import dev.octoshrimpy.quik.common.widget.PreferenceViewWithBinding
 import javax.inject.Singleton
 
 @Singleton
@@ -59,7 +60,7 @@ interface AppComponent {
     fun conversationInfoBuilder(): ConversationInfoComponent.Builder
     fun themePickerBuilder(): ThemePickerComponent.Builder
 
-    fun inject(application: QKApplication)
+    fun inject(application: App)
 
     fun inject(controller: AboutController)
     fun inject(controller: BackupController)
@@ -83,6 +84,7 @@ interface AppComponent {
     fun inject(view: DetailedChipView)
     fun inject(view: PagerTitleView)
     fun inject(view: PreferenceView)
+    fun inject(view: PreferenceViewWithBinding)
     fun inject(view: RadioPreferenceView)
     fun inject(view: QkEditText)
     fun inject(view: QkSwitch)
