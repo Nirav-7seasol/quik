@@ -39,11 +39,11 @@
     <string name="archived_empty_text">Архивированные беседы будут появляться здесь</string>
     <string name="main_fab_cd">Начать новую беседу</string>
     <string name="main_default_sms_title">Снова полюбите писать</string>
-    <string name="main_default_sms_message">Сделать QUIK приложением SMS по умолчанию</string>
+    <string name="main_default_sms_message">Сделать Messages приложением SMS по умолчанию</string>
     <string name="main_default_sms_change">Изменить</string>
     <string name="main_permission_required">Требуется разрешение</string>
-    <string name="main_permission_sms">QUIK необходимо разрешение для отправки и просмотра SMS-сообщений</string>
-    <string name="main_permission_contacts">QUIK необходимо разрешение для просмотра контактов</string>
+    <string name="main_permission_sms">Messages необходимо разрешение для отправки и просмотра SMS-сообщений</string>
+    <string name="main_permission_contacts">Messages необходимо разрешение для просмотра контактов</string>
     <string name="main_permission_allow">Разрешить</string>
     <string name="drawer_inbox">Входящие</string>
     <string name="drawer_archived">Архив</string>
@@ -54,7 +54,7 @@
     <string name="drawer_help">Помощь и обратная связь</string>
     <string name="drawer_invite">Пригласить друзей</string>
     <string name="drawer_plus_banner_summary">Разблокировать новые удивительные функции и поддержать разработку</string>
-    <string name="rate_title">Нравится QUIK?</string>
+    <string name="rate_title">Нравится Messages?</string>
     <string name="rate_summary">Поделитесь любовью и оцените нас в Google Play!</string>
     <string name="rate_okay">OK!</string>
     <string name="rate_dismiss">ОТКЛОНИТЬ</string>
@@ -82,7 +82,7 @@
     <string name="compose_vcard_label">Карточка контакта</string>
     <string name="compose_scheduled_for">Запланировано на</string>
     <string name="compose_scheduled_future">Выбранное время должно быть в будущем!</string>
-    <string name="compose_scheduled_plus">Вы должны разблокировать QUIK+, чтобы использовать запланированные сообщения</string>
+    <string name="compose_scheduled_plus">Вы должны разблокировать Messages+, чтобы использовать запланированные сообщения</string>
     <string name="compose_scheduled_toast">Добавлено в планировщик сообщений</string>
     <string name="compose_hint">Написать сообщение&#8230;</string>
     <string name="compose_menu_copy">Скопировать текст</string>
@@ -134,7 +134,7 @@
     <string name="backup_never">Никогда</string>
     <string name="backup_restore_title">Восстановление</string>
     <string name="backup_restore_summary">Выберите резервную копию</string>
-    <string name="backup_restore_error_plus">Пожалуйста, разблокируйте QUIK+ для использования резервного копирования и восстановления</string>
+    <string name="backup_restore_error_plus">Пожалуйста, разблокируйте Messages+ для использования резервного копирования и восстановления</string>
     <string name="backup_restore_error_backup">Выполняется резервное копирование&#8230;</string>
     <string name="backup_restore_error_restore">Выполняется восстановление&#8230;</string>
     <string name="backup_restore_confirm_title">Восстановление из резервной копии</string>
@@ -225,7 +225,7 @@
     <string name="settings_mms_size_title">Автоматически сжимать вложения MMS</string>
     <string name="settings_sync_title">Синхронизация сообщений</string>
     <string name="settings_sync_summary">Принудительная синхронизация сообщений с собственной базой данных SMS Android</string>
-    <string name="settings_about_title">О QUIK</string>
+    <string name="settings_about_title">О Messages</string>
     <string name="settings_version">Версия %s</string>
     <string name="settings_logging_enabled">Ведение журнала отладки включено</string>
     <string name="settings_logging_disabled">Ведение журнала отладки отключено</string>
@@ -235,8 +235,8 @@
     <string name="blocking_drop_summary">Удалять входящие сообщения от заблокированных отправителей, а не скрывать их</string>
     <string name="blocking_conversations">Заблокированные беседы</string>
     <string name="blocking_manager_title">Управление блокировкой</string>
-    <string name="blocking_manager_sms_title">QUIK</string>
-    <string name="blocking_manager_sms_summary">Встроенная функция блокировки QUIK</string>
+    <string name="blocking_manager_sms_title">Messages</string>
+    <string name="blocking_manager_sms_summary">Встроенная функция блокировки Messages</string>
     <string name="blocking_manager_call_control_summary">Автоматическая фильтрация звонков и сообщений в одном удобном месте! Community IQ™ позволяет предотвратить получение нежелательных сообщений от известных сообществу спаммеров</string>
     <string name="blocking_manager_sia_summary">Автоматически фильтровать сообщения от нежелательных номеров, используя приложение «Should I Answer»</string>
     <string name="blocking_manager_copy_title">Скопировать заблокированные номера</string>
@@ -277,9 +277,9 @@
     <string name="sms_plus_upgrade">Пожизненное обновление за %1$s %2$s</string>
     <!-- Substitutions are for price and currency. Ex: Unlock + donate for $4.99 USD -->
     <string name="sms_plus_upgrade_donate">Разблокировать + пожертвовать %1$s %2$s</string>
-    <string name="sms_plus_thanks_title">Спасибо за поддержку QUIK!</string>
-    <string name="sms_plus_thanks_summary">Теперь у вас есть доступ ко всем функциям QUIK+</string>
-    <string name="sms_plus_free_title">QUIK+ является бесплатным для пользователей F-Droid! Если вы хотите поддержать развитие приложения, сделайте пожертвование.</string>
+    <string name="sms_plus_thanks_title">Спасибо за поддержку Messages!</string>
+    <string name="sms_plus_thanks_summary">Теперь у вас есть доступ ко всем функциям Messages+</string>
+    <string name="sms_plus_free_title">Messages+ является бесплатным для пользователей F-Droid! Если вы хотите поддержать развитие приложения, сделайте пожертвование.</string>
     <string name="sms_plus_donate">Пожертвовать через PayPal</string>
     <string name="sms_plus_coming_soon">Скоро</string>
     <string name="sms_plus_themes_title">Премиальные темы</string>
@@ -301,7 +301,7 @@
     <string name="sms_plus_respond_title">Автоматический ответ</string>
     <string name="sms_plus_respond_summary">Автоматически отвечать на входящие сообщения предустановленным ответом</string>
     <string name="sms_plus_more_title">Ещё</string>
-    <string name="sms_plus_more_summary">QUIK находится в активной разработке и ваша покупка будет включать в себя все функции QUIK+ в будущем!</string>
+    <string name="sms_plus_more_summary">Messages находится в активной разработке и ваша покупка будет включать в себя все функции Messages+ в будущем!</string>
     <string name="widget_loading">Загрузка&#8230;</string>
     <string name="widget_more">Посмотреть больше бесед</string>
     <string name="reply_menu_read">Прочитано</string>
@@ -333,7 +333,7 @@
     <string name="button_undo">Отмена</string>
     <string name="toast_copied">Скопировано</string>
     <string name="toast_archived">Архивированная беседа</string>
-    <string name="toast_sms_plus">Вы должны разблокировать QUIK+, чтобы использовать</string>
+    <string name="toast_sms_plus">Вы должны разблокировать Messages+, чтобы использовать</string>
     <plurals name="notification_new_messages">
         <item quantity="one">Новое сообщение</item>
         <item quantity="few">%s новых сообщения</item>
