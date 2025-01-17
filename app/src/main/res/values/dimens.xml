@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="design_fab_size_normal">56dp</dimen>
+    <dimen name="design_fab_size_mini">30dp</dimen>
+
+    <dimen name="attachment_item_icon_size">@dimen/_40sdp</dimen>
+    <dimen name="attachment_item_icon_padding">@dimen/_10sdp</dimen>
+
+    <dimen name="WheelItemTextSize">24sp</dimen>
+    <dimen name="WheelItemSpace">12dp</dimen>
+    <dimen name="WheelIndicatorSize">2dp</dimen>
+</resources>
