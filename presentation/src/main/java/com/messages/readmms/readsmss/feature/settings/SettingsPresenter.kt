@@ -178,32 +178,12 @@ class SettingsPresenter @Inject constructor(
                         R.id.mmsSize -> view.showMmsSizePicker()
 
                         R.id.sync -> syncMessages.execute(Unit)
-
-                        R.id.about -> view.showAbout()
                     }
                 }
 
-        view.aboutLongClicks()
-                .map { !prefs.logging.get() }
-                .doOnNext { enabled -> prefs.logging.set(enabled) }
-                .autoDisposable(view.scope())
-                .subscribe { enabled ->
-                    context.makeToast(when (enabled) {
-                        true -> R.string.settings_logging_enabled
-                        false -> R.string.settings_logging_disabled
-                    })
-                }
-
-        view.nightModeSelected()
-                .withLatestFrom(billingManager.upgradeStatus) { mode, upgraded ->
-//                    if (!upgraded && mode == Preferences.NIGHT_MODE_AUTO) {
-//                        view.showQksmsPlusSnackbar()
-//                    } else {
-                        nightModeManager.updateNightMode(mode)
-//                    }
-                }
-                .autoDisposable(view.scope())
-                .subscribe()
+        view.nightModeSelected().withLatestFrom(billingManager.upgradeStatus) { mode, upgraded ->
+                nightModeManager.updateNightMode(mode)
+            }.autoDisposable(view.scope()).subscribe()
 
         view.viewQksmsPlusClicks()
                 .autoDisposable(view.scope())

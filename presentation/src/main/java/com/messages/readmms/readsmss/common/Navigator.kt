@@ -125,23 +125,16 @@ class Navigator @Inject constructor(
     }
 
     fun showDeveloper() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/octoshrimpy"))
-        startActivityExternal(intent)
     }
 
     fun showSourceCode() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/octoshrimpy/quik"))
-        startActivityExternal(intent)
+
     }
 
     fun showChangelog() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/octoshrimpy/quik/releases"))
-        startActivityExternal(intent)
     }
 
     fun showLicense() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/octoshrimpy/quik/blob/master/LICENSE"))
-        startActivityExternal(intent)
     }
 
     fun showBlockedConversations() {
@@ -156,20 +149,21 @@ class Navigator @Inject constructor(
     }
 
     fun showDonation() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/octoshrimpy/quik"))
-        startActivityExternal(intent)
     }
 
     fun showRating() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/octoshrimpy/quik"))
-                .addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY
-                        or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
-                        or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+        val intent =
+            Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${context.packageName}"))
+                .addFlags(
+                    Intent.FLAG_ACTIVITY_NO_HISTORY
+                            or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
+                            or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                )
 
         try {
             startActivityExternal(intent)
         } catch (e: ActivityNotFoundException) {
-            val url = "https://github.com/octoshrimpy/quik"
+            val url = "https://play.google.com/store/apps/details?id=${context.packageName}"
             startActivityExternal(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
         }
     }

@@ -25,7 +25,6 @@ import com.messages.readmms.readsmss.common.util.extensions.setBackgroundTint
 import com.messages.readmms.readsmss.common.util.extensions.setVisible
 import com.messages.readmms.readsmss.common.widget.PreferenceView
 import com.messages.readmms.readsmss.common.widget.TextInputDialog
-import com.messages.readmms.readsmss.feature.settings.about.AboutController
 import com.messages.readmms.readsmss.feature.settings.autodelete.AutoDeleteDialog
 import com.messages.readmms.readsmss.feature.settings.swipe.SwipeActionsController
 import com.messages.readmms.readsmss.feature.themepicker.ThemePickerController
@@ -37,7 +36,6 @@ import com.uber.autodispose.autoDisposable
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.settings_controller.about
 import kotlinx.android.synthetic.main.settings_controller.autoColor
 import kotlinx.android.synthetic.main.settings_controller.autoDelete
 import kotlinx.android.synthetic.main.settings_controller.autoEmoji
@@ -112,8 +110,6 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
         textSizeDialog.adapter.setData(R.array.text_sizes)
         sendDelayDialog.adapter.setData(R.array.delayed_sending_labels)
         mmsSizeDialog.adapter.setData(R.array.mms_sizes, R.array.mms_sizes_ids)
-
-        about.summary = context.getString(R.string.settings_version, BuildConfig.VERSION_NAME)
     }
 
     override fun onAttach(view: View) {
@@ -128,8 +124,6 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
             .mapNotNull { view -> view as? PreferenceView }
             .map { preference -> preference.clicks().map { preference } }
             .let { preferences -> Observable.merge(preferences) }
-
-    override fun aboutLongClicks(): Observable<*> = about.longClicks()
 
     override fun viewQksmsPlusClicks(): Observable<*> = viewQksmsPlusSubject
 
@@ -254,12 +248,6 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
 
     override fun showThemePicker() {
         router.pushController(RouterTransaction.with(ThemePickerController())
-                .pushChangeHandler(QkChangeHandler())
-                .popChangeHandler(QkChangeHandler()))
-    }
-
-    override fun showAbout() {
-        router.pushController(RouterTransaction.with(AboutController())
                 .pushChangeHandler(QkChangeHandler())
                 .popChangeHandler(QkChangeHandler()))
     }

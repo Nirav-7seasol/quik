@@ -19,7 +19,6 @@ import com.messages.readmms.readsmss.feature.blocking.numbers.BlockedNumbersCont
 import com.messages.readmms.readsmss.feature.compose.editing.DetailedChipView
 import com.messages.readmms.readsmss.feature.conversationinfo.injection.ConversationInfoComponent
 import com.messages.readmms.readsmss.feature.settings.SettingsController
-import com.messages.readmms.readsmss.feature.settings.about.AboutController
 import com.messages.readmms.readsmss.feature.settings.swipe.SwipeActionsController
 import com.messages.readmms.readsmss.feature.themepicker.injection.ThemePickerComponent
 import com.messages.readmms.readsmss.feature.widget.WidgetAdapter
@@ -45,7 +44,6 @@ interface AppComponent {
 
     fun inject(application: App)
 
-    fun inject(controller: AboutController)
     fun inject(controller: BackupController)
     fun inject(controller: BlockedMessagesController)
     fun inject(controller: BlockedNumbersController)
