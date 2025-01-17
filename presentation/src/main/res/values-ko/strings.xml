@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2019 Moez Bhatti <moez.bhatti@gmail.com>
-  ~
-  ~ This file is part of QKSMS.
-  ~
-  ~ QKSMS is free software: you can redistribute it and/or modify
-  ~ it under the terms of the GNU General Public License as published by
-  ~ the Free Software Foundation, either version 3 of the License, or
-  ~ (at your option) any later version.
-  ~
-  ~ QKSMS is distributed in the hope that it will be useful,
-  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~ GNU General Public License for more details.
-  ~
-  ~ You should have received a copy of the GNU General Public License
-  ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
-  -->
 <resources>
+    <string name="change_language">언어 변경</string>
     <string name="shortcut_compose_long_label">새로운 대화</string>
     <string name="shortcut_compose_short_label">메시지 작성</string>
     <string name="shortcut_compose_disabled_message">바로가기 해제</string>
@@ -61,7 +44,6 @@
     <string name="main_permission_required">권한을 부여해 주세요</string>
     <string name="main_permission_sms">QUIK 앱은 메시지를 보내고 읽을 수 있는 권한이 필요합니다</string>
     <string name="main_permission_contacts">QUIK 앱은 연락처를 읽을 수 있는 권한이 필요합니다</string>
-    <string name="main_permission_notifications">QUIK needs permission to display notifications</string>
     <string name="main_permission_allow">허용</string>
     <string name="drawer_inbox">수신함</string>
     <string name="drawer_archived">보관됨</string>
@@ -147,8 +129,6 @@
     <string name="backup_restoring">복원하기</string>
     <string name="backup_loading">로딩 중...</string>
     <string name="backup_never">사용 안 함</string>
-    <string name="backup_location_title">Backup location</string>
-    <string name="backup_location_summary">Set folder</string>
     <string name="backup_restore_title">복원</string>
     <string name="backup_restore_summary">백업 선택하기</string>
     <string name="backup_restore_error_plus">QUIK+을 구입하여 백업과 복원기능을 사용하세요</string>
@@ -157,12 +137,6 @@
     <string name="backup_restore_confirm_title">복원을 할까요?</string>
     <string name="backup_restore_stop_title">복원 중지</string>
     <string name="backup_restore_stop_message">이미 저장된 메시지들은 내 기기에 남아있습니다.</string>
-    <string name="backup_select_location_rationale_title">Select backup location</string>
-    <string name="backup_select_location_rationale_message">Please select a folder to save your backups to</string>
-    <string name="backup_details">%1$s\n%2$d messages</string>
-    <string name="backup_selected_backup_error_title">Error</string>
-    <string name="backup_selected_backup_error_message">Couldn\'t read backup file</string>
-    <string name="backup_selected_backup_details_title">Backup details</string>
     <string name="backup_restore_dialog_title">백업</string>
     <string name="backup_restore_dialog_empty">백업을 찾지 못했어요</string>
     <string name="backup_disclaimer">아직 SMS만 백업과 복원기능이 지원됩니다. MMS지원과 백업 스케줄 기능은 곧 찾아옵니다!</string>
@@ -189,7 +163,7 @@
     </string-array>
     <string name="settings_category_appearance">디자인</string>
     <string name="settings_category_general">일반 설정</string>
-    <string name="settings_category_qkreply">빠른 응답</string>
+    <string name="settings_category_reply">빠른 응답</string>
     <string name="settings_theme_title">테마</string>
     <string name="settings_night_title">나이트 모드</string>
     <string name="settings_black_title">완전한 블랙 테마</string>
@@ -210,10 +184,10 @@
     <string name="settings_vibration_title">진동</string>
     <string name="settings_ringtone_title">소리</string>
     <string name="settings_ringtone_none">없음</string>
-    <string name="settings_qkreply_title">QK Reply</string>
-    <string name="settings_qkreply_summary">새로운 메시지에 대한 팝업</string>
-    <string name="settings_qkreply_tap_dismiss_title">탭해서 닫기</string>
-    <string name="settings_qkreply_tap_dismiss_summary">아무데나 탭하면 팝업이 닫힙니다.</string>
+    <string name="settings_reply_title">Reply</string>
+    <string name="settings_reply_summary">새로운 메시지에 대한 팝업</string>
+    <string name="settings_reply_tap_dismiss_title">탭해서 닫기</string>
+    <string name="settings_reply_tap_dismiss_summary">아무데나 탭하면 팝업이 닫힙니다.</string>
     <string name="settings_delayed_title">전송 지연</string>
     <string name="settings_swipe_actions">쓸어넘기기 설정</string>
     <string name="settings_swipe_actions_summary">대화를 쓸어넘겼을 때 할 작업</string>
@@ -237,12 +211,6 @@
     <string name="settings_unicode_summary">SMS를 주고받을 때, 대문자 없애기</string>
     <string name="settings_mobile_title">전화번호만 보이기</string>
     <string name="settings_mobile_summary">메시지를 쓸 때, 전화번호만 보이게 하기</string>
-    <string name="settings_auto_delete">자동으로 오래된 메시지 제거</string>
-    <string name="settings_auto_delete_dialog_message">지정된 일 수 후에 메시지를 삭제합니다</string>
-    <string name="settings_auto_delete_dialog_hint">일 수</string>
-    <string name="settings_auto_delete_never">사용 안 함</string>
-    <string name="settings_auto_delete_warning">자동으로 오래된 메시지를 제거하시겠습니까?</string>
-    <string name="settings_auto_delete_warning_message">이대로 진행하면, %1$d 개의 메시지가 지금 삭제됩니다</string>
     <plurals name="settings_auto_delete_summary">
         <item quantity="other">%d 일 후</item>
     </plurals>
@@ -261,9 +229,8 @@
     <string name="blocking_drop_summary">차단된 사람으로부터 오는 메시지를 가리는 대신 삭제합니다</string>
     <string name="blocking_conversations">차단된 대화</string>
     <string name="blocking_manager_title">차단 메니저</string>
-    <string name="blocking_manager_qksms_title">QUIK</string>
-    <string name="blocking_manager_qksms_summary">빌트인 차단기능이 있는 기본 필터.</string>
-    <string name="blocking_manager_call_blocker_summary">Block spam messages, numbers &amp; unknown calls with blacklist &amp; Schedule</string>
+    <string name="blocking_manager_sms_title">QUIK</string>
+    <string name="blocking_manager_sms_summary">빌트인 차단기능이 있는 기본 필터.</string>
     <string name="blocking_manager_call_control_summary">자동으오 전화와 메시지를 한 곳에서 필터링하세요! Community IQ™는 커뮤니티 기반으로 원하지 않는 스팸 메시지를 차단해줍니다.</string>
     <string name="blocking_manager_sia_summary">Should I Answer 앱을 이용해 필요없는 번호에서 보낸 메시지를 자동으로 필터링하기</string>
     <string name="blocking_manager_copy_title">차단된 번호 복사하기</string>
@@ -292,46 +259,45 @@
     <string name="about_contact_title">연락처</string>
     <string name="about_license_title">라이선스</string>
     <string name="about_copyright_title">저작권</string>
-    <string name="qksms_plus_description_title">개발을 지원하고 모든 기능을 해제하세요.</string>
-    <string name="qksms_plus_description_summary">배고픈 개발자를 위해 %s 만큼만으로도 구할 수 있습니다.</string>
+    <string name="sms_plus_description_title">개발을 지원하고 모든 기능을 해제하세요.</string>
+    <string name="sms_plus_description_summary">배고픈 개발자를 위해 %s 만큼만으로도 구할 수 있습니다.</string>
     <!-- Substitutions are for price and currency. Ex: Lifetime upgrade for $1.99 USD -->
-    <string name="qksms_plus_upgrade">%1$s %2$s 으로 평생 업그레이드</string>
+    <string name="sms_plus_upgrade">%1$s %2$s 으로 평생 업그레이드</string>
     <!-- Substitutions are for price and currency. Ex: Unlock + donate for $4.99 USD -->
-    <string name="qksms_plus_upgrade_donate">%1$s %2$s 으로 프리미엄 기능 잠금 해제 및 기부</string>
-    <string name="qksms_plus_thanks_title">QUIK를 지원해 주셔서 감사합니다!</string>
-    <string name="qksms_plus_thanks_summary">이제 모든 QUIK+ 기능에 액세스할 수 있습니다</string>
-    <string name="qksms_plus_error">An error has occurred, please try again</string>
-    <string name="qksms_plus_free_title">QUIK+는 F-Droid 사용자들에게 무료입니다! 만약 여러분이 개발을 지원하고 싶으시다면, 기부해 주시기 바랍니다.</string>
-    <string name="qksms_plus_donate">페이팔을 통해 기부</string>
-    <string name="qksms_plus_coming_soon">출시 예정</string>
-    <string name="qksms_plus_themes_title">프리미엄 테마</string>
-    <string name="qksms_plus_themes_summary">Material Design 팔레트에선 볼 수 없던 아름다운 테마를 잠금해제 하세요!</string>
-    <string name="qksms_plus_emoji_title">사용자 지정 이모티콘</string>
-    <string name="qksms_plus_emoji_summary">사용자 지정 이모티콘 바로 가기 만들기</string>
-    <string name="qksms_plus_backup_title">메시지 백업</string>
-    <string name="qksms_plus_backup_summary">자동으로 메시지를 백업해서 휴대폰을 바꾸거나 잊어버려도 문제없죠!</string>
-    <string name="qksms_plus_scheduled_title">예약 전송 메시지</string>
-    <string name="qksms_plus_scheduled_summary">특정한 시간에 메시지가 보내지도록 메시지 전송을 예약하세요</string>
-    <string name="qksms_plus_delayed_title">지연 전송</string>
-    <string name="qksms_plus_delayed_summary">지연 전송이라는 멋진 기능이 있답니다!</string>
-    <string name="qksms_plus_night_title">자동 나이트 모드</string>
-    <string name="qksms_plus_night_summary">시간에 따라 나이트 모드 설정하기</string>
-    <string name="qksms_plus_blacklist_title">고급 차단 기능</string>
-    <string name="qksms_plus_blacklist_summary">특정 키워드 및 패턴이 있을 때 차단합니다</string>
-    <string name="qksms_plus_forward_title">자동 전달</string>
-    <string name="qksms_plus_forward_summary">자동으로 특정한 보낸 사람으로부터 메시지를 전달합니다</string>
-    <string name="qksms_plus_respond_title">자동 응답</string>
-    <string name="qksms_plus_respond_summary">미리 설정된 응답으로 받은 메시지에 자동으로 응답합니다</string>
-    <string name="qksms_plus_more_title">더보기</string>
-    <string name="qksms_plus_more_summary">QUIK는 개발이 활성화되어 있고 여러분의 구입이 모든 미래의 QUIK+ 기능들이 포함될 것입니다!</string>
+    <string name="sms_plus_upgrade_donate">%1$s %2$s 으로 프리미엄 기능 잠금 해제 및 기부</string>
+    <string name="sms_plus_thanks_title">QUIK를 지원해 주셔서 감사합니다!</string>
+    <string name="sms_plus_thanks_summary">이제 모든 QUIK+ 기능에 액세스할 수 있습니다</string>
+    <string name="sms_plus_free_title">QUIK+는 F-Droid 사용자들에게 무료입니다! 만약 여러분이 개발을 지원하고 싶으시다면, 기부해 주시기 바랍니다.</string>
+    <string name="sms_plus_donate">페이팔을 통해 기부</string>
+    <string name="sms_plus_coming_soon">출시 예정</string>
+    <string name="sms_plus_themes_title">프리미엄 테마</string>
+    <string name="sms_plus_themes_summary">Material Design 팔레트에선 볼 수 없던 아름다운 테마를 잠금해제 하세요!</string>
+    <string name="sms_plus_emoji_title">사용자 지정 이모티콘</string>
+    <string name="sms_plus_emoji_summary">사용자 지정 이모티콘 바로 가기 만들기</string>
+    <string name="sms_plus_backup_title">메시지 백업</string>
+    <string name="sms_plus_backup_summary">자동으로 메시지를 백업해서 휴대폰을 바꾸거나 잊어버려도 문제없죠!</string>
+    <string name="sms_plus_scheduled_title">예약 전송 메시지</string>
+    <string name="sms_plus_scheduled_summary">특정한 시간에 메시지가 보내지도록 메시지 전송을 예약하세요</string>
+    <string name="sms_plus_delayed_title">지연 전송</string>
+    <string name="sms_plus_delayed_summary">지연 전송이라는 멋진 기능이 있답니다!</string>
+    <string name="sms_plus_night_title">자동 나이트 모드</string>
+    <string name="sms_plus_night_summary">시간에 따라 나이트 모드 설정하기</string>
+    <string name="sms_plus_blacklist_title">고급 차단 기능</string>
+    <string name="sms_plus_blacklist_summary">특정 키워드 및 패턴이 있을 때 차단합니다</string>
+    <string name="sms_plus_forward_title">자동 전달</string>
+    <string name="sms_plus_forward_summary">자동으로 특정한 보낸 사람으로부터 메시지를 전달합니다</string>
+    <string name="sms_plus_respond_title">자동 응답</string>
+    <string name="sms_plus_respond_summary">미리 설정된 응답으로 받은 메시지에 자동으로 응답합니다</string>
+    <string name="sms_plus_more_title">더보기</string>
+    <string name="sms_plus_more_summary">QUIK는 개발이 활성화되어 있고 여러분의 구입이 모든 미래의 QUIK+ 기능들이 포함될 것입니다!</string>
     <string name="widget_loading">불러오는 중&#8230;</string>
     <string name="widget_more">더 많은 대화 보기</string>
-    <string name="qkreply_menu_read">읽음으로 표시</string>
-    <string name="qkreply_menu_call">전화하기</string>
-    <string name="qkreply_menu_delete">삭제하기</string>
-    <string name="qkreply_menu_expand">더 보기</string>
-    <string name="qkreply_menu_collapse">적게 표시</string>
-    <string name="qkreply_menu_view">대화 열기</string>
+    <string name="reply_menu_read">읽음으로 표시</string>
+    <string name="reply_menu_call">전화하기</string>
+    <string name="reply_menu_delete">삭제하기</string>
+    <string name="reply_menu_expand">더 보기</string>
+    <string name="reply_menu_collapse">적게 표시</string>
+    <string name="reply_menu_view">대화 열기</string>
     <string name="theme_material">Meterial</string>
     <string name="theme_hex">HEX</string>
     <string name="theme_apply">적용하기</string>
@@ -355,7 +321,7 @@
     <string name="button_undo">되돌리기</string>
     <string name="toast_copied">복사됨</string>
     <string name="toast_archived">보관된 대화</string>
-    <string name="toast_qksms_plus">이 기능을 사용하려면 QUIK+ 를 잠금 해제해야 합니다.</string>
+    <string name="toast_sms_plus">이 기능을 사용하려면 QUIK+ 를 잠금 해제해야 합니다.</string>
     <plurals name="notification_new_messages">
         <item quantity="other">새로운 메세지
 
@@ -363,6 +329,7 @@
     </plurals>
     <string name="notification_message_failed_title">메시지 전송 실패</string>
     <string name="notification_message_failed_text">%s 에게 보낼 메시지 전송이 실패했습니다</string>
+    <string name="language">Language</string>
     <string-array name="night_modes">
         <item>시스템 설정</item>
         <item>사용 안 함</item>
@@ -396,7 +363,7 @@
         <item>2000KB</item>
         <item>무압축</item>
     </string-array>
-    <string-array name="qk_responses">
+    <string-array name="custom_responses">
         <item>확인</item>
         <item>잠시만 기다려주세요.</item>
         <item>가고 있어요</item>
@@ -410,4 +377,5 @@
         <item>웃음</item>
         <item>괜찮아요</item>
     </string-array>
+    <string name="select_language">언어 선택</string>
 </resources>

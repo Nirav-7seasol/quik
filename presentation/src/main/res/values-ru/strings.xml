@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2019 Moez Bhatti <moez.bhatti@gmail.com>
-  ~
-  ~ This file is part of QKSMS.
-  ~
-  ~ QKSMS is free software: you can redistribute it and/or modify
-  ~ it under the terms of the GNU General Public License as published by
-  ~ the Free Software Foundation, either version 3 of the License, or
-  ~ (at your option) any later version.
-  ~
-  ~ QKSMS is distributed in the hope that it will be useful,
-  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~ GNU General Public License for more details.
-  ~
-  ~ You should have received a copy of the GNU General Public License
-  ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
-  -->
 <resources>
+    <string name="change_language">Изменить язык</string>
     <string name="shortcut_compose_long_label">Новая беседа</string>
     <string name="shortcut_compose_short_label">Написать</string>
     <string name="shortcut_compose_disabled_message">Ярлык отключён</string>
@@ -61,7 +44,6 @@
     <string name="main_permission_required">Требуется разрешение</string>
     <string name="main_permission_sms">QUIK необходимо разрешение для отправки и просмотра SMS-сообщений</string>
     <string name="main_permission_contacts">QUIK необходимо разрешение для просмотра контактов</string>
-    <string name="main_permission_notifications">QUIK требуется разрешение для отображения уведомлений</string>
     <string name="main_permission_allow">Разрешить</string>
     <string name="drawer_inbox">Входящие</string>
     <string name="drawer_archived">Архив</string>
@@ -150,8 +132,6 @@
     <string name="backup_restoring">Восстановление из резервной копии</string>
     <string name="backup_loading">Загрузка&#8230;</string>
     <string name="backup_never">Никогда</string>
-    <string name="backup_location_title">Путь резервной копии</string>
-    <string name="backup_location_summary">Выбор папки</string>
     <string name="backup_restore_title">Восстановление</string>
     <string name="backup_restore_summary">Выберите резервную копию</string>
     <string name="backup_restore_error_plus">Пожалуйста, разблокируйте QUIK+ для использования резервного копирования и восстановления</string>
@@ -160,12 +140,6 @@
     <string name="backup_restore_confirm_title">Восстановление из резервной копии</string>
     <string name="backup_restore_stop_title">Остановить восстановление</string>
     <string name="backup_restore_stop_message">Сообщения, которые уже были восстановлены останутся на вашем устройстве</string>
-    <string name="backup_select_location_rationale_title">Выбор папки резервной копии</string>
-    <string name="backup_select_location_rationale_message">Выберите папку для сохранения резервных копий</string>
-    <string name="backup_details">%1$s\n%2$d сообщений</string>
-    <string name="backup_selected_backup_error_title">Ошибка</string>
-    <string name="backup_selected_backup_error_message">Невозможно прочитать файл резервной копии</string>
-    <string name="backup_selected_backup_details_title">Данные резервной копии</string>
     <string name="backup_restore_dialog_title">Резервирование</string>
     <string name="backup_restore_dialog_empty">Резервные копии не найдены</string>
     <string name="backup_disclaimer">В настоящее время поддерживается резервное копирование и восстановление только SMS. Поддержка MMS и регулярные резервные копии появятся в ближайшее время!</string>
@@ -192,7 +166,7 @@
     </string-array>
     <string name="settings_category_appearance">Внешний вид</string>
     <string name="settings_category_general">Общее</string>
-    <string name="settings_category_qkreply">QK-ответ</string>
+    <string name="settings_category_reply">ответ</string>
     <string name="settings_theme_title">Тема</string>
     <string name="settings_night_title">Ночной режим</string>
     <string name="settings_black_title">Полностью чёрный ночной режим</string>
@@ -213,10 +187,10 @@
     <string name="settings_vibration_title">Вибросигнал</string>
     <string name="settings_ringtone_title">Звук</string>
     <string name="settings_ringtone_none">Нет</string>
-    <string name="settings_qkreply_title">QK-ответ</string>
-    <string name="settings_qkreply_summary">Всплывающее окно для новых сообщений</string>
-    <string name="settings_qkreply_tap_dismiss_title">Нажмите, чтобы отклонить</string>
-    <string name="settings_qkreply_tap_dismiss_summary">Нажмите за пределами всплывающего окна, чтобы закрыть его</string>
+    <string name="settings_reply_title">ответ</string>
+    <string name="settings_reply_summary">Всплывающее окно для новых сообщений</string>
+    <string name="settings_reply_tap_dismiss_title">Нажмите, чтобы отклонить</string>
+    <string name="settings_reply_tap_dismiss_summary">Нажмите за пределами всплывающего окна, чтобы закрыть его</string>
     <string name="settings_delayed_title">Задержка перед отправкой</string>
     <string name="settings_swipe_actions">Действия жестами</string>
     <string name="settings_swipe_actions_summary">Настройка действий жестами для бесед</string>
@@ -240,12 +214,6 @@
     <string name="settings_unicode_summary">Удаление акцентов с символов в исходящих SMS-сообщениях</string>
     <string name="settings_mobile_title">Только мобильные номера</string>
     <string name="settings_mobile_summary">При составлении сообщения показывать только мобильные номера</string>
-    <string name="settings_auto_delete">Удалять старые сообщения автоматически</string>
-    <string name="settings_auto_delete_dialog_message">Сообщения будут удалены после указанного количества дней</string>
-    <string name="settings_auto_delete_dialog_hint">Количество дней</string>
-    <string name="settings_auto_delete_never">Никогда</string>
-    <string name="settings_auto_delete_warning">Удалить старые сообщения автоматически?</string>
-    <string name="settings_auto_delete_warning_message">Если продолжить, будет удалено сообщений: %1$d</string>
     <plurals name="settings_auto_delete_summary">
         <item quantity="one">Через день</item>
         <item quantity="few">Через %d дня</item>
@@ -267,9 +235,8 @@
     <string name="blocking_drop_summary">Удалять входящие сообщения от заблокированных отправителей, а не скрывать их</string>
     <string name="blocking_conversations">Заблокированные беседы</string>
     <string name="blocking_manager_title">Управление блокировкой</string>
-    <string name="blocking_manager_qksms_title">QUIK</string>
-    <string name="blocking_manager_qksms_summary">Встроенная функция блокировки QUIK</string>
-    <string name="blocking_manager_call_blocker_summary">Чёрный список с возможность работы по расписанию для блокировки сообщений со спамом, звонков с определённых и неизвестных номеров</string>
+    <string name="blocking_manager_sms_title">QUIK</string>
+    <string name="blocking_manager_sms_summary">Встроенная функция блокировки QUIK</string>
     <string name="blocking_manager_call_control_summary">Автоматическая фильтрация звонков и сообщений в одном удобном месте! Community IQ™ позволяет предотвратить получение нежелательных сообщений от известных сообществу спаммеров</string>
     <string name="blocking_manager_sia_summary">Автоматически фильтровать сообщения от нежелательных номеров, используя приложение «Should I Answer»</string>
     <string name="blocking_manager_copy_title">Скопировать заблокированные номера</string>
@@ -304,46 +271,45 @@
     <string name="about_contact_title">Контакт</string>
     <string name="about_license_title">Лицензия</string>
     <string name="about_copyright_title">Авторское право</string>
-    <string name="qksms_plus_description_title">Поддержать развитие, разблокировать всё</string>
-    <string name="qksms_plus_description_summary">Вы можете спасти голодающего разработчика всего за %s</string>
+    <string name="sms_plus_description_title">Поддержать развитие, разблокировать всё</string>
+    <string name="sms_plus_description_summary">Вы можете спасти голодающего разработчика всего за %s</string>
     <!-- Substitutions are for price and currency. Ex: Lifetime upgrade for $1.99 USD -->
-    <string name="qksms_plus_upgrade">Пожизненное обновление за %1$s %2$s</string>
+    <string name="sms_plus_upgrade">Пожизненное обновление за %1$s %2$s</string>
     <!-- Substitutions are for price and currency. Ex: Unlock + donate for $4.99 USD -->
-    <string name="qksms_plus_upgrade_donate">Разблокировать + пожертвовать %1$s %2$s</string>
-    <string name="qksms_plus_thanks_title">Спасибо за поддержку QUIK!</string>
-    <string name="qksms_plus_thanks_summary">Теперь у вас есть доступ ко всем функциям QUIK+</string>
-    <string name="qksms_plus_error">Произошла ошибка. Попробуйте ещё раз.</string>
-    <string name="qksms_plus_free_title">QUIK+ является бесплатным для пользователей F-Droid! Если вы хотите поддержать развитие приложения, сделайте пожертвование.</string>
-    <string name="qksms_plus_donate">Пожертвовать через PayPal</string>
-    <string name="qksms_plus_coming_soon">Скоро</string>
-    <string name="qksms_plus_themes_title">Премиальные темы</string>
-    <string name="qksms_plus_themes_summary">Разблокируйте красивые цвета темы, недоступные в палитре Material Design</string>
-    <string name="qksms_plus_emoji_title">Пользовательские авто-emoji</string>
-    <string name="qksms_plus_emoji_summary">Создайте ярлык пользовательских авто-emoji</string>
-    <string name="qksms_plus_backup_title">Резервирование сообщений</string>
-    <string name="qksms_plus_backup_summary">Автоматически создавайте резервные копии сообщений. Не беспокойтесь о потере истории, если вы поменяете или потеряете телефон</string>
-    <string name="qksms_plus_scheduled_title">Запланированные сообщения</string>
-    <string name="qksms_plus_scheduled_summary">Запланированные сообщения для автоматической отправки в определённое время и дату</string>
-    <string name="qksms_plus_delayed_title">Отложенная отправка</string>
-    <string name="qksms_plus_delayed_summary">Выжидание несколько секунд перед отправкой сообщения</string>
-    <string name="qksms_plus_night_title">Автоматический ночной режим</string>
-    <string name="qksms_plus_night_summary">Включать ночной режим, основываясь на времени суток</string>
-    <string name="qksms_plus_blacklist_title">Расширенная блокировка</string>
-    <string name="qksms_plus_blacklist_summary">Блокировать сообщения, содержащие ключевые слова или соответствующие шаблонам</string>
-    <string name="qksms_plus_forward_title">Автоматическая пересылка</string>
-    <string name="qksms_plus_forward_summary">Автоматическая пересылка сообщений от определённых отправителей</string>
-    <string name="qksms_plus_respond_title">Автоматический ответ</string>
-    <string name="qksms_plus_respond_summary">Автоматически отвечать на входящие сообщения предустановленным ответом</string>
-    <string name="qksms_plus_more_title">Ещё</string>
-    <string name="qksms_plus_more_summary">QUIK находится в активной разработке и ваша покупка будет включать в себя все функции QUIK+ в будущем!</string>
+    <string name="sms_plus_upgrade_donate">Разблокировать + пожертвовать %1$s %2$s</string>
+    <string name="sms_plus_thanks_title">Спасибо за поддержку QUIK!</string>
+    <string name="sms_plus_thanks_summary">Теперь у вас есть доступ ко всем функциям QUIK+</string>
+    <string name="sms_plus_free_title">QUIK+ является бесплатным для пользователей F-Droid! Если вы хотите поддержать развитие приложения, сделайте пожертвование.</string>
+    <string name="sms_plus_donate">Пожертвовать через PayPal</string>
+    <string name="sms_plus_coming_soon">Скоро</string>
+    <string name="sms_plus_themes_title">Премиальные темы</string>
+    <string name="sms_plus_themes_summary">Разблокируйте красивые цвета темы, недоступные в палитре Material Design</string>
+    <string name="sms_plus_emoji_title">Пользовательские авто-emoji</string>
+    <string name="sms_plus_emoji_summary">Создайте ярлык пользовательских авто-emoji</string>
+    <string name="sms_plus_backup_title">Резервирование сообщений</string>
+    <string name="sms_plus_backup_summary">Автоматически создавайте резервные копии сообщений. Не беспокойтесь о потере истории, если вы поменяете или потеряете телефон</string>
+    <string name="sms_plus_scheduled_title">Запланированные сообщения</string>
+    <string name="sms_plus_scheduled_summary">Запланированные сообщения для автоматической отправки в определённое время и дату</string>
+    <string name="sms_plus_delayed_title">Отложенная отправка</string>
+    <string name="sms_plus_delayed_summary">Выжидание несколько секунд перед отправкой сообщения</string>
+    <string name="sms_plus_night_title">Автоматический ночной режим</string>
+    <string name="sms_plus_night_summary">Включать ночной режим, основываясь на времени суток</string>
+    <string name="sms_plus_blacklist_title">Расширенная блокировка</string>
+    <string name="sms_plus_blacklist_summary">Блокировать сообщения, содержащие ключевые слова или соответствующие шаблонам</string>
+    <string name="sms_plus_forward_title">Автоматическая пересылка</string>
+    <string name="sms_plus_forward_summary">Автоматическая пересылка сообщений от определённых отправителей</string>
+    <string name="sms_plus_respond_title">Автоматический ответ</string>
+    <string name="sms_plus_respond_summary">Автоматически отвечать на входящие сообщения предустановленным ответом</string>
+    <string name="sms_plus_more_title">Ещё</string>
+    <string name="sms_plus_more_summary">QUIK находится в активной разработке и ваша покупка будет включать в себя все функции QUIK+ в будущем!</string>
     <string name="widget_loading">Загрузка&#8230;</string>
     <string name="widget_more">Посмотреть больше бесед</string>
-    <string name="qkreply_menu_read">Прочитано</string>
-    <string name="qkreply_menu_call">Позвонить</string>
-    <string name="qkreply_menu_delete">Удалить</string>
-    <string name="qkreply_menu_expand">Показать ещё</string>
-    <string name="qkreply_menu_collapse">Показать меньше</string>
-    <string name="qkreply_menu_view">Открыть беседу</string>
+    <string name="reply_menu_read">Прочитано</string>
+    <string name="reply_menu_call">Позвонить</string>
+    <string name="reply_menu_delete">Удалить</string>
+    <string name="reply_menu_expand">Показать ещё</string>
+    <string name="reply_menu_collapse">Показать меньше</string>
+    <string name="reply_menu_view">Открыть беседу</string>
     <string name="theme_material">Material</string>
     <string name="theme_hex">HEX</string>
     <string name="theme_apply">Применить</string>
@@ -367,7 +333,7 @@
     <string name="button_undo">Отмена</string>
     <string name="toast_copied">Скопировано</string>
     <string name="toast_archived">Архивированная беседа</string>
-    <string name="toast_qksms_plus">Вы должны разблокировать QUIK+, чтобы использовать</string>
+    <string name="toast_sms_plus">Вы должны разблокировать QUIK+, чтобы использовать</string>
     <plurals name="notification_new_messages">
         <item quantity="one">Новое сообщение</item>
         <item quantity="few">%s новых сообщения</item>
@@ -376,6 +342,7 @@
     </plurals>
     <string name="notification_message_failed_title">Сообщение не отправлено</string>
     <string name="notification_message_failed_text">Не удалось отправить сообщение для %s</string>
+    <string name="language">Language</string>
     <string-array name="night_modes">
         <item>Как в системе</item>
         <item>Отключено</item>
@@ -409,7 +376,7 @@
         <item>2000 Кб</item>
         <item>Без сжатия</item>
     </string-array>
-    <string-array name="qk_responses">
+    <string-array name="custom_responses">
         <item>Хорошо</item>
         <item>Дайте мне минуту</item>
         <item>Мне по пути</item>
@@ -423,4 +390,5 @@
         <item>LOL</item>
         <item>Это нормально</item>
     </string-array>
+    <string name="select_language">Выберите язык</string>
 </resources>

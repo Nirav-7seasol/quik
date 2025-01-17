@@ -1,21 +1,4 @@
-/*
- * Copyright (C) 2017 Moez Bhatti <moez.bhatti@gmail.com>
- *
- * This file is part of QKSMS.
- *
- * QKSMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * QKSMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
- */
+
 package com.messages.readmms.readsmss.feature.compose
 
 import android.content.Context
@@ -522,10 +505,6 @@ class ComposeViewModel @Inject constructor(
         // Choose a time to schedule the message
         view.scheduleIntent
                 .doOnNext { newState { copy(attaching = false) } }
-                .withLatestFrom(billingManager.upgradeStatus) { _, upgraded -> upgraded } //todo:(nirav)remove this filter
-                .filter { upgraded ->
-                    upgraded.also { }
-                }
                 .autoDisposable(view.scope())
                 .subscribe { view.requestDatePicker() }
 

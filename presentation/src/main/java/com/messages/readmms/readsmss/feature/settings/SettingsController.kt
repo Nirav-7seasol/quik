@@ -1,21 +1,4 @@
-/*
- * Copyright (C) 2017 Moez Bhatti <moez.bhatti@gmail.com>
- *
- * This file is part of QKSMS.
- *
- * QKSMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * QKSMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
- */
+
 package com.messages.readmms.readsmss.feature.settings
 
 import android.animation.ObjectAnimator
@@ -24,7 +7,6 @@ import android.content.Context
 import android.os.Build
 import android.text.format.DateFormat
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import com.bluelinelabs.conductor.RouterTransaction
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -42,7 +24,6 @@ import com.messages.readmms.readsmss.common.util.extensions.animateLayoutChanges
 import com.messages.readmms.readsmss.common.util.extensions.setBackgroundTint
 import com.messages.readmms.readsmss.common.util.extensions.setVisible
 import com.messages.readmms.readsmss.common.widget.PreferenceView
-import com.messages.readmms.readsmss.common.widget.QkSwitch
 import com.messages.readmms.readsmss.common.widget.TextInputDialog
 import com.messages.readmms.readsmss.feature.settings.about.AboutController
 import com.messages.readmms.readsmss.feature.settings.autodelete.AutoDeleteDialog
@@ -56,13 +37,30 @@ import com.uber.autodispose.autoDisposable
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
+import kotlinx.android.synthetic.main.settings_controller.about
+import kotlinx.android.synthetic.main.settings_controller.autoColor
+import kotlinx.android.synthetic.main.settings_controller.autoDelete
+import kotlinx.android.synthetic.main.settings_controller.autoEmoji
+import kotlinx.android.synthetic.main.settings_controller.black
+import kotlinx.android.synthetic.main.settings_controller.delayed
+import kotlinx.android.synthetic.main.settings_controller.delivery
+import kotlinx.android.synthetic.main.settings_controller.longAsMms
+import kotlinx.android.synthetic.main.settings_controller.mmsSize
+import kotlinx.android.synthetic.main.settings_controller.mobileOnly
+import kotlinx.android.synthetic.main.settings_controller.night
+import kotlinx.android.synthetic.main.settings_controller.nightEnd
+import kotlinx.android.synthetic.main.settings_controller.nightStart
+import kotlinx.android.synthetic.main.settings_controller.preferences
+import kotlinx.android.synthetic.main.settings_controller.syncingProgress
+import kotlinx.android.synthetic.main.settings_controller.systemFont
+import kotlinx.android.synthetic.main.settings_controller.textSize
+import kotlinx.android.synthetic.main.settings_controller.unicode
+import kotlinx.android.synthetic.main.settings_controller.view.contentView
+import kotlinx.android.synthetic.main.settings_switch_widget.view.checkbox
+import kotlinx.android.synthetic.main.settings_theme_widget.themePreview
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
-import kotlinx.android.synthetic.main.settings_controller.*
-import kotlinx.android.synthetic.main.settings_controller.view.*
-import kotlinx.android.synthetic.main.settings_switch_widget.view.*
-import kotlinx.android.synthetic.main.settings_theme_widget.*
 import javax.inject.Inject
 import kotlin.coroutines.resume
 
@@ -205,7 +203,7 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
 
     override fun showQksmsPlusSnackbar() {
         view?.run {
-            Snackbar.make(contentView, R.string.toast_qksms_plus, Snackbar.LENGTH_LONG).run {
+            Snackbar.make(contentView, R.string.toast_sms_plus, Snackbar.LENGTH_LONG).run {
                 setAction(R.string.button_more) { viewQksmsPlusSubject.onNext(Unit) }
                 setActionTextColor(colors.theme().theme)
                 show()
