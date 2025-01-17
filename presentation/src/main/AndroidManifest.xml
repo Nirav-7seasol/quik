@@ -46,6 +46,8 @@
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:name=".common.App"
         android:allowBackup="true"
@@ -55,14 +57,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppLaunchTheme">
         <activity
-            android:name="com.moez.QKSMS.feature.language.LanguageSelectionActivity"
+            android:name="com.moez.QKSMS.feature.permission.PermissionActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.moez.QKSMS.feature.permission.MyTranslucentActivity"
+            android:exported="true"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.TransparentWindow" />
+        <activity
+            android:name="com.moez.QKSMS.feature.splash.MySplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.APP_MESSAGING" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.moez.QKSMS.feature.language.LanguageSelectionActivity"
+            android:exported="true" />
         <activity
             android:name=".feature.main.MainActivity"
             android:exported="true"

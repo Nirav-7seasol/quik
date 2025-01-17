@@ -19,6 +19,7 @@
 package dev.octoshrimpy.quik.injection.android
 
 import com.moez.QKSMS.feature.language.LanguageSelectionActivity
+import com.moez.QKSMS.feature.permission.PermissionActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dev.octoshrimpy.quik.feature.backup.BackupActivity
@@ -45,6 +46,10 @@ import dev.octoshrimpy.quik.injection.scope.ActivityScope
 
 @Module
 abstract class ActivityBuilderModule {
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [])
+    abstract fun bindPermissionActivity(): PermissionActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [])

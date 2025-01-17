@@ -497,8 +497,6 @@
     </string-array>
 
     <string name="backup_last">Last backup</string>
-    <string name="str_notreply">Can\'t reply to short codes like this</string>
-    <string name="str_notreply_dis">You can only reply to short codes with numbers like \"523698\" but not to codes containing letters and numbers like \"JK-HJY\".</string>
     <string name="rate_us">Rate Us</string>
     <string name="language">Language</string>
     <string name="version_prefix" translatable="false">Version %s</string>
@@ -515,4 +513,37 @@
         <item quantity="other">%d messages</item>
     </plurals>
     <string name="backup_restore_confirm_message">Are you sure you would like to restore your messages from this backup?</string>
+
+    <string name="find_messages_and_allow_permission">Find Messages and allow permission</string>
+    <string name="app_name1">Messages</string>
+
+    <string name="overlay_permission_for_app">Overlay permission for app</string>
+    <string name="desc_overlay">View caller details immediately after each call, keeping you organized and productive.</string>
+    <string name="grant_access">Allow Permission</string>
+    <string name="turn_on_the_after_call_feature">Turn on the after-call feature:</string>
+    <string name="step_1">Step 01:</string>
+    <string name="desc_step1">Tap on “Grant Access” button.</string>
+    <string name="step_2">Step 02:</string>
+    <string name="desc_step2">Locate #Messages in their list</string>
+    <string name="desc_step3">Slide the toggle to activate.</string>
+    <string name="step_3">Step 03:</string>
+    <string name="allow_overlay_access">Allow Overlay Access</string>
+
+    <string name="str_notreply">Can\'t reply to short codes like this</string>
+    <string name="str_notreply_dis">You can only reply to short codes with numbers like \"523698\" but not to codes containing letters and numbers like \"JK-HJY\".</string>
+
+    <string name="no_title">No Title</string>
+    <string name="send_a_message">Send a message</string>
+    <string name="quick_messages">Quick messages</string>
+    <string name="can_not_talk_right_now">Sorry, I can\'t talk right now</string>
+    <string name="can_call_you_later">Can I call you later?</string>
+    <string name="write_personal_message">Write personal message</string>
+    <string name="i_am_on_my_way">I\'m on my way</string>
+    <string name="title_add_contact">Add contact</string>
+    <string name="messages">Messages</string>
+    <string name="send_mail">Send Mail</string>
+    <string name="calendar">Calendar</string>
+    <string name="web">Web</string>
+    <string name="remind_me_about">Remind me about</string>
+    <string name="duration">Duration:</string>
 </resources>
