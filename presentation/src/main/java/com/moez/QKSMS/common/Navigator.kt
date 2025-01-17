@@ -28,8 +28,7 @@ import android.os.Build
 import android.provider.ContactsContract
 import android.provider.Settings
 import android.provider.Telephony
-import android.webkit.MimeTypeMap
-import androidx.core.content.FileProvider
+import com.moez.QKSMS.feature.language.LanguageSelectionActivity
 import dev.octoshrimpy.quik.BuildConfig
 import dev.octoshrimpy.quik.feature.backup.BackupActivity
 import dev.octoshrimpy.quik.feature.blocking.BlockingActivity
@@ -37,22 +36,16 @@ import dev.octoshrimpy.quik.feature.compose.ComposeActivity
 import dev.octoshrimpy.quik.feature.conversationinfo.ConversationInfoActivity
 import dev.octoshrimpy.quik.feature.gallery.GalleryActivity
 import dev.octoshrimpy.quik.feature.notificationprefs.NotificationPrefsActivity
-import dev.octoshrimpy.quik.feature.plus.PlusActivity
 import dev.octoshrimpy.quik.feature.scheduled.ScheduledActivity
 import dev.octoshrimpy.quik.feature.settings.SettingsActivity
-import dev.octoshrimpy.quik.manager.AnalyticsManager
-import dev.octoshrimpy.quik.manager.BillingManager
 import dev.octoshrimpy.quik.manager.NotificationManager
 import dev.octoshrimpy.quik.manager.PermissionManager
-import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class Navigator @Inject constructor(
     private val context: Context,
-    private val analyticsManager: AnalyticsManager,
-    private val billingManager: BillingManager,
     private val notificationManager: NotificationManager,
     private val permissions: PermissionManager
 ) {
@@ -76,8 +69,8 @@ class Navigator @Inject constructor(
      */
     fun showQksmsPlusActivity(source: String) {
 //        analyticsManager.track("Viewed QKSMS+", Pair("source", source))
-        val intent = Intent(context, PlusActivity::class.java)
-        startActivity(intent)
+//        val intent = Intent(context, PlusActivity::class.java)
+//        startActivity(intent)
     }
 
     /**
@@ -247,6 +240,12 @@ class Navigator @Inject constructor(
                 .putExtra(Intent.EXTRA_TEXT, "https://github.com/octoshrimpy/quik/releases/latest")
                 .let { Intent.createChooser(it, null) }
                 .let(::startActivityExternal)
+    }
+
+    fun showLanguageSelectionScreen() {
+        val intent = Intent(context, LanguageSelectionActivity::class.java)
+        intent.putExtra("FROM_SETTING", true)
+        startActivity(intent)
     }
 
     fun addContact(address: String) {

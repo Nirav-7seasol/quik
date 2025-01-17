@@ -35,7 +35,7 @@ class BlockingActivity : QkThemedActivity() {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.container_activity)
-
+        setToolbar()
         router = Conductor.attachRouter(this, container, savedInstanceState)
         if (!router.hasRootController()) {
             router.setRoot(RouterTransaction.with(BlockingController()))

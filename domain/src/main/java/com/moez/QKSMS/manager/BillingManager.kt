@@ -19,29 +19,15 @@
 
 package dev.octoshrimpy.quik.manager
 
-import android.app.Activity
 import io.reactivex.Observable
+import io.reactivex.subjects.BehaviorSubject
+import javax.inject.Inject
+import javax.inject.Singleton
 
-interface BillingManager {
+@Singleton
+class BillingManager @Inject constructor(
+) {
 
-    companion object {
-        const val SKU_PLUS = "remove_ads"
-        const val SKU_PLUS_DONATE = "qksms_plus_donate"
-    }
-
-    data class Product(
-        val sku: String,
-        val price: String,
-        val priceCurrencyCode: String
-    )
-
-    val products: Observable<List<Product>>
-    val upgradeStatus: Observable<Boolean>
-
-    suspend fun checkForPurchases()
-
-    suspend fun queryProducts()
-
-    suspend fun initiatePurchaseFlow(activity: Activity, sku: String)
+    val upgradeStatus: Observable<Boolean> = BehaviorSubject.createDefault(true)
 
 }

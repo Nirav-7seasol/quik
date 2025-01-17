@@ -19,25 +19,20 @@
 package dev.octoshrimpy.quik.feature.backup
 
 import android.content.Context
-import androidx.core.net.toUri
+import com.uber.autodispose.android.lifecycle.scope
+import com.uber.autodispose.autoDisposable
 import dev.octoshrimpy.quik.R
-import dev.octoshrimpy.quik.common.Navigator
 import dev.octoshrimpy.quik.common.base.QkPresenter
 import dev.octoshrimpy.quik.common.util.DateFormatter
 import dev.octoshrimpy.quik.common.util.extensions.makeToast
 import dev.octoshrimpy.quik.interactor.PerformBackup
 import dev.octoshrimpy.quik.manager.BillingManager
-import dev.octoshrimpy.quik.repository.BackupRepository
-import com.uber.autodispose.android.lifecycle.scope
-import com.uber.autodispose.autoDisposable
 import dev.octoshrimpy.quik.manager.PermissionManager
-import io.reactivex.android.schedulers.AndroidSchedulers
+import dev.octoshrimpy.quik.repository.BackupRepository
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.withLatestFrom
-import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
-import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -46,12 +41,12 @@ class BackupPresenter @Inject constructor(
     private val billingManager: BillingManager,
     private val context: Context,
     private val dateFormatter: DateFormatter,
-    private val navigator: Navigator,
     private val performBackup: PerformBackup,
     private val permissionManager: PermissionManager
 ) : QkPresenter<BackupView, BackupState>(BackupState()) {
 
-    private val storagePermissionSubject: Subject<Boolean> = BehaviorSubject.createDefault(permissionManager.hasStorage())
+    private val storagePermissionSubject: Subject<Boolean> =
+        BehaviorSubject.createDefault(permissionManager.hasStorage())
 
     init {
         disposables += backupRepo.getBackupProgress()
@@ -68,7 +63,9 @@ class BackupPresenter @Inject constructor(
             .distinctUntilChanged()
             .switchMap { backupRepo.getBackups() }
             .doOnNext { backups -> newState { copy(backups = backups) } }
-            .map { backups -> backups.map { it.date }.maxOrNull() ?: 0L } // Use maxOrNull to safely handle empty lists
+            .map { backups ->
+                backups.map { it.date }.maxOrNull() ?: 0L
+            } // Use maxOrNull to safely handle empty lists
             .map { lastBackup ->
                 when (lastBackup) {
                     0L -> context.getString(R.string.backup_never)
@@ -94,7 +91,8 @@ class BackupPresenter @Inject constructor(
             .withLatestFrom(
                 backupRepo.getBackupProgress(),
                 backupRepo.getRestoreProgress(),
-                billingManager.upgradeStatus)
+                billingManager.upgradeStatus
+            )
             { _, backupProgress, restoreProgress, upgraded ->
                 when {
                     !upgraded -> context.makeToast(R.string.backup_restore_error_plus)

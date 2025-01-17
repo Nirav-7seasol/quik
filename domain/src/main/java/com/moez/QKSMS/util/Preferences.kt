@@ -142,7 +142,9 @@ class Preferences @Inject constructor(
     val keyChanges: Observable<String> = Observable.create<String> { emitter ->
         // Making this a lambda would cause it to be GCd
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-            emitter.onNext(key)
+            if (key != null) {
+                emitter.onNext(key)
+            }
         }
 
         emitter.setCancellable {

@@ -232,8 +232,6 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
 
     override fun showDelayDurationDialog() = sendDelayDialog.show(activity!!)
 
-    override fun showSignatureDialog(signature: String) = signatureDialog.setText(signature).show()
-
     override fun showAutoDeleteDialog(days: Int) = autoDeleteDialog.setExpiry(days).show()
 
     override suspend fun showAutoDeleteWarningDialog(messages: Int): Boolean = withContext(Dispatchers.Main) {

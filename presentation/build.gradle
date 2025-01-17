@@ -23,15 +23,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdk 33
-    flavorDimensions "analytics"
+    compileSdk 34
 
     defaultConfig {
         applicationId 'dev.octoshrimpy.quik'
         minSdkVersion 23
-        targetSdkVersion 33
-        versionCode 2225
-        versionName '4.0.8'
+        targetSdkVersion 34
+        versionCode 1
+        versionName '0.0.1'
         setProperty("archivesBaseName", "QUIK-v${versionName}")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -39,30 +38,11 @@ android {
         versionNameSuffix '-alpha'
     }
 
-//    signingConfigs {
-//        release {
-//            def keystoreProps = new Properties()
-//            def keystorePropsFile = rootProject.file('./.gradle/.gradlerc')
-//            storeFile file('./my-release-key.keystore')
-//            keyAlias 'quik_release'
-//            if (keystorePropsFile.exists()) {
-//                keystoreProps.load(new FileInputStream(keystorePropsFile))
-//            } else if (System.getenv("CI") == "true") {
-////                do nothing
-//            } else {
-//                throw new GradleException("Keystore properties file not found.")
-//            }
-//            storePassword keystoreProps['storePassword']
-//            keyPassword keystoreProps['keyPassword']
-//        }
-//    }
-
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            signingConfig signingConfigs.release
         }
     }
 
@@ -75,13 +55,6 @@ android {
         jvmTarget = "1.8"
     }
 
-
-    productFlavors {
-        withAnalytics { dimension "analytics" }
-        noAnalytics {
-//            signingConfig signingConfigs.release
-        }
-    }
     lint {
         abortOnError false
     }
@@ -98,13 +71,6 @@ android {
 
 androidExtensions {
     experimental = true
-}
-
-configurations {
-    noAnalyticsDebug
-    noAnalyticsRelease
-    withAnalyticsDebug
-    withAnalyticsRelease
 }
 
 dependencies {
@@ -210,14 +176,6 @@ dependencies {
     implementation project(':data')
     implementation project(':domain')
 
-    withAnalyticsImplementation 'com.google.firebase:firebase-crashlytics:17.3.0'
-    withAnalyticsImplementation "com.android.billingclient:billing:$billing_version"
-    withAnalyticsImplementation "com.android.billingclient:billing-ktx:$billing_version"
-    noAnalyticsDebug project(path: ':data', configuration: 'noAnalyticsDebug')
-    noAnalyticsRelease project(path: ':data', configuration: 'noAnalyticsRelease')
-    withAnalyticsDebug project(path: ':data', configuration: 'withAnalyticsDebug')
-    withAnalyticsRelease project(path: ':data', configuration: 'withAnalyticsRelease')
-
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
 
     implementation 'com.intuit.sdp:sdp-android:1.1.1'
@@ -232,21 +190,10 @@ dependencies {
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.karumi:dexter:6.2.3'
-//    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
-//
-//    // Add the dependencies for the Crashlytics and Analytics libraries
-//    // When using the BoM, you don't specify versions in Firebase library dependencies
-//    implementation("com.google.firebase:firebase-crashlytics")
-//    implementation("com.google.firebase:firebase-analytics")
 
     implementation 'com.google.android.play:app-update:2.1.0'
     implementation 'com.google.android.play:review:2.0.2'
 
     implementation "androidx.core:core-splashscreen:1.0.1"
     implementation "com.airbnb.android:lottie:6.5.2"
-}
-
-if (getGradle().getStartParameter().getTaskRequests().toString().contains("WithAnalytics")) {
-    apply plugin: 'com.google.gms.google-services'
-    apply plugin: 'com.google.firebase.crashlytics'
 }

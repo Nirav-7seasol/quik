@@ -54,6 +54,7 @@ class ScheduledActivity : QkThemedActivity(), ScheduledView {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.scheduled_activity)
+        setToolbar()
         setTitle(R.string.scheduled_title)
         showBackButton(true)
         viewModel.bindView(this)

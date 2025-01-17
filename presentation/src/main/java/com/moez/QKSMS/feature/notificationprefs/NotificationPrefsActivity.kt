@@ -63,6 +63,7 @@ class NotificationPrefsActivity : QkThemedActivity(), NotificationPrefsView {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.notification_prefs_activity)
+        setToolbar()
         setTitle(R.string.title_notification_prefs)
         showBackButton(true)
         viewModel.bindView(this)

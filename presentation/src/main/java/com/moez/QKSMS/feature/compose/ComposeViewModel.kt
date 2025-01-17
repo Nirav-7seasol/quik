@@ -23,6 +23,7 @@ import android.net.Uri
 import android.os.Vibrator
 import android.provider.ContactsContract
 import android.telephony.SmsMessage
+import android.util.Log
 import androidx.core.content.getSystemService
 import dev.octoshrimpy.quik.R
 import dev.octoshrimpy.quik.common.Navigator
@@ -59,6 +60,7 @@ import dev.octoshrimpy.quik.util.Preferences
 import dev.octoshrimpy.quik.util.tryOrNull
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDisposable
+import dev.octoshrimpy.quik.common.App
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.Observables
@@ -520,9 +522,9 @@ class ComposeViewModel @Inject constructor(
         // Choose a time to schedule the message
         view.scheduleIntent
                 .doOnNext { newState { copy(attaching = false) } }
-                .withLatestFrom(billingManager.upgradeStatus) { _, upgraded -> upgraded }
+                .withLatestFrom(billingManager.upgradeStatus) { _, upgraded -> upgraded } //todo:(nirav)remove this filter
                 .filter { upgraded ->
-                    upgraded.also { if (!upgraded) view.showQksmsPlusSnackbar(R.string.compose_scheduled_plus) }
+                    upgraded.also { }
                 }
                 .autoDisposable(view.scope())
                 .subscribe { view.requestDatePicker() }
@@ -674,57 +676,109 @@ class ComposeViewModel @Inject constructor(
                     }
                     val sendAsGroup = !state.editingMode || state.sendAsGroup
 
-                    when {
-                        // Scheduling a message
-                        state.scheduled != 0L -> {
-                            newState { copy(scheduled = 0) }
-                            val uris = attachments
+                    if (App.isSchedule) {
+                        App.isSchedule = false
+                        Log.d("TAG", "isSchedule1: " + App.isSchedule)
+                        view.requestDatePicker()
+                    } else {
+                        when {
+                            // Scheduling a message
+                            state.scheduled != 0L -> {
+                                newState { copy(scheduled = 0) }
+                                val uris = attachments
                                     .mapNotNull { it as? Attachment.Image }
                                     .map { it.getUri() }
                                     .map { it.toString() }
-                            val params = AddScheduledMessage
-                                    .Params(state.scheduled, subId, addresses, sendAsGroup, body, uris)
-                            addScheduledMessage.execute(params)
-                            context.makeToast(R.string.compose_scheduled_toast)
-                        }
+                                val params = AddScheduledMessage
+                                    .Params(
+                                        state.scheduled,
+                                        subId,
+                                        addresses,
+                                        sendAsGroup,
+                                        body,
+                                        uris
+                                    )
+                                addScheduledMessage.execute(params)
+                                context.makeToast(R.string.compose_scheduled_toast)
+                            }
 
-                        // Sending a group message
-                        sendAsGroup -> {
-                            sendMessage.execute(SendMessage
-                                    .Params(subId, conversation.id, addresses, body, attachments, delay))
-                        }
+                            // Sending a group message
+                            sendAsGroup -> {
+                                sendMessage.execute(
+                                    SendMessage
+                                        .Params(
+                                            subId,
+                                            conversation.id,
+                                            addresses,
+                                            body,
+                                            attachments,
+                                            delay
+                                        )
+                                )
+                            }
 
-                        // Sending a message to an existing conversation with one recipient
-                        conversation.recipients.size == 1 -> {
-                            val address = conversation.recipients.map { it.address }
-                            sendMessage.execute(SendMessage.Params(subId, threadId, address, body, attachments, delay))
-                        }
+                            // Sending a message to an existing conversation with one recipient
+                            conversation.recipients.size == 1 -> {
+                                val address = conversation.recipients.map { it.address }
+                                sendMessage.execute(
+                                    SendMessage.Params(
+                                        subId,
+                                        threadId,
+                                        address,
+                                        body,
+                                        attachments,
+                                        delay
+                                    )
+                                )
+                            }
 
-                        // Create a new conversation with one address
-                        addresses.size == 1 -> {
-                            sendMessage.execute(SendMessage
-                                    .Params(subId, threadId, addresses, body, attachments, delay))
-                        }
+                            // Create a new conversation with one address
+                            addresses.size == 1 -> {
+                                sendMessage.execute(
+                                    SendMessage
+                                        .Params(
+                                            subId,
+                                            threadId,
+                                            addresses,
+                                            body,
+                                            attachments,
+                                            delay
+                                        )
+                                )
+                            }
 
-                        // Send a message to multiple addresses
-                        else -> {
-                            addresses.forEach { addr ->
-                                val threadId = tryOrNull(false) {
-                                    TelephonyCompat.getOrCreateThreadId(context, addr)
-                                } ?: 0
-                                val address = listOf(conversationRepo
-                                        .getConversation(threadId)?.recipients?.firstOrNull()?.address ?: addr)
-                                sendMessage.execute(SendMessage
-                                        .Params(subId, threadId, address, body, attachments, delay))
+                            // Send a message to multiple addresses
+                            else -> {
+                                addresses.forEach { addr ->
+                                    val threadId = tryOrNull(false) {
+                                        TelephonyCompat.getOrCreateThreadId(context, addr)
+                                    } ?: 0
+                                    val address = listOf(
+                                        conversationRepo
+                                            .getConversation(threadId)?.recipients?.firstOrNull()?.address
+                                            ?: addr
+                                    )
+                                    sendMessage.execute(
+                                        SendMessage
+                                            .Params(
+                                                subId,
+                                                threadId,
+                                                address,
+                                                body,
+                                                attachments,
+                                                delay
+                                            )
+                                    )
+                                }
                             }
                         }
-                    }
 
-                    view.setDraft("")
-                    this.attachments.onNext(ArrayList())
+                        view.setDraft("")
+                        this.attachments.onNext(ArrayList())
 
-                    if (state.editingMode) {
-                        newState { copy(editingMode = false, hasError = !sendAsGroup) }
+                        if (state.editingMode) {
+                            newState { copy(editingMode = false, hasError = !sendAsGroup) }
+                        }
                     }
                 }
                 .autoDisposable(view.scope())

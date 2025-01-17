@@ -48,6 +48,7 @@ import dev.octoshrimpy.quik.repository.SyncRepository
 import dev.octoshrimpy.quik.util.Preferences
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDisposable
+import dev.octoshrimpy.quik.common.App
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.withLatestFrom
@@ -291,12 +292,16 @@ class MainViewModel @Inject constructor(
                             else -> newState { copy(hasError = true) }
                         }
                         NavItem.BACKUP -> navigator.showBackup()
-                        NavItem.SCHEDULED -> navigator.showScheduled()
+                        NavItem.SCHEDULED -> {
+                            App.isSchedule = true
+                            navigator.showScheduled()
+                        }
                         NavItem.BLOCKING -> navigator.showBlockedConversations()
                         NavItem.SETTINGS -> navigator.showSettings()
 //                        NavItem.PLUS -> navigator.showQksmsPlusActivity("main_menu")
 //                        NavItem.HELP -> navigator.showSupport()
                         NavItem.INVITE -> navigator.showInvite()
+                        NavItem.LANGUAGE -> navigator.showLanguageSelectionScreen()
                         else -> Unit
                     }
                     drawerItem

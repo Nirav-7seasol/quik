@@ -41,7 +41,6 @@ interface SettingsView : QkViewContract<SettingsState> {
     fun showEndTimePicker(hour: Int, minute: Int)
     fun showTextSizePicker()
     fun showDelayDurationDialog()
-    fun showSignatureDialog(signature: String)
     fun showAutoDeleteDialog(days: Int)
     suspend fun showAutoDeleteWarningDialog(messages: Int): Boolean
     fun showMmsSizePicker()

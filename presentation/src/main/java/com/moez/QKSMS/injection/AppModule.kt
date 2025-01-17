@@ -25,10 +25,14 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import androidx.lifecycle.ViewModelProvider
 import com.f2prateek.rx.preferences2.RxSharedPreferences
+import com.moez.QKSMS.manager.ReferralManagerImpl
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import dagger.Module
+import dagger.Provides
 import dev.octoshrimpy.quik.blocking.BlockingClient
 import dev.octoshrimpy.quik.blocking.BlockingManager
 import dev.octoshrimpy.quik.common.ViewModelFactory
-import dev.octoshrimpy.quik.common.util.BillingManagerImpl
 import dev.octoshrimpy.quik.common.util.NotificationManagerImpl
 import dev.octoshrimpy.quik.common.util.ShortcutManagerImpl
 import dev.octoshrimpy.quik.feature.conversationinfo.injection.ConversationInfoComponent
@@ -39,9 +43,6 @@ import dev.octoshrimpy.quik.manager.ActiveConversationManager
 import dev.octoshrimpy.quik.manager.ActiveConversationManagerImpl
 import dev.octoshrimpy.quik.manager.AlarmManager
 import dev.octoshrimpy.quik.manager.AlarmManagerImpl
-import dev.octoshrimpy.quik.manager.AnalyticsManager
-import dev.octoshrimpy.quik.manager.AnalyticsManagerImpl
-import dev.octoshrimpy.quik.manager.BillingManager
 import dev.octoshrimpy.quik.manager.ChangelogManager
 import dev.octoshrimpy.quik.manager.ChangelogManagerImpl
 import dev.octoshrimpy.quik.manager.KeyManager
@@ -51,7 +52,6 @@ import dev.octoshrimpy.quik.manager.PermissionManager
 import dev.octoshrimpy.quik.manager.PermissionManagerImpl
 import dev.octoshrimpy.quik.manager.RatingManager
 import dev.octoshrimpy.quik.manager.ReferralManager
-import dev.octoshrimpy.quik.manager.ReferralManagerImpl
 import dev.octoshrimpy.quik.manager.ShortcutManager
 import dev.octoshrimpy.quik.manager.WidgetManager
 import dev.octoshrimpy.quik.manager.WidgetManagerImpl
@@ -84,15 +84,13 @@ import dev.octoshrimpy.quik.repository.ScheduledMessageRepository
 import dev.octoshrimpy.quik.repository.ScheduledMessageRepositoryImpl
 import dev.octoshrimpy.quik.repository.SyncRepository
 import dev.octoshrimpy.quik.repository.SyncRepositoryImpl
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import dagger.Module
-import dagger.Provides
 import javax.inject.Singleton
 
-@Module(subcomponents = [
-    ConversationInfoComponent::class,
-    ThemePickerComponent::class])
+@Module(
+    subcomponents = [
+        ConversationInfoComponent::class,
+        ThemePickerComponent::class]
+)
 class AppModule(private var application: Application) {
 
     @Provides
@@ -118,8 +116,8 @@ class AppModule(private var application: Application) {
     @Singleton
     fun provideMoshi(): Moshi {
         return Moshi.Builder()
-                .add(KotlinJsonAdapterFactory())
-                .build()
+            .add(KotlinJsonAdapterFactory())
+            .build()
     }
 
     @Provides
@@ -128,21 +126,20 @@ class AppModule(private var application: Application) {
     // Listener
 
     @Provides
-    fun provideContactAddedListener(listener: ContactAddedListenerImpl): ContactAddedListener = listener
+    fun provideContactAddedListener(listener: ContactAddedListenerImpl): ContactAddedListener =
+        listener
 
     // Manager
 
-    @Provides
-    fun provideBillingManager(manager: BillingManagerImpl): BillingManager = manager
+//    @Provides
+//    fun provideBillingManager(manager: BillingManager): BillingManager = manager
 
     @Provides
-    fun provideActiveConversationManager(manager: ActiveConversationManagerImpl): ActiveConversationManager = manager
+    fun provideActiveConversationManager(manager: ActiveConversationManagerImpl): ActiveConversationManager =
+        manager
 
     @Provides
     fun provideAlarmManager(manager: AlarmManagerImpl): AlarmManager = manager
-
-    @Provides
-    fun provideAnalyticsManager(manager: AnalyticsManagerImpl): AnalyticsManager = manager
 
     @Provides
     fun blockingClient(manager: BlockingManager): BlockingClient = manager
@@ -180,7 +177,8 @@ class AppModule(private var application: Application) {
     fun provideCursorToContactGroup(mapper: CursorToContactGroupImpl): CursorToContactGroup = mapper
 
     @Provides
-    fun provideCursorToContactGroupMember(mapper: CursorToContactGroupMemberImpl): CursorToContactGroupMember = mapper
+    fun provideCursorToContactGroupMember(mapper: CursorToContactGroupMemberImpl): CursorToContactGroupMember =
+        mapper
 
     @Provides
     fun provideCursorToConversation(mapper: CursorToConversationImpl): CursorToConversation = mapper
@@ -200,19 +198,22 @@ class AppModule(private var application: Application) {
     fun provideBackupRepository(repository: BackupRepositoryImpl): BackupRepository = repository
 
     @Provides
-    fun provideBlockingRepository(repository: BlockingRepositoryImpl): BlockingRepository = repository
+    fun provideBlockingRepository(repository: BlockingRepositoryImpl): BlockingRepository =
+        repository
 
     @Provides
     fun provideContactRepository(repository: ContactRepositoryImpl): ContactRepository = repository
 
     @Provides
-    fun provideConversationRepository(repository: ConversationRepositoryImpl): ConversationRepository = repository
+    fun provideConversationRepository(repository: ConversationRepositoryImpl): ConversationRepository =
+        repository
 
     @Provides
     fun provideMessageRepository(repository: MessageRepositoryImpl): MessageRepository = repository
 
     @Provides
-    fun provideScheduledMessagesRepository(repository: ScheduledMessageRepositoryImpl): ScheduledMessageRepository = repository
+    fun provideScheduledMessagesRepository(repository: ScheduledMessageRepositoryImpl): ScheduledMessageRepository =
+        repository
 
     @Provides
     fun provideSyncRepository(repository: SyncRepositoryImpl): SyncRepository = repository

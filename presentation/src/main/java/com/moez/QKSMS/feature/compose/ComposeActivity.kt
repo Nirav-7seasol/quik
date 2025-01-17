@@ -34,6 +34,7 @@ import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDisposable
 import dagger.android.AndroidInjection
 import dev.octoshrimpy.quik.R
+import dev.octoshrimpy.quik.common.App
 import dev.octoshrimpy.quik.common.Navigator
 import dev.octoshrimpy.quik.common.base.QkThemedActivity
 import dev.octoshrimpy.quik.common.util.DateFormatter
@@ -330,20 +331,32 @@ class ComposeActivity : QkThemedActivity(), ComposeView {
 
     override fun requestDatePicker() {
         val calendar = Calendar.getInstance()
-        DatePickerDialog(this, DatePickerDialog.OnDateSetListener { _, year, month, day ->
-            TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { _, hour, minute ->
-                calendar.set(Calendar.YEAR, year)
-                calendar.set(Calendar.MONTH, month)
-                calendar.set(Calendar.DAY_OF_MONTH, day)
-                calendar.set(Calendar.HOUR_OF_DAY, hour)
-                calendar.set(Calendar.MINUTE, minute)
-                scheduleSelectedIntent.onNext(calendar.timeInMillis)
-            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), DateFormat.is24HourFormat(this))
-                .show()
-        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
+        val datePickerDialog = DatePickerDialog(
+            this,
+            R.style.MaterialDateTimePickerDialog,
+            { _, year, month, day ->
+                TimePickerDialog(
+                    this,
+                    R.style.MaterialDateTimePickerDialog,
+                    { _, hour, minute ->
+                        calendar.set(Calendar.YEAR, year)
+                        calendar.set(Calendar.MONTH, month)
+                        calendar.set(Calendar.DAY_OF_MONTH, day)
+                        calendar.set(Calendar.HOUR_OF_DAY, hour)
+                        calendar.set(Calendar.MINUTE, minute)
+                        scheduleSelectedIntent.onNext(calendar.timeInMillis)
+                    },
+                    calendar.get(Calendar.HOUR_OF_DAY),
+                    calendar.get(Calendar.MINUTE),
+                    DateFormat.is24HourFormat(this)
+                ).show()
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
 
-        // On some devices, the keyboard can cover the date picker
-        binding.message.hideKeyboard()
+        datePickerDialog.show()
     }
 
     override fun requestContact() {
@@ -470,6 +483,9 @@ class ComposeActivity : QkThemedActivity(), ComposeView {
         super.onRestoreInstanceState(savedInstanceState)
     }
 
-    override fun onBackPressed() = backPressedIntent.onNext(Unit)
+    override fun onBackPressed() {
+        App.isSchedule = false
+        backPressedIntent.onNext(Unit)
+    }
 
 }

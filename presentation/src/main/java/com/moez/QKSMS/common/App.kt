@@ -35,17 +35,6 @@ import com.moez.QKSMS.common.SharedPrefs
 import com.moez.QKSMS.myadsworld.MyAddPrefs
 import com.moez.QKSMS.myadsworld.MyAllAdCommonClass
 import com.moez.QKSMS.myadsworld.MyAppOpenManager
-import dev.octoshrimpy.quik.R
-import dev.octoshrimpy.quik.common.util.CrashlyticsTree
-import dev.octoshrimpy.quik.common.util.FileLoggingTree
-import dev.octoshrimpy.quik.injection.AppComponentManager
-import dev.octoshrimpy.quik.injection.appComponent
-import dev.octoshrimpy.quik.manager.AnalyticsManager
-import dev.octoshrimpy.quik.manager.BillingManager
-import dev.octoshrimpy.quik.manager.ReferralManager
-import dev.octoshrimpy.quik.migration.QkMigration
-import dev.octoshrimpy.quik.migration.QkRealmMigration
-import dev.octoshrimpy.quik.util.NightModeManager
 import com.uber.rxdogtag.RxDogTag
 import com.uber.rxdogtag.autodispose.AutoDisposeConfigurer
 import dagger.android.AndroidInjector
@@ -53,6 +42,15 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.HasBroadcastReceiverInjector
 import dagger.android.HasServiceInjector
+import dev.octoshrimpy.quik.R
+import dev.octoshrimpy.quik.common.util.FileLoggingTree
+import dev.octoshrimpy.quik.injection.AppComponentManager
+import dev.octoshrimpy.quik.injection.appComponent
+import dev.octoshrimpy.quik.manager.BillingManager
+import dev.octoshrimpy.quik.manager.ReferralManager
+import dev.octoshrimpy.quik.migration.QkMigration
+import dev.octoshrimpy.quik.migration.QkRealmMigration
+import dev.octoshrimpy.quik.util.NightModeManager
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import kotlinx.coroutines.Dispatchers
@@ -60,16 +58,11 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
-import timber.log.Timber
 import javax.inject.Inject
 
 class App : Application(), HasActivityInjector, HasBroadcastReceiverInjector, HasServiceInjector {
 
-    /**
-     * Inject these so that they are forced to initialize
-     */
-    @Suppress("unused")
-    @Inject lateinit var analyticsManager: AnalyticsManager
+
     @Suppress("unused")
     @Inject lateinit var qkMigration: QkMigration
 
@@ -118,8 +111,6 @@ class App : Application(), HasActivityInjector, HasBroadcastReceiverInjector, Ha
 
         GlobalScope.launch(Dispatchers.IO) {
             referralManager.trackReferrer()
-            billingManager.checkForPurchases()
-            billingManager.queryProducts()
         }
 
         nightModeManager.updateCurrentTheme()
@@ -131,8 +122,6 @@ class App : Application(), HasActivityInjector, HasBroadcastReceiverInjector, Ha
                 R.array.com_google_android_gms_fonts_certs)
 
         EmojiCompat.init(FontRequestEmojiCompatConfig(this, fontRequest))
-
-        Timber.plant(Timber.DebugTree(), CrashlyticsTree(), fileLoggingTree)
 
         RxDogTag.builder()
                 .configureWith(AutoDisposeConfigurer::configure)
