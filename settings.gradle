@@ -1,1 +1,1 @@
-include ':presentation', ':android-smsmms', ':domain', ':data', ':common', ":nativetemplates"
+include ':app', ':android-smsmms', ':domain', ':data', ':common', ":nativetemplates"
