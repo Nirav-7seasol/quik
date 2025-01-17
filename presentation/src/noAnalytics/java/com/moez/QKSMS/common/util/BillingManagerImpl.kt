@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU General Public License
  * along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
  */
-package dev.octoshrimpy.quik.common.util
+package com.messages.readmms.readsmss.common.util
 
 import android.app.Activity
-import dev.octoshrimpy.quik.manager.BillingManager
+import com.messages.readmms.readsmss.manager.BillingManager
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Inject

@@ -26,16 +26,12 @@ android {
     compileSdk 34
 
     defaultConfig {
-        applicationId 'dev.octoshrimpy.quik'
+        applicationId 'com.messages.readmms.readsmss'
         minSdkVersion 23
         targetSdkVersion 34
         versionCode 1
         versionName '0.0.1'
-        setProperty("archivesBaseName", "QUIK-v${versionName}")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        setProperty("archivesBaseName", "QUIK-v${versionName}")
-        versionNameSuffix '-alpha'
     }
 
     buildTypes {
@@ -58,7 +54,7 @@ android {
     lint {
         abortOnError false
     }
-    namespace 'dev.octoshrimpy.quik'
+    namespace 'com.messages.readmms.readsmss'
     if (System.getenv("CI") == "true") {
         signingConfigs.release.storePassword = System.getenv("keystore_password")
         signingConfigs.release.keyAlias = System.getenv("key_alias")

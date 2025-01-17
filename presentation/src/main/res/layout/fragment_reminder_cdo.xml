@@ -81,7 +81,7 @@
                         app:tint="@color/gray_text" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <com.moez.QKSMS.callendservice.custom.DateTimePicker
+                <com.messages.readmms.readsmss.callendservice.custom.DateTimePicker
                     android:id="@+id/time_picker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

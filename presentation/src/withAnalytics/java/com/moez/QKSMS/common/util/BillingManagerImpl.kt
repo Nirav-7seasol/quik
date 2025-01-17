@@ -17,7 +17,7 @@
  * along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.octoshrimpy.quik.common.util
+package com.messages.readmms.readsmss.common.util
 
 import android.app.Activity
 import android.content.Context
@@ -37,8 +37,8 @@ import com.android.billingclient.api.acknowledgePurchase
 import com.android.billingclient.api.queryProductDetails
 import com.android.billingclient.api.queryPurchaseHistory
 import com.android.billingclient.api.queryPurchasesAsync
-import dev.octoshrimpy.quik.manager.AnalyticsManager
-import dev.octoshrimpy.quik.manager.BillingManager
+import com.messages.readmms.readsmss.manager.AnalyticsManager
+import com.messages.readmms.readsmss.manager.BillingManager
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject

@@ -40,7 +40,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/fileBackground" />
 
-        <dev.octoshrimpy.quik.common.widget.QkTextView
+        <com.messages.readmms.readsmss.common.widget.QkTextView
             android:id="@+id/filename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             app:textSize="primary"
             tools:text="Resume.pdf" />
 
-        <dev.octoshrimpy.quik.common.widget.QkTextView
+        <com.messages.readmms.readsmss.common.widget.QkTextView
             android:id="@+id/size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

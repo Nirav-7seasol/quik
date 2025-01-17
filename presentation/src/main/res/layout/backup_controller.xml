@@ -55,7 +55,7 @@
                     app:layout_constraintTop_toTopOf="@id/progressTitle"
                     tools:src="@drawable/ic_file_download_black_24dp" />
 
-                <dev.octoshrimpy.quik.common.widget.QkTextView
+                <com.messages.readmms.readsmss.common.widget.QkTextView
                     android:id="@+id/progressTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
                     app:textSize="primary"
                     tools:text="Restoring from backup" />
 
-                <dev.octoshrimpy.quik.common.widget.QkTextView
+                <com.messages.readmms.readsmss.common.widget.QkTextView
                     android:id="@+id/progressSummary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <dev.octoshrimpy.quik.common.widget.PreferenceViewWithBinding
+            <com.messages.readmms.readsmss.common.widget.PreferenceViewWithBinding
                 android:id="@+id/backup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
                 app:title="@string/backup_last"
                 tools:summary="@string/backup_never" />
 
-            <dev.octoshrimpy.quik.common.widget.PreferenceViewWithBinding
+            <com.messages.readmms.readsmss.common.widget.PreferenceViewWithBinding
                 android:id="@+id/restore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
             android:src="@drawable/ic_star_black_24dp"
             tools:tint="@color/textPrimaryDark" />
 
-        <dev.octoshrimpy.quik.common.widget.QkTextView
+        <com.messages.readmms.readsmss.common.widget.QkTextView
             android:id="@+id/fabLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

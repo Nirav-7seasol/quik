@@ -28,9 +28,9 @@
         android:shortcutShortLabel="@string/shortcut_compose_short_label">
 
         <intent
-            android:action="dev.octoshrimpy.quik.START"
-            android:targetClass="dev.octoshrimpy.quik.feature.compose.ComposeActivity"
-            android:targetPackage="dev.octoshrimpy.quik" />
+            android:action="com.messages.readmms.readsmss.START"
+            android:targetClass="com.messages.readmms.readsmss.feature.compose.ComposeActivity"
+            android:targetPackage="com.messages.readmms.readsmss" />
 
         <categories android:name="android.shortcut.conversation" />
 

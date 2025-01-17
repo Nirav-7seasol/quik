@@ -17,10 +17,10 @@
  * along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package dev.octoshrimpy.quik.manager
+package com.messages.readmms.readsmss.manager
 
 import android.content.Context
-import dev.octoshrimpy.quik.util.Preferences
+import com.messages.readmms.readsmss.util.Preferences
 import kotlinx.coroutines.suspendCancellableCoroutine
 import javax.inject.Inject
 import kotlin.coroutines.resume

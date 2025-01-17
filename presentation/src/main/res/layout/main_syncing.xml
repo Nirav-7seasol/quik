@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <dev.octoshrimpy.quik.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.QkTextView
         android:id="@+id/label"
         style="@style/TextPrimary"
         android:layout_width="match_parent"

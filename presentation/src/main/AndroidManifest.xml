@@ -57,17 +57,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppLaunchTheme">
         <activity
-            android:name="com.moez.QKSMS.feature.permission.PermissionActivity"
+            android:name="com.messages.readmms.readsmss.feature.permission.PermissionActivity"
             android:exported="false"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.moez.QKSMS.feature.permission.MyTranslucentActivity"
+            android:name="com.messages.readmms.readsmss.feature.permission.MyTranslucentActivity"
             android:exported="true"
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.TransparentWindow" />
         <activity
-            android:name="com.moez.QKSMS.feature.splash.MySplashActivity"
+            android:name="com.messages.readmms.readsmss.feature.splash.MySplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -77,7 +77,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.moez.QKSMS.feature.language.LanguageSelectionActivity"
+            android:name="com.messages.readmms.readsmss.feature.language.LanguageSelectionActivity"
             android:exported="true" />
         <activity
             android:name=".feature.main.MainActivity"
@@ -189,10 +189,10 @@
         <receiver android:name=".receiver.SmsDeliveredReceiver" />
         <receiver
             android:name=".receiver.MmsSentReceiver"
-            android:taskAffinity="dev.octoshrimpy.quik.MMS_SENT" />
+            android:taskAffinity="com.messages.readmms.readsmss.MMS_SENT" />
         <receiver
             android:name=".receiver.MmsUpdatedReceiver"
-            android:taskAffinity="dev.octoshrimpy.quik.MMS_UPDATED" />
+            android:taskAffinity="com.messages.readmms.readsmss.MMS_UPDATED" />
         <receiver
             android:name=".receiver.MmsReceivedReceiver"
             android:taskAffinity="com.klinker.android.messaging.MMS_RECEIVED" />
@@ -216,7 +216,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="dev.octoshrimpy.quik.intent.action.ACTION_NOTIFY_DATASET_CHANGED" />
+                <action android:name="com.messages.readmms.readsmss.intent.action.ACTION_NOTIFY_DATASET_CHANGED" />
             </intent-filter>
 
             <meta-data
@@ -282,7 +282,7 @@
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
-            android:name="com.moez.QKSMS.callendservice.MainCallActivity"
+            android:name="com.messages.readmms.readsmss.callendservice.MainCallActivity"
             android:autoRemoveFromRecents="true"
             android:excludeFromRecents="true"
             android:exported="true"
@@ -291,7 +291,7 @@
             android:windowSoftInputMode="adjustNothing" />
 
         <receiver
-            android:name="com.moez.QKSMS.callendservice.Services.PhoneStateReceiver1"
+            android:name="com.messages.readmms.readsmss.callendservice.Services.PhoneStateReceiver1"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BROADCAST_CALL">

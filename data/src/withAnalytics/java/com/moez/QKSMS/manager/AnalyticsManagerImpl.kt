@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU General Public License
  * along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
  */
-package dev.octoshrimpy.quik.manager
+package com.messages.readmms.readsmss.manager
 
 import android.content.Context
 import com.amplitude.api.Amplitude
 import com.amplitude.api.AmplitudeClient
 import com.amplitude.api.Identify
-import dev.octoshrimpy.quik.data.BuildConfig
+import com.messages.readmms.readsmss.data.BuildConfig
 import org.json.JSONArray
 import org.json.JSONObject
 import timber.log.Timber

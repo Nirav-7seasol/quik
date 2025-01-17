@@ -36,7 +36,7 @@ android {
 
         buildConfigField "String", "AMPLITUDE_API_KEY", "\"${System.getenv("AMPLITUDE_API_KEY")}\""
     }
-    namespace 'dev.octoshrimpy.quik.data'
+    namespace 'com.messages.readmms.readsmss.data'
 }
 
 dependencies {

@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:tag="layout/cdo_time_date_picker_0">
 
-    <com.moez.QKSMS.callendservice.custom.WheelPicker
+    <com.messages.readmms.readsmss.callendservice.custom.WheelPicker
         android:id="@+id/date_picker"
         style="@style/WheelPicker"
         android:layout_width="wrap_content"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:wheel_cyclic="false" />
 
-    <com.moez.QKSMS.callendservice.custom.WheelPicker
+    <com.messages.readmms.readsmss.callendservice.custom.WheelPicker
         android:id="@+id/hour_picker"
         style="@style/WheelPicker"
         android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toEndOf="@+id/date_picker"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.moez.QKSMS.callendservice.custom.WheelPicker
+    <com.messages.readmms.readsmss.callendservice.custom.WheelPicker
         android:id="@+id/minutes_picker"
         style="@style/WheelPicker"
         android:layout_width="wrap_content"

@@ -34,7 +34,7 @@ android {
         minSdk 23
         targetSdkVersion 34
     }
-    namespace 'dev.octoshrimpy.quik.domain'
+    namespace 'com.messages.readmms.readsmss.domain'
 }
 
 dependencies {

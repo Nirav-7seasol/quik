@@ -44,7 +44,7 @@
                 android:paddingRight="24dp"
                 android:paddingBottom="16dp">
 
-                <dev.octoshrimpy.quik.common.widget.QkTextView
+                <com.messages.readmms.readsmss.common.widget.QkTextView
                     android:id="@+id/titleView"
                     style="@style/TextPrimary"
                     android:layout_width="match_parent"
@@ -52,7 +52,7 @@
                     android:duplicateParentState="true"
                     tools:text="Default SMS App" />
 
-                <dev.octoshrimpy.quik.common.widget.QkTextView
+                <com.messages.readmms.readsmss.common.widget.QkTextView
                     android:id="@+id/summaryView"
                     style="@style/TextSecondary"
                     android:layout_width="match_parent"

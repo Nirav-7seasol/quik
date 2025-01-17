@@ -4,7 +4,7 @@
     android:id="@+id/toolbar"
     style="@style/Toolbar">
 
-    <dev.octoshrimpy.quik.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.QkTextView
         android:id="@+id/toolbarTitle"
         android:visibility="visible"
         style="@style/ToolbarText"

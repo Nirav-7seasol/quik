@@ -24,7 +24,7 @@
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground">
 
-    <dev.octoshrimpy.quik.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.QkTextView
         android:id="@+id/timestamp"
         style="@style/TextSecondary"
         android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
         app:layout_constraintStart_toEndOf="@id/timestamp"
         app:layout_constraintTop_toTopOf="@id/timestamp" />
 
-    <dev.octoshrimpy.quik.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.QkTextView
         android:id="@+id/simIndex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
         tools:itemCount="1"
         tools:listitem="@layout/mms_preview_list_item" />
 
-    <dev.octoshrimpy.quik.common.widget.TightTextView
+    <com.messages.readmms.readsmss.common.widget.TightTextView
         android:id="@+id/body"
         style="@style/TextPrimary"
         android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
         app:layout_constraintTop_toTopOf="@id/cancel"
         tools:tint="@color/tools_theme" />
 
-    <dev.octoshrimpy.quik.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.QkTextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
