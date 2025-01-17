@@ -20,32 +20,33 @@ package dev.octoshrimpy.quik.feature.contacts
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
+import android.graphics.Rect
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProviders
 import com.jakewharton.rxbinding2.view.clicks
 import com.jakewharton.rxbinding2.widget.editorActions
 import com.jakewharton.rxbinding2.widget.textChanges
+import dagger.android.AndroidInjection
 import dev.octoshrimpy.quik.R
 import dev.octoshrimpy.quik.common.ViewModelFactory
 import dev.octoshrimpy.quik.common.base.QkThemedActivity
 import dev.octoshrimpy.quik.common.util.extensions.hideKeyboard
-import dev.octoshrimpy.quik.common.util.extensions.resolveThemeColor
-import dev.octoshrimpy.quik.common.util.extensions.setBackgroundTint
 import dev.octoshrimpy.quik.common.util.extensions.showKeyboard
+import dev.octoshrimpy.quik.common.util.extensions.viewBinding
 import dev.octoshrimpy.quik.common.widget.QkDialog
+import dev.octoshrimpy.quik.databinding.ContactsActivityBinding
 import dev.octoshrimpy.quik.extensions.Optional
 import dev.octoshrimpy.quik.feature.compose.editing.ComposeItem
 import dev.octoshrimpy.quik.feature.compose.editing.ComposeItemAdapter
 import dev.octoshrimpy.quik.feature.compose.editing.PhoneNumberAction
 import dev.octoshrimpy.quik.feature.compose.editing.PhoneNumberPickerAdapter
-import dagger.android.AndroidInjection
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.contacts_activity.*
 import javax.inject.Inject
+import com.moez.QKSMS.myadsworld.MyAllAdCommonClass.SmallNativeBannerLoad
+import com.moez.QKSMS.myadsworld.MyAddPrefs
 
 class ContactsActivity : QkThemedActivity(), ContactsContract {
 
@@ -58,14 +59,15 @@ class ContactsActivity : QkThemedActivity(), ContactsContract {
     @Inject lateinit var phoneNumberAdapter: PhoneNumberPickerAdapter
     @Inject lateinit var viewModelFactory: ViewModelFactory
 
-    override val queryChangedIntent: Observable<CharSequence> by lazy { search.textChanges() }
-    override val queryClearedIntent: Observable<*> by lazy { cancel.clicks() }
-    override val queryEditorActionIntent: Observable<Int> by lazy { search.editorActions() }
+    override val queryChangedIntent: Observable<CharSequence> by lazy { binding.search.textChanges() }
+    override val queryClearedIntent: Observable<*> by lazy { binding.cancel.clicks() }
+    override val queryEditorActionIntent: Observable<Int> by lazy { binding.search.editorActions() }
     override val composeItemPressedIntent: Subject<ComposeItem> by lazy { contactsAdapter.clicks }
     override val composeItemLongPressedIntent: Subject<ComposeItem> by lazy { contactsAdapter.longClicks }
     override val phoneNumberSelectedIntent: Subject<Optional<Long>> by lazy { phoneNumberAdapter.selectedItemChanges }
     override val phoneNumberActionIntent: Subject<PhoneNumberAction> = PublishSubject.create()
 
+    private val binding by viewBinding(ContactsActivityBinding::inflate)
     private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory)[ContactsViewModel::class.java] }
 
     private val phoneNumberDialog by lazy {
@@ -83,15 +85,35 @@ class ContactsActivity : QkThemedActivity(), ContactsContract {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.contacts_activity)
+        setContentView(binding.root)
+
+        binding.shimmerViewContainer.startShimmer()
+        SmallNativeBannerLoad(
+            this,
+            binding.myTemplate,
+            binding.shimmerViewContainer,
+            MyAddPrefs(this).admNativeId,
+            colors.theme().theme
+        )
+
+        binding.contentView.viewTreeObserver.addOnGlobalLayoutListener {
+            val r = Rect()
+            binding.contentView.getWindowVisibleDisplayFrame(r)
+            val screenHeight = binding.contentView.rootView.height
+            val keypadHeight = screenHeight - r.bottom
+            binding.adRl2.isVisible = (keypadHeight > screenHeight * 0.15).not()
+        }
+
         showBackButton(true)
         viewModel.bindView(this)
 
-        contacts.adapter = contactsAdapter
+        binding.contacts.adapter = contactsAdapter
+
+        // These theme attributes don't apply themselves on API 21
     }
 
     override fun render(state: ContactsState) {
-        cancel.isVisible = state.query.length > 1
+        binding.cancel.isVisible = state.query.length > 1
 
         contactsAdapter.data = state.composeItems
 
@@ -105,17 +127,17 @@ class ContactsActivity : QkThemedActivity(), ContactsContract {
     }
 
     override fun clearQuery() {
-        search.text = null
+        binding.search.text = null
     }
 
     override fun openKeyboard() {
-        search.postDelayed({
-            search.showKeyboard()
+        binding.search.postDelayed({
+            binding.search.showKeyboard()
         }, 200)
     }
 
     override fun finish(result: HashMap<String, String?>) {
-        search.hideKeyboard()
+        binding.search.hideKeyboard()
         val intent = Intent().putExtra(ChipsKey, result)
         setResult(Activity.RESULT_OK, intent)
         finish()

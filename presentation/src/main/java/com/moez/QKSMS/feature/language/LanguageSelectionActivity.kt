@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.recyclerview.widget.GridLayoutManager
 import com.moez.QKSMS.common.SharedPrefs
+import com.moez.QKSMS.feature.permission.PermissionActivity
 import com.moez.QKSMS.myadsworld.MyAddPrefs
 import com.moez.QKSMS.myadsworld.MyAllAdCommonClass.SmallNativeBannerLoad
 import dagger.android.AndroidInjection
@@ -92,8 +93,7 @@ class LanguageSelectionActivity : QkThemedActivity() {
                     finish()
                 } else {
                     if (!Settings.canDrawOverlays(this)) {
-                        //todo:open permission activity
-                        val intent = Intent(this, MainActivity::class.java)
+                        val intent = Intent(this, PermissionActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {

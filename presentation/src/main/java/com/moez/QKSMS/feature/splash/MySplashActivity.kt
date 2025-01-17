@@ -39,64 +39,63 @@ class MySplashActivity : AppCompatActivity() {
             setContentView(R.layout.activity_splash_my)
         }
 
-        myAddPrefs = MyAddPrefs(this)
-        myApplication = App()
-        MyAppOpenManager.appOpenAd = null
-
-        myGoogleMobileAdsConsentManager =
-            MyGoogleMobileAdsConsentManager.getInstance(applicationContext)
-        myGoogleMobileAdsConsentManager?.gatherConsent(
-            this
-        ) { consentError: FormError? ->
-            if (consentError != null) {
-                // Consent not obtained in current session.
-                Log.w(
-                    "GoogleConsentError",
-                    String.format(
-                        "%s: %s",
-                        consentError.errorCode,
-                        consentError.message
-                    )
-                )
-            }
-            //                        Log.e("fgfgfffgffg", "onCreate: "+AESUTIL.decrypt(AllAdCommonClass.JSON_URL) );
-            if (myGoogleMobileAdsConsentManager?.canRequestAds() == true) {
-                initializeMobileAdsSdk()
-                GoNextScren()
-            } else {
-                GoNextScren()
-            }
-        }
-
-        // This sample attempts to load ads using consent obtained in the previous session.
-        if (myGoogleMobileAdsConsentManager?.canRequestAds() == true) {
-            initializeMobileAdsSdk()
-        }
+//        myAddPrefs = MyAddPrefs(this)
+//        myApplication = App()
+//        MyAppOpenManager.appOpenAd = null
+//
+//        myGoogleMobileAdsConsentManager =
+//            MyGoogleMobileAdsConsentManager.getInstance(applicationContext)
+//        myGoogleMobileAdsConsentManager?.gatherConsent(
+//            this
+//        ) { consentError: FormError? ->
+//            if (consentError != null) {
+//                // Consent not obtained in current session.
+//                Log.w(
+//                    "GoogleConsentError",
+//                    String.format(
+//                        "%s: %s",
+//                        consentError.errorCode,
+//                        consentError.message
+//                    )
+//                )
+//            }
+//            //                        Log.e("fgfgfffgffg", "onCreate: "+AESUTIL.decrypt(AllAdCommonClass.JSON_URL) );
+//            if (myGoogleMobileAdsConsentManager?.canRequestAds() == true) {
+//                initializeMobileAdsSdk()
+//                GoNextScren()
+//            } else {
+//                GoNextScren()
+//            }
+//        }
+//
+//        // This sample attempts to load ads using consent obtained in the previous session.
+//        if (myGoogleMobileAdsConsentManager?.canRequestAds() == true) {
+//            initializeMobileAdsSdk()
+//        }
+        GoNextScren()
     }
 
     fun GoNextScren() {
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (SharedPrefs.isInitialLanguageSet) {
-                if (!Settings.canDrawOverlays(this@MySplashActivity)) {
-                    val intent = Intent(
-                        this@MySplashActivity,
-                        PermissionActivity::class.java
-                    )
-                    startActivity(intent)
-                    finish()
-                } else {
-                    val intent = Intent(
-                        this@MySplashActivity,
-                        MainActivity::class.java
-                    )
-                    startActivity(intent)
-                    finish()
-                }
+        if (SharedPrefs.isInitialLanguageSet) {
+            if (!Settings.canDrawOverlays(this@MySplashActivity)) {
+                val intent = Intent(
+                    this@MySplashActivity,
+                    PermissionActivity::class.java
+                )
+                startActivity(intent)
+                finish()
             } else {
-                MyAppOpenManager.Strcheckad = "StrClosed"
-                MySplashAppOpenAds.SplashAppOpenShow(this@MySplashActivity)
+                val intent = Intent(
+                    this@MySplashActivity,
+                    MainActivity::class.java
+                )
+                startActivity(intent)
+                finish()
             }
-        }, 1000)
+        } else {
+            MyAppOpenManager.Strcheckad = "StrClosed"
+            MySplashAppOpenAds.SplashAppOpenShow(this@MySplashActivity)
+        }
     }
 
     private fun initializeMobileAdsSdk() {

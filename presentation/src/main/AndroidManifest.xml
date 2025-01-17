@@ -73,6 +73,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.APP_MESSAGING" />
             </intent-filter>
         </activity>
         <activity
@@ -80,12 +81,11 @@
             android:exported="true" />
         <activity
             android:name=".feature.main.MainActivity"
-            android:exported="true"
-            android:launchMode="singleTask">
+            android:exported="true">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                <category android:name="android.intent.category.APP_MESSAGING" />-->
+
 <!--            </intent-filter>-->
             <meta-data
                 android:name="android.app.shortcuts"
@@ -280,6 +280,38 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
+
+        <activity
+            android:name="com.moez.QKSMS.callendservice.MainCallActivity"
+            android:autoRemoveFromRecents="true"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:theme="@style/CdoAppTheme1"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <receiver
+            android:name="com.moez.QKSMS.callendservice.Services.PhoneStateReceiver1"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_CALL">
+            <intent-filter android:priority="994">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="android.permission.ANSWER_PHONE_CALLS" />
+                <action android:name="android.permission.READ_PHONE_STATE" />
+                <action android:name="android.permission.NEW_OUTGOING_CALL" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+
+                <category android:name="com.example.autostart.CATEGORY_AUTOSTART" />
+
+                <action android:name="com.example.autostart.ACTION_IMPLICIT_BROADCAST" />
+                <action android:name="com.example.autostart.ACTION_EXPLICIT_BROADCAST" />
+                <action android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+            </intent-filter>
+        </receiver>
     </application>
 
     <queries>

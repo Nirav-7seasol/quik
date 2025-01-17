@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.moez.QKSMS.feature.language.LanguageSelectionActivity;
 import com.moez.QKSMS.common.SharedPrefs;
+import com.moez.QKSMS.feature.permission.PermissionActivity;
 
 import dev.octoshrimpy.quik.common.App;
 import dev.octoshrimpy.quik.feature.main.MainActivity;
@@ -82,8 +83,7 @@ public class MySplashAppOpenAds {
 //        }
         if (SharedPrefs.Companion.isInitialLanguageSet()) {
             if (!Settings.canDrawOverlays(activity)) {
-                //todo:open permission activity
-                Intent intent = new Intent(activity, MainActivity.class);
+                Intent intent = new Intent(activity, PermissionActivity.class);
                 activity.startActivity(intent);
                 activity.finish();
             } else {
