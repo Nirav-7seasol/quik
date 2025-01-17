@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.res.ColorStateList
 import android.view.View
 import androidx.core.view.isInvisible
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jakewharton.rxbinding2.view.clicks
 import dev.octoshrimpy.quik.R
 import dev.octoshrimpy.quik.common.base.QkController
@@ -89,13 +90,15 @@ class BlockingManagerController : QkController<BlockingManagerView, BlockingMana
     override fun siaClicked(): Observable<*> = shouldIAnswer.clicks()
 
     override fun showCopyDialog(manager: String): Single<Boolean> = Single.create { emitter ->
-        AlertDialog.Builder(activity)
+        activity?.let {
+            MaterialAlertDialogBuilder(it)
                 .setTitle(R.string.blocking_manager_copy_title)
                 .setMessage(resources?.getString(R.string.blocking_manager_copy_summary, manager))
                 .setPositiveButton(R.string.button_continue) { _, _ -> emitter.onSuccess(true) }
                 .setNegativeButton(R.string.button_cancel) { _, _ -> emitter.onSuccess(false) }
                 .setCancelable(false)
                 .show()
+        }
     }
 
 }

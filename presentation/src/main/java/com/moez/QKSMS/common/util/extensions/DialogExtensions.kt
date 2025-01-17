@@ -20,17 +20,18 @@ package dev.octoshrimpy.quik.common.util.extensions
 
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.reactivex.subjects.Subject
 
-fun AlertDialog.Builder.setPositiveButton(@StringRes textId: Int, subject: Subject<Unit>): AlertDialog.Builder {
+fun MaterialAlertDialogBuilder.setPositiveButton(@StringRes textId: Int, subject: Subject<Unit>): MaterialAlertDialogBuilder {
     return setPositiveButton(textId) { _, _ -> subject.onNext(Unit) }
 }
 
-fun AlertDialog.Builder.setNegativeButton(@StringRes textId: Int, subject: Subject<Unit>): AlertDialog.Builder {
+fun MaterialAlertDialogBuilder.setNegativeButton(@StringRes textId: Int, subject: Subject<Unit>): MaterialAlertDialogBuilder {
     return setNegativeButton(textId) { _, _ -> subject.onNext(Unit) }
 }
 
-fun AlertDialog.Builder.setNeutralButton(@StringRes textId: Int, subject: Subject<Unit>): AlertDialog.Builder {
+fun MaterialAlertDialogBuilder.setNeutralButton(@StringRes textId: Int, subject: Subject<Unit>): MaterialAlertDialogBuilder {
     return setNeutralButton(textId) { _, _ -> subject.onNext(Unit) }
 }
 

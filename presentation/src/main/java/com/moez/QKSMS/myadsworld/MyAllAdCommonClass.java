@@ -28,6 +28,7 @@ import com.google.android.gms.ads.nativead.NativeAdOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
@@ -109,7 +110,7 @@ public class MyAllAdCommonClass {
     }
 
     public static void dialogProgress(Activity context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.exitdialog_style);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context, R.style.exitdialog_style);
 
         View view = LayoutInflater.from(context).inflate(R.layout.showads_dialog, null);
         builder.setView(view);

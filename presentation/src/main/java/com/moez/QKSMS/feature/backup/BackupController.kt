@@ -24,10 +24,10 @@ import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.view.children
 import androidx.core.view.isVisible
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jakewharton.rxbinding2.view.clicks
 import com.moez.QKSMS.common.base.QkControllerWithBinding
 import com.moez.QKSMS.feature.backup.BackupAdapter
@@ -64,14 +64,14 @@ class BackupController : QkControllerWithBinding<BackupView, BackupState, Backup
         val binding = BackupListDialogBinding.inflate(LayoutInflater.from(activity))
             .apply { files.adapter = adapter.apply { emptyView = empty } }
 
-        AlertDialog.Builder(activity!!)
+        MaterialAlertDialogBuilder(activity!!)
             .setView(binding.root)
             .setCancelable(true)
             .create()
     }
 
     private val confirmRestoreDialog by lazy {
-        AlertDialog.Builder(activity!!)
+        MaterialAlertDialogBuilder(activity!!)
             .setTitle(R.string.backup_restore_confirm_title)
             .setMessage(R.string.backup_restore_confirm_message)
             .setPositiveButton(R.string.backup_restore_title, confirmRestoreSubject)
@@ -80,7 +80,7 @@ class BackupController : QkControllerWithBinding<BackupView, BackupState, Backup
     }
 
     private val stopRestoreDialog by lazy {
-        AlertDialog.Builder(activity!!)
+        MaterialAlertDialogBuilder(activity!!)
             .setTitle(R.string.backup_restore_stop_title)
             .setMessage(R.string.backup_restore_stop_message)
             .setPositiveButton(R.string.button_stop, stopRestoreSubject)

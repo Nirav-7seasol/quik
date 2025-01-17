@@ -27,6 +27,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import com.bluelinelabs.conductor.RouterTransaction
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding2.view.clicks
 import com.jakewharton.rxbinding2.view.longClicks
@@ -237,7 +238,7 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
 
     override suspend fun showAutoDeleteWarningDialog(messages: Int): Boolean = withContext(Dispatchers.Main) {
         suspendCancellableCoroutine<Boolean> { cont ->
-            AlertDialog.Builder(activity!!)
+            MaterialAlertDialogBuilder(activity!!)
                     .setTitle(R.string.settings_auto_delete_warning)
                     .setMessage(context.resources.getString(R.string.settings_auto_delete_warning_message, messages))
                     .setOnCancelListener { cont.resume(false) }

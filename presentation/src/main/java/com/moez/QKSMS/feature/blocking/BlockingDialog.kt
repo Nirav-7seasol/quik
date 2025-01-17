@@ -21,6 +21,7 @@ package dev.octoshrimpy.quik.feature.blocking
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.octoshrimpy.quik.R
 import dev.octoshrimpy.quik.blocking.BlockingClient
 import dev.octoshrimpy.quik.interactor.MarkBlocked
@@ -45,10 +46,10 @@ class BlockingDialog @Inject constructor(
 
     fun show(activity: Activity, conversationIds: List<Long>, block: Boolean) = GlobalScope.launch {
         val addresses = conversationIds.toLongArray()
-                .let { conversationRepo.getConversations(*it) }
-                .flatMap { conversation -> conversation.recipients }
-                .map { it.address }
-                .distinct()
+            .let { conversationRepo.getConversations(*it) }
+            .flatMap { conversation -> conversation.recipients }
+            .map { it.address }
+            .distinct()
 
         if (addresses.isEmpty()) {
             return@launch
@@ -57,7 +58,13 @@ class BlockingDialog @Inject constructor(
         if (blockingManager.getClientCapability() == BlockingClient.Capability.BLOCK_WITHOUT_PERMISSION) {
             // If we can block/unblock in the external manager, then just fire that off and exit
             if (block) {
-                markBlocked.execute(MarkBlocked.Params(conversationIds, prefs.blockingManager.get(), null))
+                markBlocked.execute(
+                    MarkBlocked.Params(
+                        conversationIds,
+                        prefs.blockingManager.get(),
+                        null
+                    )
+                )
                 blockingManager.block(addresses).subscribe()
             } else {
                 markUnblocked.execute(conversationIds)
@@ -67,7 +74,14 @@ class BlockingDialog @Inject constructor(
             // If all of the addresses are already in their correct state in the blocking manager, just marked the
             // conversations blocked and exit
             when (block) {
-                true -> markBlocked.execute(MarkBlocked.Params(conversationIds, prefs.blockingManager.get(), null))
+                true -> markBlocked.execute(
+                    MarkBlocked.Params(
+                        conversationIds,
+                        prefs.blockingManager.get(),
+                        null
+                    )
+                )
+
                 false -> markUnblocked.execute(conversationIds)
             }
         } else {
@@ -91,35 +105,45 @@ class BlockingDialog @Inject constructor(
             false -> R.plurals.blocking_unblock_external
         }
 
-        val manager = context.getString(when (prefs.blockingManager.get()) {
-            Preferences.BLOCKING_MANAGER_CB -> R.string.blocking_manager_call_blocker_title
-            Preferences.BLOCKING_MANAGER_CC -> R.string.blocking_manager_call_control_title
-            Preferences.BLOCKING_MANAGER_SIA -> R.string.blocking_manager_sia_title
-            else -> R.string.blocking_manager_qksms_title
-        })
+        val manager = context.getString(
+            when (prefs.blockingManager.get()) {
+                Preferences.BLOCKING_MANAGER_CB -> R.string.blocking_manager_call_blocker_title
+                Preferences.BLOCKING_MANAGER_CC -> R.string.blocking_manager_call_control_title
+                Preferences.BLOCKING_MANAGER_SIA -> R.string.blocking_manager_sia_title
+                else -> R.string.blocking_manager_qksms_title
+            }
+        )
 
         val message = context.resources.getQuantityString(res, addresses.size, manager)
 
         // Otherwise, show a dialog asking the user if they want to be directed to the external
         // blocking manager
-        AlertDialog.Builder(activity)
-                .setTitle(when (block) {
+        MaterialAlertDialogBuilder(activity)
+            .setTitle(
+                when (block) {
                     true -> R.string.blocking_block_title
                     false -> R.string.blocking_unblock_title
-                })
-                .setMessage(message)
-                .setPositiveButton(R.string.button_continue) { _, _ ->
-                    if (block) {
-                        markBlocked.execute(MarkBlocked.Params(conversationIds, prefs.blockingManager.get(), null))
-                        blockingManager.block(addresses).subscribe()
-                    } else {
-                        markUnblocked.execute(conversationIds)
-                        blockingManager.unblock(addresses).subscribe()
-                    }
                 }
-                .setNegativeButton(R.string.button_cancel) { _, _ -> }
-                .create()
-                .show()
+            )
+            .setMessage(message)
+            .setPositiveButton(R.string.button_continue) { _, _ ->
+                if (block) {
+                    markBlocked.execute(
+                        MarkBlocked.Params(
+                            conversationIds,
+                            prefs.blockingManager.get(),
+                            null
+                        )
+                    )
+                    blockingManager.block(addresses).subscribe()
+                } else {
+                    markUnblocked.execute(conversationIds)
+                    blockingManager.unblock(addresses).subscribe()
+                }
+            }
+            .setNegativeButton(R.string.button_cancel) { _, _ -> }
+            .create()
+            .show()
     }
 
 }

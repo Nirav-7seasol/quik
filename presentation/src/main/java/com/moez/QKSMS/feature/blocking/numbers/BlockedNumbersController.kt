@@ -21,6 +21,7 @@ package dev.octoshrimpy.quik.feature.blocking.numbers
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jakewharton.rxbinding2.view.clicks
 import dev.octoshrimpy.quik.R
 import dev.octoshrimpy.quik.common.base.QkController
@@ -78,7 +79,7 @@ class BlockedNumbersController : QkController<BlockedNumbersView, BlockedNumbers
     override fun showAddDialog() {
         val layout = LayoutInflater.from(activity).inflate(R.layout.blocked_numbers_add_dialog, null)
         val textWatcher = BlockedNumberTextWatcher(layout.input, phoneNumberUtils)
-        val dialog = AlertDialog.Builder(activity!!)
+        val dialog = MaterialAlertDialogBuilder(activity!!)
                 .setView(layout)
                 .setPositiveButton(R.string.blocked_numbers_dialog_block) { _, _ ->
                     saveAddressSubject.onNext(layout.input.text.toString())

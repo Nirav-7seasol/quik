@@ -20,6 +20,7 @@ package dev.octoshrimpy.quik.feature.changelog
 
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.octoshrimpy.quik.BuildConfig
 import dev.octoshrimpy.quik.R
 import dev.octoshrimpy.quik.feature.main.MainActivity
@@ -38,7 +39,7 @@ class ChangelogDialog(activity: MainActivity) {
     init {
         val layout = LayoutInflater.from(activity).inflate(R.layout.changelog_dialog, null)
 
-        dialog = AlertDialog.Builder(activity)
+        dialog = MaterialAlertDialogBuilder(activity)
                 .setCancelable(true)
                 .setView(layout)
                 .create()

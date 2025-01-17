@@ -414,7 +414,7 @@ class ComposeActivity : QkThemedActivity(), ComposeView {
 
     override fun showDeleteDialog(messages: List<Long>) {
         val count = messages.size
-        android.app.AlertDialog.Builder(this)
+        MaterialAlertDialogBuilder(this)
             .setTitle(R.string.dialog_delete_title)
             .setMessage(resources.getQuantityString(R.plurals.dialog_delete_chat, count, count))
             .setPositiveButton(R.string.button_delete) { _, _ -> confirmDeleteIntent.onNext(messages) }

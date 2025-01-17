@@ -24,6 +24,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dev.octoshrimpy.quik.R
 import dev.octoshrimpy.quik.common.base.QkController
 import dev.octoshrimpy.quik.common.util.Colors
@@ -107,12 +108,14 @@ class BlockedMessagesController : QkController<BlockedMessagesView, BlockedMessa
 
     override fun showDeleteDialog(conversations: List<Long>) {
         val count = conversations.size
-        AlertDialog.Builder(activity)
+        activity?.let {
+            MaterialAlertDialogBuilder(it)
                 .setTitle(R.string.dialog_delete_title)
                 .setMessage(resources?.getQuantityString(R.plurals.dialog_delete_message, count, count))
                 .setPositiveButton(R.string.button_delete) { _, _ -> confirmDeleteIntent.onNext(conversations) }
                 .setNegativeButton(R.string.button_cancel, null)
                 .show()
+        }
     }
 
     override fun goBack() {
