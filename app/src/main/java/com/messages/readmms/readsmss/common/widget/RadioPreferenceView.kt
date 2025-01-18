@@ -56,7 +56,7 @@ class RadioPreferenceView @JvmOverloads constructor(
         }
 
         View.inflate(context, R.layout.radio_preference_view, this)
-        setBackgroundResource(context.resolveThemeAttribute(R.attr.selectableItemBackground))
+        setBackgroundResource(context.resolveThemeAttribute(android.R.attr.selectableItemBackground))
 
         val states = arrayOf(
                 intArrayOf(android.R.attr.state_checked),

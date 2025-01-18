@@ -4,21 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.provider.Settings;
 import android.util.Log;
 
-import com.messages.readmms.readsmss.feature.language.LanguageSelectionActivity;
-import com.messages.readmms.readsmss.common.SharedPrefs;
-import com.messages.readmms.readsmss.feature.permission.PermissionActivity;
-
 import com.messages.readmms.readsmss.common.App;
-import com.messages.readmms.readsmss.feature.main.MainActivity;
+import com.messages.readmms.readsmss.common.SharedPrefs;
 
 public class MySplashAppOpenAds {
     private static int counter = 0;
     static boolean loaded = false;
 
-    public static void SplashAppOpenShow(Activity SplashActivity) {
+    public static void SplashAppOpenShow(Activity SplashActivity, Intent targetIntent) {
         MyAddPrefs appPreferences = new MyAddPrefs(SplashActivity);
         if (App.Companion.isConnected(SplashActivity) && !appPreferences.getAdmAppOpenId().isEmpty()) {
 
@@ -43,15 +38,15 @@ public class MySplashAppOpenAds {
                         MyAppOpenManager.showAdIfAvailableAds(SplashActivity, new onInterCloseCallBack() {
                             @Override
                             public void onAdsClose() {
-
-                                goToNextStep(SplashActivity);
+                                SharedPrefs.Companion.setFirstAppOpenPending(false);
+                                goToNextStep(SplashActivity, targetIntent);
                             }
                         });
                     } else if (!loaded) {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                goToNextStep(SplashActivity);
+                                goToNextStep(SplashActivity, targetIntent);
                             }
                         }, 500);
                     }
@@ -64,37 +59,24 @@ public class MySplashAppOpenAds {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    goToNextStep(SplashActivity);
+                    goToNextStep(SplashActivity, targetIntent);
                 }
             }, 500);
         }
     }
 
 
-    static void goToNextStep(Activity activity) {
-//        if (SharedPrefs.Companion.isInitialLanguageSet()) {
-//            Intent intent = new Intent(activity, MainActivity.class);
+    static void goToNextStep(Activity activity, Intent intent) {
+        activity.startActivity(intent);
+        activity.finish();
+//        if (!Settings.canDrawOverlays(activity)) {
+//            Intent intent = new Intent(activity, PermissionActivity.class);
 //            activity.startActivity(intent);
 //            activity.finish();
 //        } else {
-//            Intent intent = new Intent(activity, LanguageSelectionActivity.class);
+//            Intent intent = new Intent(activity, MainActivity.class);
 //            activity.startActivity(intent);
 //            activity.finish();
 //        }
-        if (SharedPrefs.Companion.isInitialLanguageSet()) {
-            if (!Settings.canDrawOverlays(activity)) {
-                Intent intent = new Intent(activity, PermissionActivity.class);
-                activity.startActivity(intent);
-                activity.finish();
-            } else {
-                Intent intent = new Intent(activity, MainActivity.class);
-                activity.startActivity(intent);
-                activity.finish();
-            }
-        } else {
-            Intent intent = new Intent(activity, LanguageSelectionActivity.class);
-            activity.startActivity(intent);
-            activity.finish();
-        }
     }
 }

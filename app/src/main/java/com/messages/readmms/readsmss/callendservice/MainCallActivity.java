@@ -1,5 +1,7 @@
 package com.messages.readmms.readsmss.callendservice;
 
+import static com.messages.readmms.readsmss.callendservice.utils.AdsKt.loadBanner;
+
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.PorterDuff;
@@ -15,8 +17,11 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.messages.readmms.readsmss.R;
 import com.messages.readmms.readsmss.callendservice.adapter.CallerScreenAdapter;
 import com.messages.readmms.readsmss.callendservice.interfaces.OnKeyboardOpenListener;
 import com.messages.readmms.readsmss.callendservice.model.ContactCDO;
@@ -24,16 +29,13 @@ import com.messages.readmms.readsmss.callendservice.utils.AppUtils;
 import com.messages.readmms.readsmss.callendservice.utils.CDOUtiler;
 import com.messages.readmms.readsmss.callendservice.utils.ConstantsKt;
 import com.messages.readmms.readsmss.callendservice.utils.Utils;
-import com.messages.readmms.readsmss.myadsworld.MyAddPrefs;
+import com.messages.readmms.readsmss.common.App;
+import com.messages.readmms.readsmss.databinding.ActivityMainCallBinding;
 import com.messages.readmms.readsmss.myadsworld.MyAllAdCommonClass;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
-import com.messages.readmms.readsmss.R;
-import com.messages.readmms.readsmss.common.App;
-import com.messages.readmms.readsmss.databinding.ActivityMainCallBinding;
 
 public final class MainCallActivity extends BaseActivity implements OnKeyboardOpenListener {
     private ActivityMainCallBinding binding;
@@ -49,8 +51,14 @@ public final class MainCallActivity extends BaseActivity implements OnKeyboardOp
         super.onCreate(bundle);
         binding = ActivityMainCallBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        loadNativeOrBannerAds();
-
+//        loadNativeOrBannerAds();
+        loadBanner(
+                binding.bannerShimmer,
+                new AdView(MainCallActivity.this),
+                binding.framBanner,
+                this,
+                AdSize.MEDIUM_RECTANGLE
+        );
         setThemeData();
         init();
         UIComponent();
@@ -61,14 +69,16 @@ public final class MainCallActivity extends BaseActivity implements OnKeyboardOp
                 if (App.Companion.isConnected(MainCallActivity.this)) {
                     if (z) {
                         Log.i("MAIN::KEY", "OPEN :: " + z);
-                        binding.cardBottom.setVisibility(View.GONE);
+                        binding.cardAds.setVisibility(View.GONE);
                         return;
                     }
                     Log.i("MAIN::KEY", "OPEN :: " + z);
-                    binding.cardBottom.setVisibility(View.VISIBLE);
+                    binding.cardAds.setVisibility(View.VISIBLE);
                 }
             }
         });
+
+        setSecondPage();
     }
 
     private final void setThemeData() {
@@ -241,27 +251,6 @@ public final class MainCallActivity extends BaseActivity implements OnKeyboardOp
         });
     }
 
-    private final void loadNativeOrBannerAds() {
-        CDOUtiler.initializeAllAdsConfigs(this);
-
-        try {
-            if (MyAllAdCommonClass.loadednative != null) {
-                Log.e("package:mine FullScreenBannerAds", "loadNativeOrBannerAds: isCDOBannerAvailable showFullScreenBannerAds");
-                binding.myTemplate.setVisibility(View.VISIBLE);
-                binding.shimmerViewContainer.setVisibility(View.GONE);
-                binding.myTemplate.setNativeAd(MyAllAdCommonClass.loadednative, new MyAddPrefs(MainCallActivity.this).getButtonColor());
-                MyAllAdCommonClass.isnativeload = true;
-                return;
-            }
-            binding.shimmerViewContainer.startShimmer();
-            MyAllAdCommonClass.SmallNativeBannerLoad(this, binding.myTemplate, binding.shimmerViewContainer,
-                    new MyAddPrefs(this).getAdmCallEndNativeId(),
-                    ContextCompat.getColor(MainCallActivity.this, R.color.tools_theme));
-        } catch (Exception e2) {
-            e2.printStackTrace();
-        }
-    }
-
     @Override
     public void onBackPressed() {
         finish();
@@ -294,10 +283,10 @@ public final class MainCallActivity extends BaseActivity implements OnKeyboardOp
     public void onKeyBoardIsOpen(boolean z) {
         if (z) {
             Log.i("MAIN::KEY", "OPEN :: " + z);
-            binding.cardBottom.setVisibility(View.GONE);
+            binding.cardAds.setVisibility(View.GONE);
             return;
         }
         Log.i("MAIN::KEY", "OPEN :: " + z);
-        binding.cardBottom.setVisibility(View.VISIBLE);
+        binding.cardAds.setVisibility(View.VISIBLE);
     }
 }

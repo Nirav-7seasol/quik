@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/recipients"
         style="@style/TextPrimary"
         android:layout_width="0dp"
@@ -34,7 +34,7 @@
         app:textSize="secondary"
         tools:text="@tools:sample/full_names" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/date"
         style="@style/TextSecondary"
         android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@id/recipients"
         tools:text="Oct 11" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/body"
         style="@style/TextPrimary"
         android:layout_width="0dp"

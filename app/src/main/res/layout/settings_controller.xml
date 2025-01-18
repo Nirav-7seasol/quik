@@ -16,7 +16,7 @@
         android:paddingTop="8dp"
         android:paddingBottom="8dp">
 
-        <com.messages.readmms.readsmss.common.widget.QkTextView
+        <com.messages.readmms.readsmss.common.widget.MyTextView
             style="@style/PreferenceCategory"
             android:text="@string/settings_category_appearance" />
 
@@ -90,7 +90,7 @@
             android:layout_marginBottom="8dp"
             android:background="?android:attr/divider" />
 
-        <com.messages.readmms.readsmss.common.widget.QkTextView
+        <com.messages.readmms.readsmss.common.widget.MyTextView
             style="@style/PreferenceCategory"
             android:text="@string/settings_category_general" />
 

@@ -6,76 +6,82 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.android.gms.ads.MobileAds
-import com.google.android.ump.FormError
-import com.messages.readmms.readsmss.feature.permission.PermissionActivity
-import com.messages.readmms.readsmss.common.SharedPrefs
-import com.messages.readmms.readsmss.myadsworld.MyAddPrefs
-import com.messages.readmms.readsmss.myadsworld.MyAppOpenManager
-import com.messages.readmms.readsmss.myadsworld.MyGoogleMobileAdsConsentManager
-import com.messages.readmms.readsmss.myadsworld.MySplashAppOpenAds
 import com.messages.readmms.readsmss.R
 import com.messages.readmms.readsmss.common.App
+import com.messages.readmms.readsmss.common.AppOpenAdListener
+import com.messages.readmms.readsmss.common.AppOpenCloseListener
+import com.messages.readmms.readsmss.common.SharedPrefs
+import com.messages.readmms.readsmss.feature.language.LanguageSelectionActivity
 import com.messages.readmms.readsmss.feature.main.MainActivity
+import com.messages.readmms.readsmss.feature.permission.PermissionActivity
+import com.messages.readmms.readsmss.myadsworld.MyAppOpenManager
 import java.util.concurrent.atomic.AtomicBoolean
 
-class MySplashActivity : AppCompatActivity() {
+class MySplashActivity : com.messages.readmms.readsmss.callendservice.BaseActivity() {
 
-    var myApplication: App? = null
-    var myGoogleMobileAdsConsentManager: MyGoogleMobileAdsConsentManager? = null
     private val isMobileAdsInitializeCalled = AtomicBoolean(false)
 
-    var myAddPrefs: MyAddPrefs? = null
+    private val splashDuration: Long = 5000 // 3 seconds
+    private var isAdLoaded = false
+    private val handler = Handler(Looper.getMainLooper())
+    private var isAdLoading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.S) {
-            installSplashScreen()
-                .setKeepOnScreenCondition { true }
-        } else {
+        if (SharedPrefs.isFirstAppOpenPending) {
+            initializeMobileAdsSdk()
             setContentView(R.layout.activity_splash_my)
+            handler.postDelayed({
+                if (!isAdLoaded) {
+                    navigateToNextScreen()
+                }
+            }, splashDuration)
+        } else {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.S) {
+                installSplashScreen()
+                    .setKeepOnScreenCondition { true }
+            } else {
+                setContentView(R.layout.activity_splash_my)
+            }
+            navigateToNextScreen()
         }
-
-//        myAddPrefs = MyAddPrefs(this)
-//        myApplication = App()
-//        MyAppOpenManager.appOpenAd = null
-//
-//        myGoogleMobileAdsConsentManager =
-//            MyGoogleMobileAdsConsentManager.getInstance(applicationContext)
-//        myGoogleMobileAdsConsentManager?.gatherConsent(
-//            this
-//        ) { consentError: FormError? ->
-//            if (consentError != null) {
-//                // Consent not obtained in current session.
-//                Log.w(
-//                    "GoogleConsentError",
-//                    String.format(
-//                        "%s: %s",
-//                        consentError.errorCode,
-//                        consentError.message
-//                    )
-//                )
-//            }
-//            //                        Log.e("fgfgfffgffg", "onCreate: "+AESUTIL.decrypt(AllAdCommonClass.JSON_URL) );
-//            if (myGoogleMobileAdsConsentManager?.canRequestAds() == true) {
-//                initializeMobileAdsSdk()
-//                GoNextScren()
-//            } else {
-//                GoNextScren()
-//            }
-//        }
-//
-//        // This sample attempts to load ads using consent obtained in the previous session.
-//        if (myGoogleMobileAdsConsentManager?.canRequestAds() == true) {
-//            initializeMobileAdsSdk()
-//        }
-        GoNextScren()
     }
 
-    fun GoNextScren() {
+    private fun initializeMobileAdsSdk() {
+        if (isMobileAdsInitializeCalled.getAndSet(true)) {
+            return
+        }
+        MobileAds.initialize(
+            this
+        ) {
+            if (isAdLoading) {
+                return@initialize
+            }
+            isAdLoading = true
+            App.adLoaded = {
+                isAdLoaded = true
+                handler.removeCallbacksAndMessages(null)
+                MyAppOpenManager.showAd(object : AppOpenCloseListener {
+                    override fun adClosed() {
+                        navigateToNextScreen()
+                    }
+                })
+                SharedPrefs.isFirstAppOpenPending = false
+                MyAppOpenManager.appOpenAdListener = null
+            }
+            App.adFailed = {
+                handler.removeCallbacksAndMessages(null)
+                navigateToNextScreen()
+                SharedPrefs.isFirstAppOpenPending = false
+                MyAppOpenManager.appOpenAdListener = null
+            }
+        }
+    }
+
+    private fun navigateToNextScreen() {
+        MyAppOpenManager.appOpenAdListener = null
         if (SharedPrefs.isInitialLanguageSet) {
             if (!Settings.canDrawOverlays(this@MySplashActivity)) {
                 val intent = Intent(
@@ -93,21 +99,17 @@ class MySplashActivity : AppCompatActivity() {
                 finish()
             }
         } else {
-            MyAppOpenManager.Strcheckad = "StrClosed"
-            MySplashAppOpenAds.SplashAppOpenShow(this@MySplashActivity)
+            val intent = Intent(
+                this@MySplashActivity,
+                LanguageSelectionActivity::class.java
+            )
+            startActivity(intent)
+            finish()
         }
     }
 
-    private fun initializeMobileAdsSdk() {
-        if (isMobileAdsInitializeCalled.getAndSet(true)) {
-            return
-        }
-        // Initialize the Mobile Ads SDK.
-        MobileAds.initialize(
-            this
-        ) { // Load an ad.
-            //                        loadAd();
-            App.ctx.loadAppOpen()
-        }
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacksAndMessages(null)
     }
 }

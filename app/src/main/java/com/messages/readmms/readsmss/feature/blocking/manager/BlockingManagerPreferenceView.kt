@@ -58,7 +58,7 @@ class BlockingManagerPreferenceView @JvmOverloads constructor(
 
     init {
         View.inflate(context, R.layout.blocking_manager_preference_view, this)
-        setBackgroundResource(context.resolveThemeAttribute(R.attr.selectableItemBackground))
+        setBackgroundResource(context.resolveThemeAttribute(android.R.attr.selectableItemBackground))
 
         context.obtainStyledAttributes(attrs, R.styleable.BlockingManagerPreferenceView).run {
             icon = getDrawable(R.styleable.BlockingManagerPreferenceView_icon)

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground">
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/empty"
         style="@style/TextSecondary"
         android:layout_width="match_parent"

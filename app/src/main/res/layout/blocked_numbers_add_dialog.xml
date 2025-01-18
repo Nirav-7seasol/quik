@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -16,7 +16,7 @@
         android:textColor="?android:attr/textColorPrimary"
         app:textSize="dialog" />
 
-    <com.messages.readmms.readsmss.common.widget.QkEditText
+    <com.messages.readmms.readsmss.common.widget.MyEditText
         android:id="@+id/input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

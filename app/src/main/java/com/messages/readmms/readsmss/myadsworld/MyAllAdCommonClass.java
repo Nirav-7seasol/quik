@@ -126,26 +126,31 @@ public class MyAllAdCommonClass {
         myListener = myListenerData;
 
         if (mInterstitialAd != null) {
-            mInterstitialAd.show(context);
-            mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    myListener.callback();
-                    isAppOpenshowornot = false;
-                }
+            try {
+                mInterstitialAd.show(context);
+                mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                    @Override
+                    public void onAdDismissedFullScreenContent() {
+                        myListener.callback();
+                        isAppOpenshowornot = false;
+                    }
 
-                @Override
-                public void onAdFailedToShowFullScreenContent(AdError adError) {
-                    myListener.callback();
-                    isAppOpenshowornot = false;
-                }
+                    @Override
+                    public void onAdFailedToShowFullScreenContent(AdError adError) {
+                        myListener.callback();
+                        isAppOpenshowornot = false;
+                    }
 
-                @Override
-                public void onAdShowedFullScreenContent() {
-                    mInterstitialAd = null;
-                    isAppOpenshowornot = true;
-                }
-            });
+                    @Override
+                    public void onAdShowedFullScreenContent() {
+                        mInterstitialAd = null;
+                        isAppOpenshowornot = true;
+                    }
+                });
+            } catch (Exception e) {
+                Log.e("TAG1212", "AdShowdialogFirstActivityQue: ");
+                throw new RuntimeException(e);
+            }
         } else {
 
             dialogProgress(context);

@@ -13,7 +13,7 @@ import com.messages.readmms.readsmss.injection.appComponent
 import com.messages.readmms.readsmss.util.Preferences
 import javax.inject.Inject
 
-class QkSwitch @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : SwitchCompat(context, attrs) {
+class MySwitch @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : SwitchCompat(context, attrs) {
 
     @Inject lateinit var colors: Colors
     @Inject lateinit var prefs: Preferences

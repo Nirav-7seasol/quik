@@ -20,11 +20,11 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
                 android:src="@drawable/app_logo" />
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
@@ -33,7 +33,7 @@
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"/>
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 android:id="@+id/versionName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:src="@drawable/ic_inbox_black_24dp"
                 tools:tint="@color/tools_theme" />
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 style="@style/DrawerText"
                 android:text="@string/drawer_inbox" />
 
@@ -70,7 +70,7 @@
                 android:src="@drawable/ic_archive_white_24dp"
                 app:tint="?attr/iconTintSolid" />
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 style="@style/DrawerText"
                 android:text="@string/drawer_archived" />
 
@@ -92,7 +92,7 @@
                 android:src="@drawable/ic_import_export_black_24dp"
                 app:tint="?attr/iconTintSolid" />
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 style="@style/DrawerText"
                 android:text="@string/backup_title" />
 
@@ -107,7 +107,7 @@
                 android:src="@drawable/ic_event_black_24dp"
                 app:tint="?attr/iconTintSolid" />
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 style="@style/DrawerText"
                 android:text="@string/drawer_scheduled" />
 
@@ -122,7 +122,7 @@
                 android:src="@drawable/ic_block_white_24dp"
                 app:tint="?attr/iconTintSolid" />
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 style="@style/DrawerText"
                 android:text="@string/drawer_blocking" />
 
@@ -137,7 +137,7 @@
                 android:src="@drawable/ic_translate_black_24dp"
                 app:tint="?attr/iconTintSolid" />
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 style="@style/DrawerText"
                 android:text="@string/change_language" />
 
@@ -159,7 +159,7 @@
                 android:src="@drawable/ic_settings_black_24dp"
                 app:tint="?attr/iconTintSolid" />
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 style="@style/DrawerText"
                 android:text="@string/drawer_settings" />
 
@@ -175,7 +175,7 @@
                 android:src="@drawable/ic_help_black_24dp"
                 app:tint="?attr/iconTintSolid" />
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 style="@style/DrawerText"
                 android:text="@string/drawer_help" />
 
@@ -190,7 +190,7 @@
                 android:src="@drawable/ic_people_black_24dp"
                 app:tint="?attr/iconTintSolid"/>
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 style="@style/DrawerText"
                 android:text="@string/drawer_invite" />
 
@@ -205,7 +205,7 @@
                 android:src="@drawable/ic_star_black_24dp"
                 app:tint="?attr/iconTintSolid" />
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 style="@style/DrawerText"
                 android:text="@string/rate_us" />
 

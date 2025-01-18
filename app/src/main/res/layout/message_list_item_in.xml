@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground">
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/timestamp"
         style="@style/TextSecondary"
         android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
         app:layout_constraintStart_toEndOf="@id/timestamp"
         app:layout_constraintTop_toTopOf="@id/timestamp" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/simIndex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
         tools:backgroundTint="@color/tools_theme"
         tools:text="@tools:sample/lorem/random" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

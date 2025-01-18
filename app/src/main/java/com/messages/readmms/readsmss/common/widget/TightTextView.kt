@@ -7,7 +7,7 @@ import android.util.AttributeSet
 class TightTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null
-) : QkTextView(context, attrs) {
+) : MyTextView(context, attrs) {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)

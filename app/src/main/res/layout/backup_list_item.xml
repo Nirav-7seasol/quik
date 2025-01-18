@@ -11,7 +11,7 @@
     android:paddingEnd="24dp"
     android:paddingBottom="8dp">
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         app:textSize="secondary"
         tools:text="5/7/18 4:18 PM" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/messages"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         app:textSize="secondary"
         tools:text="72,302 messages" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

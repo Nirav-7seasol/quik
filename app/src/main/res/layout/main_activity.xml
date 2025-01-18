@@ -45,7 +45,7 @@
                 app:layout_constraintTop_toBottomOf="@id/toolbar"
                 app:lottie_autoPlay="true" />
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 android:id="@+id/empty"
                 style="@style/TextSecondary"
                 android:layout_width="match_parent"
@@ -93,11 +93,12 @@
                 android:id="@+id/compose"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:layout_margin="16dp"
+                android:layout_margin="@dimen/_20sdp"
                 android:background="@drawable/circle_ripple"
                 android:contentDescription="@string/main_fab_cd"
                 android:elevation="8dp"
                 android:padding="16dp"
+                android:visibility="gone"
                 android:src="@drawable/ic_add_black_24dp"
                 app:backgroundTint="@color/tools_theme"
                 app:layout_constraintBottom_toTopOf="@id/bottom"

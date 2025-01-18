@@ -23,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/fileBackground" />
 
-        <com.messages.readmms.readsmss.common.widget.QkTextView
+        <com.messages.readmms.readsmss.common.widget.MyTextView
             android:id="@+id/filename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             app:textSize="primary"
             tools:text="Resume.pdf" />
 
-        <com.messages.readmms.readsmss.common.widget.QkTextView
+        <com.messages.readmms.readsmss.common.widget.MyTextView
             android:id="@+id/size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

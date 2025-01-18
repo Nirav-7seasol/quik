@@ -8,7 +8,7 @@ import com.messages.readmms.readsmss.common.util.TextViewStyler
 import com.messages.readmms.readsmss.injection.appComponent
 import javax.inject.Inject
 
-open class QkTextView @JvmOverloads constructor(
+open class MyTextView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : EmojiAppCompatTextView(context, attrs) {
 

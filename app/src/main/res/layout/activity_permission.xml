@@ -25,7 +25,7 @@
             android:adjustViewBounds="true"
             android:src="@drawable/ic_guide_vect" />
 
-        <com.messages.readmms.readsmss.common.widget.QkTextView
+        <com.messages.readmms.readsmss.common.widget.MyTextView
             style="@style/ToolbarText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold" />
 
-        <com.messages.readmms.readsmss.common.widget.QkTextView
+        <com.messages.readmms.readsmss.common.widget.MyTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/google"
@@ -54,7 +54,7 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
-        <com.messages.readmms.readsmss.common.widget.QkTextView
+        <com.messages.readmms.readsmss.common.widget.MyTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/google"
@@ -82,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.messages.readmms.readsmss.common.widget.QkTextView
+                    <com.messages.readmms.readsmss.common.widget.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/google"
@@ -92,7 +92,7 @@
                         android:textColor="@color/tools_theme"
                         android:textSize="@dimen/_12ssp" />
 
-                    <com.messages.readmms.readsmss.common.widget.QkTextView
+                    <com.messages.readmms.readsmss.common.widget.MyTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/google"
@@ -109,7 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.messages.readmms.readsmss.common.widget.QkTextView
+                    <com.messages.readmms.readsmss.common.widget.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/google"
@@ -119,7 +119,7 @@
                         android:textColor="@color/tools_theme"
                         android:textSize="@dimen/_12ssp" />
 
-                    <com.messages.readmms.readsmss.common.widget.QkTextView
+                    <com.messages.readmms.readsmss.common.widget.MyTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/google"
@@ -136,7 +136,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.messages.readmms.readsmss.common.widget.QkTextView
+                    <com.messages.readmms.readsmss.common.widget.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/google"
@@ -146,7 +146,7 @@
                         android:textColor="@color/tools_theme"
                         android:textSize="@dimen/_12ssp" />
 
-                    <com.messages.readmms.readsmss.common.widget.QkTextView
+                    <com.messages.readmms.readsmss.common.widget.MyTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/google"

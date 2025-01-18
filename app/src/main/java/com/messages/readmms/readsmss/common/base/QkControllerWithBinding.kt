@@ -10,10 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.viewbinding.ViewBinding
 import com.bluelinelabs.conductor.archlifecycle.LifecycleController
 import com.messages.readmms.readsmss.R
-import com.messages.readmms.readsmss.common.base.QkPresenter
-import com.messages.readmms.readsmss.common.base.QkThemedActivity
-import com.messages.readmms.readsmss.common.base.QkViewContract
-import com.messages.readmms.readsmss.common.widget.QkTextView
+import com.messages.readmms.readsmss.common.widget.MyTextView
 
 abstract class QkControllerWithBinding<ViewContract : QkViewContract<State>, State : Any, Presenter : QkPresenter<ViewContract, State>, Binding : ViewBinding>(
     private val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> Binding
@@ -28,7 +25,7 @@ abstract class QkControllerWithBinding<ViewContract : QkViewContract<State>, Sta
         get() = activity as? QkThemedActivity
 
     private val toolbar by lazy { view?.findViewById<Toolbar>(R.id.toolbar) }
-    private val toolbarTitle by lazy { view?.findViewById<QkTextView>(R.id.toolbarTitle) }
+    private val toolbarTitle by lazy { view?.findViewById<MyTextView>(R.id.toolbarTitle) }
 
     lateinit var binding: Binding
 

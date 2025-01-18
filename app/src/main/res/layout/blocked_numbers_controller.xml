@@ -17,7 +17,7 @@
         android:paddingBottom="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

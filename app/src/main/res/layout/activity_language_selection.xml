@@ -20,7 +20,7 @@
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:gravity="center_vertical">
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -29,7 +29,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 android:id="@+id/btnNext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

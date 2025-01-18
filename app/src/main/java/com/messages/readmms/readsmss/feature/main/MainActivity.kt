@@ -1,16 +1,13 @@
-
 package com.messages.readmms.readsmss.feature.main
 
 import android.Manifest
 import android.animation.ObjectAnimator
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.content.res.ColorStateList
 import android.graphics.Rect
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -21,7 +18,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
-import android.view.ViewStub
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -30,7 +26,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -40,6 +35,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateInfo
@@ -50,16 +46,16 @@ import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
+import com.google.android.ump.FormError
 import com.jakewharton.rxbinding2.view.clicks
-import com.jakewharton.rxbinding2.widget.textChanges
-import com.messages.readmms.readsmss.common.hide
-import com.messages.readmms.readsmss.common.show
-import com.messages.readmms.readsmss.myadsworld.MyAddPrefs
-import com.messages.readmms.readsmss.myadsworld.MyAllAdCommonClass
+import com.messages.readmms.readsmss.BuildConfig
 import com.messages.readmms.readsmss.R
+import com.messages.readmms.readsmss.common.App
 import com.messages.readmms.readsmss.common.Navigator
 import com.messages.readmms.readsmss.common.androidxcompat.drawerOpen
 import com.messages.readmms.readsmss.common.base.QkThemedActivity
+import com.messages.readmms.readsmss.common.hide
+import com.messages.readmms.readsmss.common.show
 import com.messages.readmms.readsmss.common.util.extensions.autoScrollToStart
 import com.messages.readmms.readsmss.common.util.extensions.dismissKeyboard
 import com.messages.readmms.readsmss.common.util.extensions.resolveThemeColor
@@ -67,26 +63,26 @@ import com.messages.readmms.readsmss.common.util.extensions.scrapViews
 import com.messages.readmms.readsmss.common.util.extensions.setBackgroundTint
 import com.messages.readmms.readsmss.common.util.extensions.setTint
 import com.messages.readmms.readsmss.common.util.extensions.setVisible
+import com.messages.readmms.readsmss.common.util.extensions.viewBinding
+import com.messages.readmms.readsmss.databinding.MainActivityBinding
 import com.messages.readmms.readsmss.feature.blocking.BlockingDialog
 import com.messages.readmms.readsmss.feature.changelog.ChangelogDialog
 import com.messages.readmms.readsmss.feature.conversations.ConversationItemTouchCallback
 import com.messages.readmms.readsmss.feature.conversations.ConversationsAdapter
 import com.messages.readmms.readsmss.manager.ChangelogManager
+import com.messages.readmms.readsmss.myadsworld.MyAddPrefs
+import com.messages.readmms.readsmss.myadsworld.MyAllAdCommonClass
+import com.messages.readmms.readsmss.myadsworld.MyAppOpenManager
+import com.messages.readmms.readsmss.myadsworld.MyGoogleMobileAdsConsentManager
 import com.messages.readmms.readsmss.repository.SyncRepository
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDisposable
 import dagger.android.AndroidInjection
-import com.messages.readmms.readsmss.BuildConfig
-import com.messages.readmms.readsmss.common.util.extensions.viewBinding
-import com.messages.readmms.readsmss.databinding.MainActivityBinding
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.android.synthetic.main.drawer_view.*
-import kotlinx.android.synthetic.main.main_activity.*
-import kotlinx.android.synthetic.main.main_permission_hint.*
-import kotlinx.android.synthetic.main.main_syncing.*
+import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
 class MainActivity : QkThemedActivity(), MainView {
@@ -242,7 +238,6 @@ class MainActivity : QkThemedActivity(), MainView {
         val item = binding.toolbar.menu.findItem(R.id.action_search)
         val searchView = item?.actionView as? SearchView
         searchView?.isEnabled = isPrimaryViewsEnabled
-        binding.compose.isVisible = isPrimaryViewsEnabled
         if (isPrimaryViewsEnabled) {
             binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
         } else {
@@ -250,19 +245,38 @@ class MainActivity : QkThemedActivity(), MainView {
         }
     }
 
-    private fun isPrimaryViewsEnabled() = binding.snackbar.root.isVisible.not() && binding.syncing.root.isVisible.not()
+    private fun isPrimaryViewsEnabled() =
+        binding.snackbar.root.isVisible.not() && binding.syncing.root.isVisible.not()
 
     private fun initAds() {
-        val shimmer = Shimmer.AlphaHighlightBuilder() // The builder for a ShimmerDrawable
-            .setDuration(1800) // how long the shimmering animation takes to do one full sweep
-            .setBaseAlpha(0.9f) // the alpha of the underlying children
-            .setHighlightAlpha(0.8f) // the shimmer alpha amount
-            .setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
-            .setAutoStart(true)
-            .build()
+        MyAppOpenManager.appOpenAd = null
 
-//        navigator.showDefaultSmsDialog(this)
-        binding.bannerShimmer.setShimmer(shimmer)
+        val myGoogleMobileAdsConsentManager =
+            MyGoogleMobileAdsConsentManager.getInstance(applicationContext)
+        myGoogleMobileAdsConsentManager?.gatherConsent(
+            this
+        ) { consentError: FormError? ->
+            if (consentError != null) {
+                // Consent not obtained in current session.
+                Log.w(
+                    "GoogleConsentError",
+                    String.format(
+                        "%s: %s",
+                        consentError.errorCode,
+                        consentError.message
+                    )
+                )
+            }
+            //                        Log.e("fgfgfffgffg", "onCreate: "+AESUTIL.decrypt(AllAdCommonClass.JSON_URL) );
+            if (myGoogleMobileAdsConsentManager?.canRequestAds() == true) {
+                initializeMobileAdsSdk()
+            }
+        }
+
+        // This sample attempts to load ads using consent obtained in the previous session.
+        if (myGoogleMobileAdsConsentManager?.canRequestAds() == true) {
+            initializeMobileAdsSdk()
+        }
 
         loadBanner()
 
@@ -279,17 +293,45 @@ class MainActivity : QkThemedActivity(), MainView {
                 binding.cardAds.show()
             }
         }
+        if (intent.getBooleanExtra("showInter", false)) {
+            MyAllAdCommonClass.AdShowdialogFirstActivityQue(this) {}
+        }
+    }
+
+    private val isMobileAdsInitializeCalled = AtomicBoolean(false)
+
+    private fun initializeMobileAdsSdk() {
+        if (isMobileAdsInitializeCalled.getAndSet(true)) {
+            return
+        }
+        // Initialize the Mobile Ads SDK.
+        MobileAds.initialize(
+            this
+        ) { // Load an ad.
+            //                        loadAd();
+            App.ctx.loadAppOpen()
+        }
     }
 
     private fun loadBanner() {
+        val shimmer = Shimmer.AlphaHighlightBuilder() // The builder for a ShimmerDrawable
+            .setDuration(1800) // how long the shimmering animation takes to do one full sweep
+            .setBaseAlpha(0.9f) // the alpha of the underlying children
+            .setHighlightAlpha(0.8f) // the shimmer alpha amount
+            .setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
+            .setAutoStart(true)
+            .build()
+
+//        navigator.showDefaultSmsDialog(this)
+        binding.bannerShimmer.setShimmer(shimmer)
         adView = AdView(this)
-        adView!!.adUnitId = (MyAddPrefs(this).admBannerId)
+        adView?.adUnitId = (MyAddPrefs(this).admBannerId)
         binding.framBanner.addView(adView)
         val adSize: AdSize = getAdSize()
-        adView!!.setAdSize(adSize)
+        adView?.setAdSize(adSize)
         val adRequest = AdRequest.Builder().build()
-        adView!!.loadAd(adRequest)
-        adView!!.setAdListener(object : AdListener() {
+        adView?.loadAd(adRequest)
+        adView?.adListener = object : AdListener() {
             override fun onAdFailedToLoad(loadAdError: LoadAdError) {
                 super.onAdFailedToLoad(loadAdError)
                 binding.bannerShimmer.visibility = GONE
@@ -301,7 +343,7 @@ class MainActivity : QkThemedActivity(), MainView {
                 Log.d("TAG", "onAdFailedToLoad1: " + "loaded")
                 binding.bannerShimmer.visibility = GONE
             }
-        })
+        }
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -338,11 +380,6 @@ class MainActivity : QkThemedActivity(), MainView {
             is Archived -> state.page.selected
             else -> 0
         }
-        val shouldSearchVisible = selectedConversations == 0 && isPrimaryViewsEnabled()
-        binding.toolbar.menu.findItem(R.id.action_search)?.isVisible = shouldSearchVisible
-        if (shouldSearchVisible.not()) {
-            binding.toolbar.menu.findItem(R.id.action_search)?.collapseActionView()
-        }
 
         binding.toolbar.menu.findItem(R.id.archive)?.isVisible =
             state.page is Inbox && selectedConversations != 0
@@ -360,7 +397,7 @@ class MainActivity : QkThemedActivity(), MainView {
             !markRead && selectedConversations != 0
         binding.toolbar.menu.findItem(R.id.block)?.isVisible = selectedConversations != 0
 
-        binding.compose.setVisible(state.page is Inbox || state.page is Archived)
+        binding.compose.setVisible((state.page is Inbox || state.page is Archived) && state.syncing !is SyncRepository.SyncProgress.Running)
         conversationsAdapter.emptyView =
             binding.empty.takeIf { state.page is Inbox || state.page is Archived }
         searchAdapter.emptyView = binding.empty.takeIf { state.page is Searching }
@@ -464,6 +501,11 @@ class MainActivity : QkThemedActivity(), MainView {
         }
 
         resetViews()
+        val shouldSearchVisible = selectedConversations == 0 && isPrimaryViewsEnabled()
+        binding.toolbar.menu.findItem(R.id.action_search)?.isVisible = shouldSearchVisible
+        if (shouldSearchVisible.not()) {
+            binding.toolbar.menu.findItem(R.id.action_search)?.collapseActionView()
+        }
     }
 
     override fun onResume() {

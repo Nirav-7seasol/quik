@@ -17,7 +17,7 @@ import com.messages.readmms.readsmss.common.base.QkThemedActivity
 import com.messages.readmms.readsmss.common.util.extensions.hideKeyboard
 import com.messages.readmms.readsmss.common.util.extensions.showKeyboard
 import com.messages.readmms.readsmss.common.util.extensions.viewBinding
-import com.messages.readmms.readsmss.common.widget.QkDialog
+import com.messages.readmms.readsmss.common.widget.MyDialog
 import com.messages.readmms.readsmss.databinding.ContactsActivityBinding
 import com.messages.readmms.readsmss.extensions.Optional
 import com.messages.readmms.readsmss.feature.compose.editing.ComposeItem
@@ -54,7 +54,7 @@ class ContactsActivity : QkThemedActivity(), ContactsContract {
     private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory)[ContactsViewModel::class.java] }
 
     private val phoneNumberDialog by lazy {
-        QkDialog(this).apply {
+        MyDialog(this).apply {
             titleRes = R.string.compose_number_picker_title
             adapter = phoneNumberAdapter
             positiveButton = R.string.compose_number_picker_always

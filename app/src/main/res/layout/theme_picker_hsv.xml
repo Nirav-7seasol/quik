@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/hexLabel"
         style="@style/TextSecondary"
         android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
         app:layout_constraintStart_toEndOf="@id/hexLabel"
         app:layout_constraintTop_toTopOf="@id/hexLabel" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/hexSign"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -55,7 +55,7 @@
         app:textSize="secondary"
         tools:ignore="HardcodedText" />
 
-    <com.messages.readmms.readsmss.common.widget.QkEditText
+    <com.messages.readmms.readsmss.common.widget.MyEditText
         android:id="@+id/hex"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -95,7 +95,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/apply"
         style="@style/TextButton"
         android:layout_width="wrap_content"

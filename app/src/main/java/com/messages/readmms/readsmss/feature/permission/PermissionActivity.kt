@@ -12,15 +12,16 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.messages.readmms.readsmss.R
 import com.messages.readmms.readsmss.callendservice.MyPermissionCenter
 import com.messages.readmms.readsmss.common.SharedPrefs
-import com.messages.readmms.readsmss.myadsworld.MyAllAdCommonClass
-import dagger.android.AndroidInjection
-import com.messages.readmms.readsmss.R
 import com.messages.readmms.readsmss.common.base.QkThemedActivity
 import com.messages.readmms.readsmss.common.util.extensions.viewBinding
 import com.messages.readmms.readsmss.databinding.ActivityPermissionBinding
 import com.messages.readmms.readsmss.feature.main.MainActivity
+import com.messages.readmms.readsmss.myadsworld.MyAppOpenManager
+import com.messages.readmms.readsmss.myadsworld.MySplashAppOpenAds
+import dagger.android.AndroidInjection
 import java.util.Timer
 import java.util.TimerTask
 
@@ -36,7 +37,7 @@ class PermissionActivity : QkThemedActivity() {
         shineAnimation()
 
         mPermissionForResult =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 // Handle the result of the activity here
             }
 
@@ -45,7 +46,6 @@ class PermissionActivity : QkThemedActivity() {
             myPermissionCenter.reqPermissions(
                 this
             ) {
-                MyAllAdCommonClass.isAppOpenshowornot = true
                 askOverlayPermission()
             }
         }
@@ -78,22 +78,14 @@ class PermissionActivity : QkThemedActivity() {
     private fun askOverlayPermission() {
         val appOpsManager = getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
         if (appOpsManager.checkOpNoThrow(
-                AppOpsManager.OPSTR_SYSTEM_ALERT_WINDOW,
-                Process.myUid(),
-                packageName
+                AppOpsManager.OPSTR_SYSTEM_ALERT_WINDOW, Process.myUid(), packageName
             ) == AppOpsManager.MODE_ALLOWED
         ) {
-            SharedPrefs.isShowCalledId = true
-            startActivity(Intent(this, MainActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            })
+            navigateNextScreen()
             return
         }
 
-        appOpsManager.startWatchingMode(
-            AppOpsManager.OPSTR_SYSTEM_ALERT_WINDOW,
+        appOpsManager.startWatchingMode(AppOpsManager.OPSTR_SYSTEM_ALERT_WINDOW,
             applicationContext.packageName,
             object : AppOpsManager.OnOpChangedListener {
                 override fun onOpChanged(op: String?, packageName: String?) {
@@ -106,14 +98,7 @@ class PermissionActivity : QkThemedActivity() {
                         return
                     }
                     appOpsManager.stopWatchingMode(this)
-
-                    SharedPrefs.isShowCalledId = true
-
-                    startActivity(Intent(this@PermissionActivity, MainActivity::class.java).apply {
-                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    })
+                    navigateNextScreen()
                 }
             })
 
@@ -128,17 +113,32 @@ class PermissionActivity : QkThemedActivity() {
 
         Timer().schedule(object : TimerTask() {
             override fun run() {
-                startActivity(
-                    Intent(
-                        this@PermissionActivity,
-                        MyTranslucentActivity::class.java
-                    ).apply {
-                        flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-                        putExtra("autostart", getString(R.string.allow_overlay_access))
-                    })
+                startActivity(Intent(
+                    this@PermissionActivity, MyTranslucentActivity::class.java
+                ).apply {
+                    flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    putExtra("autostart", getString(R.string.allow_overlay_access))
+                })
             }
         }, 150L)
     }
 
+    private fun navigateNextScreen() {
+        val intent = Intent(this@PermissionActivity, MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+//        if (MyAppOpenManager.isAdAvailable() && SharedPrefs.isFirstAppOpenPending) {
+////            MyAppOpenManager.Strcheckad = "StrClosed"
+////            MySplashAppOpenAds.SplashAppOpenShow(
+////                this@PermissionActivity,
+////                intent
+////            )
+//
+//        } else {
+            startActivity(intent)
+//        }
+    }
 
 }

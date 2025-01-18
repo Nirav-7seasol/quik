@@ -21,6 +21,8 @@ import com.google.android.gms.ads.appopen.AppOpenAd;
 import java.util.List;
 
 import com.messages.readmms.readsmss.common.App;
+import com.messages.readmms.readsmss.common.AppOpenAdListener;
+import com.messages.readmms.readsmss.common.AppOpenCloseListener;
 
 public class MyAppOpenManager implements LifecycleObserver {
 
@@ -32,9 +34,17 @@ public class MyAppOpenManager implements LifecycleObserver {
     public static String Strcheckad = "StrClosed";
     public static App myApplication;
 
+    public static AppOpenAdListener appOpenAdListener;
+
     public MyAppOpenManager(App myApplication) {
         this.myApplication = myApplication;
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
+    }
+
+    public MyAppOpenManager(App myApplication, AppOpenAdListener appOpenAdListener) {
+        this.myApplication = myApplication;
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
+        this.appOpenAdListener = appOpenAdListener;
     }
 
     @OnLifecycleEvent(ON_START)
@@ -47,7 +57,7 @@ public class MyAppOpenManager implements LifecycleObserver {
 
             Log.d("TAG", "getTimeFormat: " + "strcurrentActivityonStart: " + strcurrentActivity);
 
-            if (!strcurrentActivity.equals("com.messages.sms.textmessages.callendservice.MainCallActivity")) {
+            if (!strcurrentActivity.equals("com.messages.readmms.readsmss.callendservice.MainCallActivity")) {
                 showAdIfAvailable();
             }
         } catch (Exception e) {
@@ -60,25 +70,32 @@ public class MyAppOpenManager implements LifecycleObserver {
     }
 
     public static void fetchAd() {
+        Log.e("TAG1212", "fetchAd: " + appOpenAdListener);
         MyAddPrefs appPreference = new MyAddPrefs(myApplication);
         if (isAdAvailable() || !App.Companion.isConnected(myApplication) || appPreference.getAdmAppOpenId().isEmpty()) {
             return;
         }
         failappOpen = false;
-        Log.e("@@AppOpenManager2", " - " + appPreference.getAdmAppOpenId());
+        Log.e("TAG1212", " - " + appPreference.getAdmAppOpenId());
         loadCallback = new AppOpenAd.AppOpenAdLoadCallback() {
             @Override
             public void onAdLoaded(@NonNull AppOpenAd ad) {
-                Log.e("@@AppOpenManager", "Loaded");
+                Log.e("TAG1212", "Loaded");
                 appOpenAd = ad;
+                if (appOpenAdListener != null) {
+                    appOpenAdListener.appOpenLoaded();
+                }
 //                NativeAdsEvent.NativeAdsLoads(myApplication);
             }
 
             @Override
             public void onAdFailedToLoad(LoadAdError loadAdError) {
-                Log.e("@@AppOpenManager", "Error: " + loadAdError.getMessage());
+                Log.e("TAG1212", "Error: " + loadAdError.getMessage());
                 appOpenAd = null;
                 failappOpen = true;
+                if (appOpenAdListener != null) {
+                    appOpenAdListener.appOpenLoaded();
+                }
 //                NativeAdsEvent.NativeAdsLoads(myApplication);
             }
         };
@@ -146,6 +163,79 @@ public class MyAppOpenManager implements LifecycleObserver {
 
     public static void showAdIfAvailable() {
         if (Strcheckad.equalsIgnoreCase("StrClosed") && !isShowingAd && isAdAvailable() && !MyAllAdCommonClass.isAppOpenshowornot) {
+            FullScreenContentCallback fullScreenContentCallback =
+                    new FullScreenContentCallback() {
+                        @Override
+                        public void onAdDismissedFullScreenContent() {
+                            Log.e("@@AppOpenManager111", "AdDismissedFullScreenContent");
+                            appOpenAd = null;
+                            isShowingAd = false;
+                            fetchAd();
+                            Strcheckad = "StrClosed";
+                        }
+
+                        @Override
+                        public void onAdFailedToShowFullScreenContent(AdError adError) {
+                            Log.e("@@AppOpenManager111", "AdFailedToShowFullScreenContent" + adError.toString());
+                            Strcheckad = "StrClosed";
+                        }
+
+                        @Override
+                        public void onAdShowedFullScreenContent() {
+                            Log.e("@@AppOpenManager111", "AdShowedFullScreenContent");
+                            Strcheckad = "StrOpen";
+                            isShowingAd = true;
+                        }
+                    };
+            appOpenAd.setFullScreenContentCallback(fullScreenContentCallback);
+            appOpenAd.show(currentActivity);
+        } else {
+            Log.e("@@SplashBeta", " - fetchAd going");
+            fetchAd();
+
+        }
+    }
+
+    public static void showAd(AppOpenCloseListener appOpenCloseListener) {
+        if (Strcheckad.equalsIgnoreCase("StrClosed") && !isShowingAd && isAdAvailable() && !MyAllAdCommonClass.isAppOpenshowornot) {
+            FullScreenContentCallback fullScreenContentCallback =
+                    new FullScreenContentCallback() {
+                        @Override
+                        public void onAdDismissedFullScreenContent() {
+                            Log.e("@@AppOpenManager111", "AdDismissedFullScreenContent");
+                            appOpenAd = null;
+                            isShowingAd = false;
+                            appOpenCloseListener.adClosed();
+                            fetchAd();
+                            Strcheckad = "StrClosed";
+                        }
+
+                        @Override
+                        public void onAdFailedToShowFullScreenContent(AdError adError) {
+                            Log.e("@@AppOpenManager111", "AdFailedToShowFullScreenContent" + adError.toString());
+                            Strcheckad = "StrClosed";
+                            appOpenCloseListener.adClosed();
+                        }
+
+                        @Override
+                        public void onAdShowedFullScreenContent() {
+                            Log.e("@@AppOpenManager111", "AdShowedFullScreenContent");
+                            Strcheckad = "StrOpen";
+                            isShowingAd = true;
+                        }
+                    };
+            appOpenAd.setFullScreenContentCallback(fullScreenContentCallback);
+            appOpenAd.show(currentActivity);
+        } else {
+            Log.e("@@SplashBeta", " - fetchAd going");
+            fetchAd();
+
+        }
+    }
+
+    public static void showAdIfAvailableSplash() {
+        if (Strcheckad.equalsIgnoreCase("StrClosed") && !isShowingAd && isAdAvailable()) {
+            Log.e("TAG1212", "showAdIfAvailableSplash: ");
             FullScreenContentCallback fullScreenContentCallback =
                     new FullScreenContentCallback() {
                         @Override

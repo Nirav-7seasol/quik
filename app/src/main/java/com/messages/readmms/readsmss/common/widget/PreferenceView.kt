@@ -51,7 +51,7 @@ class PreferenceView @JvmOverloads constructor(
         }
 
         View.inflate(context, R.layout.preference_view, this)
-        setBackgroundResource(context.resolveThemeAttribute(R.attr.selectableItemBackground))
+        setBackgroundResource(context.resolveThemeAttribute(android.R.attr.selectableItemBackground))
         orientation = HORIZONTAL
         gravity = Gravity.CENTER_VERTICAL
 

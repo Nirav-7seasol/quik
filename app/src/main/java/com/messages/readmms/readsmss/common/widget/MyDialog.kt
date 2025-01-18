@@ -10,7 +10,7 @@ import com.messages.readmms.readsmss.R
 import com.messages.readmms.readsmss.common.base.QkAdapter
 import kotlinx.android.synthetic.main.qk_dialog.view.*
 
-class QkDialog(private val context: Activity) : AlertDialog(context) {
+class MyDialog(private val context: Activity) : AlertDialog(context) {
 
     private val view = LayoutInflater.from(context).inflate(R.layout.qk_dialog, null)
 

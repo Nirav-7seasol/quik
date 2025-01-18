@@ -12,8 +12,8 @@ import com.messages.readmms.readsmss.common.util.TextViewStyler.Companion.SIZE_S
 import com.messages.readmms.readsmss.common.util.TextViewStyler.Companion.SIZE_TERTIARY
 import com.messages.readmms.readsmss.common.util.TextViewStyler.Companion.SIZE_TOOLBAR
 import com.messages.readmms.readsmss.common.util.extensions.getColorCompat
-import com.messages.readmms.readsmss.common.widget.QkEditText
-import com.messages.readmms.readsmss.common.widget.QkTextView
+import com.messages.readmms.readsmss.common.widget.MyEditText
+import com.messages.readmms.readsmss.common.widget.MyTextView
 import com.messages.readmms.readsmss.util.Preferences
 import javax.inject.Inject
 
@@ -42,13 +42,13 @@ class TextViewStyler @Inject constructor(
                 var textSizeAttr = 0
 
                 when (this) {
-                    is QkTextView -> context.obtainStyledAttributes(attrs, R.styleable.CustomTextView)?.run {
+                    is MyTextView -> context.obtainStyledAttributes(attrs, R.styleable.CustomTextView)?.run {
                         colorAttr = getInt(R.styleable.CustomTextView_textColor, -1)
                         textSizeAttr = getInt(R.styleable.CustomTextView_textSize, -1)
                         recycle()
                     }
 
-                    is QkEditText -> context.obtainStyledAttributes(attrs, R.styleable.CustomEditText)?.run {
+                    is MyEditText -> context.obtainStyledAttributes(attrs, R.styleable.CustomEditText)?.run {
                         colorAttr = getInt(R.styleable.CustomEditText_textColor, -1)
                         textSizeAttr = getInt(R.styleable.CustomEditText_textSize, -1)
                         recycle()
@@ -88,13 +88,13 @@ class TextViewStyler @Inject constructor(
         }
 
         when (textView) {
-            is QkTextView -> textView.context.obtainStyledAttributes(attrs, R.styleable.CustomTextView).run {
+            is MyTextView -> textView.context.obtainStyledAttributes(attrs, R.styleable.CustomTextView).run {
                 colorAttr = getInt(R.styleable.CustomTextView_textColor, -1)
                 textSizeAttr = getInt(R.styleable.CustomTextView_textSize, -1)
                 recycle()
             }
 
-            is QkEditText -> textView.context.obtainStyledAttributes(attrs, R.styleable.CustomEditText).run {
+            is MyEditText -> textView.context.obtainStyledAttributes(attrs, R.styleable.CustomEditText).run {
                 colorAttr = getInt(R.styleable.CustomEditText_textColor, -1)
                 textSizeAttr = getInt(R.styleable.CustomEditText_textSize, -1)
                 recycle()

@@ -6,7 +6,7 @@
     android:layout_height="48dp"
     android:orientation="horizontal">
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/number"
         style="@style/TextPrimary"
         android:layout_width="0dp"

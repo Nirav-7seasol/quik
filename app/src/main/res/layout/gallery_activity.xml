@@ -27,7 +27,7 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 android:id="@+id/toolbarTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 app:textSize="toolbar"
                 tools:text="Conversations" />
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 android:id="@+id/toolbarSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

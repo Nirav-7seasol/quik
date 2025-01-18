@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         app:layout_constraintVertical_weight="1"
         app:textSize="dialog" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/version"
         style="@style/TextSecondary"
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
         app:layout_constraintVertical_weight="0"
         tools:listitem="@layout/changelog_list_item" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/more"
         style="@style/TextSecondary"
         android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
         app:layout_constraintTop_toBottomOf="@id/changelog"
         app:layout_constraintVertical_weight="1" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/dismiss"
         style="@style/TextSecondary"
         android:layout_width="wrap_content"

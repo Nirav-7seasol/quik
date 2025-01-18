@@ -7,9 +7,9 @@ import com.messages.readmms.readsmss.common.util.QkChooserTargetService
 import com.messages.readmms.readsmss.common.widget.AvatarView
 import com.messages.readmms.readsmss.common.widget.PagerTitleView
 import com.messages.readmms.readsmss.common.widget.PreferenceView
-import com.messages.readmms.readsmss.common.widget.QkEditText
-import com.messages.readmms.readsmss.common.widget.QkSwitch
-import com.messages.readmms.readsmss.common.widget.QkTextView
+import com.messages.readmms.readsmss.common.widget.MyEditText
+import com.messages.readmms.readsmss.common.widget.MySwitch
+import com.messages.readmms.readsmss.common.widget.MyTextView
 import com.messages.readmms.readsmss.common.widget.RadioPreferenceView
 import com.messages.readmms.readsmss.feature.backup.BackupController
 import com.messages.readmms.readsmss.feature.blocking.BlockingController
@@ -67,8 +67,8 @@ interface AppComponent {
     fun inject(view: PreferenceView)
     fun inject(view: PreferenceViewWithBinding)
     fun inject(view: RadioPreferenceView)
-    fun inject(view: QkEditText)
-    fun inject(view: QkSwitch)
-    fun inject(view: QkTextView)
+    fun inject(view: MyEditText)
+    fun inject(view: MySwitch)
+    fun inject(view: MyTextView)
 
 }

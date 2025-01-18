@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-feature
         android:name="android.hardware.telephony"
@@ -35,9 +36,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:label="@string/app_name"
+        android:label="@string/app_name1"
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
+        tools:replace="android:label"
         android:theme="@style/AppLaunchTheme">
         <activity
             android:name=".feature.permission.PermissionActivity"
@@ -51,6 +53,8 @@
             android:theme="@style/AppTheme.TransparentWindow" />
         <activity
             android:name=".feature.splash.MySplashActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppBaseTheme"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -119,7 +123,6 @@
                 android:value=".common.util.QkChooserTargetService" />
         </activity>
         <activity android:name=".feature.settings.SettingsActivity" />
-        <activity android:name=".feature.plus.PlusActivity" />
         <activity
             android:name=".feature.gallery.GalleryActivity"
             android:theme="@style/AppTheme.Black" />

@@ -12,7 +12,7 @@
         style="@style/Toolbar"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.messages.readmms.readsmss.common.widget.QkTextView
+        <com.messages.readmms.readsmss.common.widget.MyTextView
             android:id="@+id/toolbarTitle"
             style="@style/ToolbarText"
             tools:text="Notifications" />
@@ -83,7 +83,7 @@
                 android:layout_marginBottom="8dp"
                 android:background="?android:attr/divider" />
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 android:id="@+id/actionsTitle"
                 style="@style/PreferenceCategory"
                 android:text="@string/settings_notification_actions_title" />
@@ -117,7 +117,7 @@
                 android:layout_marginBottom="8dp"
                 android:background="?android:attr/divider" />
 
-            <com.messages.readmms.readsmss.common.widget.QkTextView
+            <com.messages.readmms.readsmss.common.widget.MyTextView
                 android:id="@+id/qkreplyTitle"
                 style="@style/PreferenceCategory"
                 android:text="@string/settings_category_reply" />

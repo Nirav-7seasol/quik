@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/name"
         style="@style/TextPrimary"
         android:layout_width="0dp"
@@ -34,7 +34,7 @@
         app:layout_constraintVertical_chainStyle="packed"
         tools:text=" Bhatti" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/address"
         style="@style/TextSecondary"
         android:layout_width="0dp"

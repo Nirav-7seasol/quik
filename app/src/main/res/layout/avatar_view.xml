@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:parentTag="com.messages.readmms.readsmss.common.widget.AvatarView">
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/initial"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -27,7 +27,7 @@ import javax.inject.Inject
  * Beware of updating to extend AppCompatTextView, as this inexplicably breaks the view in
  * the contacts chip view
  */
-class QkEditText @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : EditText(context, attrs) {
+class MyEditText @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : EditText(context, attrs) {
 
     @Inject lateinit var textViewStyler: TextViewStyler
 

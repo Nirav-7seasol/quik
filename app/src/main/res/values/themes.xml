@@ -20,6 +20,10 @@
 
     <style name="AppTheme" parent="AppBaseTheme" />
 
+    <style name="SplashTheme" parent="AppBaseTheme">
+        <item name="android:windowBackground">#ffffff</item>
+    </style>
+
     <style name="AppBaseTheme" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:divider">@color/separatorLight</item>
         <item name="android:queryBackground">@color/bubbleLight</item>

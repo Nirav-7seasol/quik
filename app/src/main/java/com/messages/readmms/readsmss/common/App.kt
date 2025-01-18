@@ -1,4 +1,3 @@
-
 package com.messages.readmms.readsmss.common
 
 import android.app.Activity
@@ -14,17 +13,8 @@ import androidx.emoji.text.FontRequestEmojiCompatConfig
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.messages.readmms.readsmss.common.SharedPrefs
-import com.messages.readmms.readsmss.myadsworld.MyAddPrefs
-import com.messages.readmms.readsmss.myadsworld.MyAllAdCommonClass
-import com.messages.readmms.readsmss.myadsworld.MyAppOpenManager
-import com.uber.rxdogtag.RxDogTag
-import com.uber.rxdogtag.autodispose.AutoDisposeConfigurer
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import dagger.android.HasBroadcastReceiverInjector
-import dagger.android.HasServiceInjector
+import com.google.firebase.FirebaseApp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.messages.readmms.readsmss.R
 import com.messages.readmms.readsmss.common.util.FileLoggingTree
 import com.messages.readmms.readsmss.injection.AppComponentManager
@@ -33,7 +23,17 @@ import com.messages.readmms.readsmss.manager.BillingManager
 import com.messages.readmms.readsmss.manager.ReferralManager
 import com.messages.readmms.readsmss.migration.QkMigration
 import com.messages.readmms.readsmss.migration.QkRealmMigration
+import com.messages.readmms.readsmss.myadsworld.MyAddPrefs
+import com.messages.readmms.readsmss.myadsworld.MyAllAdCommonClass
+import com.messages.readmms.readsmss.myadsworld.MyAppOpenManager
 import com.messages.readmms.readsmss.util.NightModeManager
+import com.uber.rxdogtag.RxDogTag
+import com.uber.rxdogtag.autodispose.AutoDisposeConfigurer
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
+import dagger.android.HasBroadcastReceiverInjector
+import dagger.android.HasServiceInjector
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import kotlinx.coroutines.Dispatchers
@@ -47,16 +47,32 @@ class App : Application(), HasActivityInjector, HasBroadcastReceiverInjector, Ha
 
 
     @Suppress("unused")
-    @Inject lateinit var qkMigration: QkMigration
+    @Inject
+    lateinit var qkMigration: QkMigration
 
-    @Inject lateinit var billingManager: BillingManager
-    @Inject lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
-    @Inject lateinit var dispatchingBroadcastReceiverInjector: DispatchingAndroidInjector<BroadcastReceiver>
-    @Inject lateinit var dispatchingServiceInjector: DispatchingAndroidInjector<Service>
-    @Inject lateinit var fileLoggingTree: FileLoggingTree
-    @Inject lateinit var nightModeManager: NightModeManager
-    @Inject lateinit var realmMigration: QkRealmMigration
-    @Inject lateinit var referralManager: ReferralManager
+    @Inject
+    lateinit var billingManager: BillingManager
+
+    @Inject
+    lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
+
+    @Inject
+    lateinit var dispatchingBroadcastReceiverInjector: DispatchingAndroidInjector<BroadcastReceiver>
+
+    @Inject
+    lateinit var dispatchingServiceInjector: DispatchingAndroidInjector<Service>
+
+    @Inject
+    lateinit var fileLoggingTree: FileLoggingTree
+
+    @Inject
+    lateinit var nightModeManager: NightModeManager
+
+    @Inject
+    lateinit var realmMigration: QkRealmMigration
+
+    @Inject
+    lateinit var referralManager: ReferralManager
 
     companion object {
         var isSchedule = false
@@ -72,23 +88,40 @@ class App : Application(), HasActivityInjector, HasBroadcastReceiverInjector, Ha
                 false
             }
         }
+
+        var adLoaded: () -> Unit = {}
+        var adFailed: () -> Unit = {}
     }
 
     var myAddPrefs: MyAddPrefs? = null
 
+    private val appOpenAdListener = object : AppOpenAdListener {
+        override fun appOpenLoaded() {
+            adLoaded()
+        }
+
+        override fun appOpenFailed() {
+            adFailed()
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
+        FirebaseApp.initializeApp(this)
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
         ctx = this
         SharedPrefs.init(this)
         AppComponentManager.init(this)
         appComponent.inject(this)
         myAddPrefs = MyAddPrefs(this)
         Realm.init(this)
-        Realm.setDefaultConfiguration(RealmConfiguration.Builder()
+        Realm.setDefaultConfiguration(
+            RealmConfiguration.Builder()
                 .compactOnLaunch()
                 .migration(realmMigration)
                 .schemaVersion(QkRealmMigration.SchemaVersion)
-                .build())
+                .build()
+        )
 
         qkMigration.performMigration()
 
@@ -99,22 +132,21 @@ class App : Application(), HasActivityInjector, HasBroadcastReceiverInjector, Ha
         nightModeManager.updateCurrentTheme()
 
         val fontRequest = FontRequest(
-                "com.google.android.gms.fonts",
-                "com.google.android.gms",
-                "Noto Color Emoji Compat",
-                R.array.com_google_android_gms_fonts_certs)
+            "com.google.android.gms.fonts",
+            "com.google.android.gms",
+            "Noto Color Emoji Compat",
+            R.array.com_google_android_gms_fonts_certs
+        )
 
         EmojiCompat.init(FontRequestEmojiCompatConfig(this, fontRequest))
 
         RxDogTag.builder()
-                .configureWith(AutoDisposeConfigurer::configure)
-                .install()
+            .configureWith(AutoDisposeConfigurer::configure)
+            .install()
         getData(this)
     }
 
     fun getData(context: Context?) {
-//        Log.d("TAG", "getDatassss: " + MyAESUTIL.decrypt(MyAllAdCommonClass.JSON_URL))
-
         val requestQueue = Volley.newRequestQueue(context)
         val req = JsonObjectRequest(
             Request.Method.GET,
@@ -136,6 +168,7 @@ class App : Application(), HasActivityInjector, HasBroadcastReceiverInjector, Ha
 
                     // Load an ad.
 //                        loadAd();
+                    loadAppOpen(appOpenAdListener)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                     Log.e("admdfdjkdfj22", "onResponse: " + e.message)
@@ -145,7 +178,12 @@ class App : Application(), HasActivityInjector, HasBroadcastReceiverInjector, Ha
     }
 
     fun loadAppOpen() {
-       MyAppOpenManager(this)
+        MyAppOpenManager(this)
+    }
+
+    fun loadAppOpen(appOpenAdListener: AppOpenAdListener) {
+        Log.e("TAG1212", "loadAppOpen: ")
+        MyAppOpenManager(this, appOpenAdListener)
     }
 
     override fun activityInjector(): AndroidInjector<Activity> {
@@ -160,4 +198,13 @@ class App : Application(), HasActivityInjector, HasBroadcastReceiverInjector, Ha
         return dispatchingServiceInjector
     }
 
+}
+
+interface AppOpenAdListener {
+    fun appOpenLoaded()
+    fun appOpenFailed()
+}
+
+interface AppOpenCloseListener {
+    fun adClosed()
 }

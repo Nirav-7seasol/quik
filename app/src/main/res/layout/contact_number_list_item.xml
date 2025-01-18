@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="2dp">
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         app:textSize="secondary"
         tools:text="Mobile" />
 
-    <com.messages.readmms.readsmss.common.widget.QkTextView
+    <com.messages.readmms.readsmss.common.widget.MyTextView
         android:id="@+id/address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

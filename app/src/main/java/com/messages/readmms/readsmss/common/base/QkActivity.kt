@@ -7,18 +7,17 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import com.messages.readmms.readsmss.R
-import com.messages.readmms.readsmss.common.widget.QkTextView
+import com.messages.readmms.readsmss.common.widget.MyTextView
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
 
-abstract class QkActivity : LocalizationActivity() {
+abstract class QkActivity : com.messages.readmms.readsmss.callendservice.BaseActivity() {
 
     val toolbar: Toolbar? by lazy { findViewById(R.id.toolbar) }
 
     protected val menu: Subject<Menu> = BehaviorSubject.create()
-    protected val toolbarTitle by lazy { findViewById<QkTextView>(R.id.toolbarTitle) }
+    protected val toolbarTitle by lazy { findViewById<MyTextView>(R.id.toolbarTitle) }
 
     @SuppressLint("InlinedApi")
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -11,7 +11,7 @@
         style="@style/Toolbar"
         android:elevation="8dp">
 
-        <com.messages.readmms.readsmss.common.widget.QkTextView
+        <com.messages.readmms.readsmss.common.widget.MyTextView
             android:id="@+id/toolbarTitle"
             style="@style/ToolbarText"
             tools:text="Conversations" />

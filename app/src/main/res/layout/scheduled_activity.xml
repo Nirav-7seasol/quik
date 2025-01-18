@@ -25,7 +25,7 @@
                 android:paddingStart="24dp"
                 android:paddingEnd="24dp">
 
-                <com.messages.readmms.readsmss.common.widget.QkTextView
+                <com.messages.readmms.readsmss.common.widget.MyTextView
                     style="@style/TextPrimary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/scheduled_empty_message_3" />
 
-                <com.messages.readmms.readsmss.common.widget.QkTextView
+                <com.messages.readmms.readsmss.common.widget.MyTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -120,7 +120,7 @@
             android:src="@drawable/ic_star_black_24dp"
             tools:tint="@color/textPrimaryDark" />
 
-        <com.messages.readmms.readsmss.common.widget.QkTextView
+        <com.messages.readmms.readsmss.common.widget.MyTextView
             android:id="@+id/upgradeLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

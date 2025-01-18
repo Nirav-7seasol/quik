@@ -221,154 +221,43 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardBottom"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/cardAds"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/gnt_bg"
-            app:cardCornerRadius="0dp"
-            app:cardElevation="0dp">
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/ad_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="#BBBABF" />
-
-                <com.google.android.ads.nativetemplates.TemplateView
-                    android:id="@+id/my_template"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_1sdp"
-                    android:visibility="gone"
-                    app:gnt_template_type="@layout/custom_native_big" />
-
                 <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmer_view_container"
+                    android:id="@+id/banner_shimmer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_1sdp">
+                    app:shimmer_auto_start="true"
+                    app:shimmer_base_color="#ccc">
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/background"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:id="@+id/ad_notification_view"
-                                android:layout_width="25dp"
-                                android:layout_height="@dimen/gnt_ad_indicator_height"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/gnt_no_margin"
-                                android:layout_marginTop="@dimen/gnt_no_margin"
-                                android:layout_marginEnd="@dimen/gnt_no_margin"
-                                android:background="@drawable/bg_border"
-                                android:backgroundTint="#8A8888"
-                                android:fontFamily="@font/google"
-                                android:gravity="center"
-                                android:paddingLeft="3dp"
-                                android:paddingTop="2dp"
-                                android:paddingRight="5dp"
-                                android:paddingBottom="5dp"
-                                android:text="Ad"
-                                android:textColor="@color/white"
-                                android:textSize="12sp"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_margin="@dimen/gnt_default_margin"
-                                android:orientation="horizontal"
-                                android:paddingHorizontal="@dimen/_5sdp"
-                                android:paddingTop="@dimen/_5sdp"
-                                app:layout_constraintTop_toBottomOf="@+id/ad_notification_view">
-
-                                <RelativeLayout
-                                    android:id="@+id/relStart"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content">
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_35sdp"
-                                        android:layout_height="@dimen/_35sdp"
-                                        android:src="@color/gnt_gray" />
-
-                                </RelativeLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginEnd="@dimen/gnt_default_margin"
-                                    android:layout_toEndOf="@+id/relStart"
-                                    android:orientation="vertical">
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginStart="@dimen/_10sdp"
-                                            android:layout_marginEnd="@dimen/gnt_no_margin"
-                                            android:layout_marginBottom="@dimen/gnt_no_margin"
-                                            android:background="#8A8888"
-                                            android:lines="1" />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginStart="@dimen/_11sdp"
-                                            android:layout_marginTop="@dimen/_2sdp"
-                                            android:layout_marginEnd="@dimen/gnt_no_margin"
-                                            android:layout_marginBottom="3dp"
-                                            android:background="#8A8888"
-                                            android:maxLines="2" />
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
-
-                            </RelativeLayout>
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="150dp"
-                            android:background="@color/gnt_gray"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_weight="0" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
-                            android:layout_marginHorizontal="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_15sdp"
-                            android:layout_marginBottom="@dimen/_15sdp"
-                            android:background="@drawable/gnt_smallbtn_outline_shape"
-                            android:backgroundTint="#8A8888" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
+                        android:layout_height="@dimen/_160sdp"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="LOADING AD"
+                        android:textStyle="normal" />
 
                 </com.facebook.shimmer.ShimmerFrameLayout>
 
+                <FrameLayout
+                    android:id="@+id/fram_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
             </RelativeLayout>
 
-        </androidx.cardview.widget.CardView>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </LinearLayout>
 </LinearLayout>

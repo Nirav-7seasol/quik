@@ -41,6 +41,7 @@ class SharedPrefs {
         private const val IS_INITIAL_LANGUAGE_SET = "IS_INITIAL_LANGUAGE_SET"
         const val LANGUAGE = "LANGUAGE"
         const val IS_SHOW_CALLED_ID = "isSHowCallerID"
+        const val IS_FIRST_APP_OPEN_PENDING = "IS_FIRST_APP_OPEN_PENDING"
 
         private fun getInstance(): SharedPrefs {
             return instance ?: synchronized(this) { SharedPrefs().also { instance = it } }
@@ -65,5 +66,9 @@ class SharedPrefs {
         var isShowCalledId: Boolean
             get() = getInstance().pref.getBoolean(IS_SHOW_CALLED_ID, false)
             set(value) = getInstance().edit { putBoolean(IS_SHOW_CALLED_ID, value) }
+
+        var isFirstAppOpenPending: Boolean
+            get() = getInstance().pref.getBoolean(IS_FIRST_APP_OPEN_PENDING, true)
+            set(value) = getInstance().edit { putBoolean(IS_FIRST_APP_OPEN_PENDING, value) }
     }
 }
